@@ -11,6 +11,7 @@ use Filament\Support\Colors\Color;
 use Guava\FilamentIconPicker\Forms\IconPicker;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
+use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Fields\FieldsContract;
 
 class TextInput extends FieldsContract
@@ -34,7 +35,7 @@ class TextInput extends FieldsContract
         return __('text input');
     }
 
-    public static function getOptions(?array $sections = null): array
+    public static function getOptions(?array $sections = null, ?array $field = null): array
     {
         return [
             Accordions::make('options')
@@ -114,6 +115,9 @@ class TextInput extends FieldsContract
                         ]),
                     self::hintOptions(),
                     self::visibility($sections),
+                    // @phpstan-ignore-next-line
+                    ...Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::schema($field) : [],
+                    Bolt::getCustomSchema('field', resolve(static::class)) ?? [],
                 ]),
         ];
     }
@@ -122,6 +126,9 @@ class TextInput extends FieldsContract
     {
         return [
             self::hiddenIsActive(),
+            // @phpstan-ignore-next-line
+            Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::hidden() : [],
+            ...Bolt::getHiddenCustomSchema('field', resolve(static::class)) ?? [],
             self::hiddenVisibility(),
             self::hiddenHtmlID(),
             self::hiddenHintOptions(),
@@ -149,7 +156,7 @@ class TextInput extends FieldsContract
         parent::appendFilamentComponentsOptions($component, $zeusField, $hasVisibility);
 
         if (! empty($zeusField['options']['dateType'])) {
-            call_user_func([$component, $zeusField['options']['dateType']]);
+            call_user_func([$component, optional($zeusField['options'])['dateType'] ?? 'string']);
         }
 
         if (isset($zeusField->options['prefix']) && $zeusField->options['prefix'] !== null) {

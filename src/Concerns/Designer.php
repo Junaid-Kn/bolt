@@ -99,22 +99,23 @@ trait Designer
 
     private static function drawSections(Form $zeusForm, ZeusSection $section, array $fields): Tab | Step | Section
     {
-        $component = Section::make($section->name)
-            ->description($section->description)
-            ->aside(fn () => $section->aside)
-            ->compact(fn () => $section->compact)
-            ->icon($section->icon ?? null)
-            ->collapsible();
-
         if (optional($zeusForm->options)['show-as'] === 'tabs') {
             $component = Tab::make($section->name)
+              //  ->live()
                 ->icon($section->icon ?? null);
-        }
-
-        if (optional($zeusForm->options)['show-as'] === 'wizard') {
+        } elseif (optional($zeusForm->options)['show-as'] === 'wizard') {
             $component = Step::make($section->name)
+             //   ->live()
                 ->description($section->description)
                 ->icon($section->icon ?? null);
+        } else {
+            $component = Section::make($section->name)
+                //  ->live()
+                ->description($section->description)
+                ->aside(fn () => $section->aside)
+                ->compact(fn () => $section->compact)
+                ->icon($section->icon ?? null)
+                ->collapsible();
         }
 
         $component->visible(function ($record, Get $get) use ($section) {
@@ -138,9 +139,9 @@ trait Designer
         });
 
         return $component
-            ->id(str($section->name)->slug() . '-' . $section->id)
+            //->id(str($section->name)->slug() . '-' . $section->id)
             ->schema($fields)
-            ->live()
+            //->live()
             ->columns($section->columns);
     }
 }

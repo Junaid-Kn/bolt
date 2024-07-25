@@ -9,9 +9,16 @@
                     @if($resp->field !== null)
                         <div class="py-2 text-ellipsis overflow-auto">
                             <p>{{ $resp->field->name ?? '' }}</p>
-                            <p class="font-semibold mb-2">
-                                {!! ( new $resp->field->type )->getResponse($resp->field, $resp) !!}
-                            </p>
+
+                            <div class="items-center flex justify-between">
+                                <p class="font-semibold mb-2">
+                                    {!! ( new $resp->field->type )->getResponse($resp->field, $resp) !!}
+                                </p>
+                                @if($resp->form->extensions === 'LaraZeus\\BoltPro\\Extensions\\Grades')
+                                    <livewire:bolt-pro.grading :response="$resp" />
+                                @endif
+                            </div>
+
                             <hr/>
                         </div>
                     @endif

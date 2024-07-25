@@ -101,7 +101,11 @@
             {{ $this->form }}
 
             <div class="px-4 py-2 text-center">
-                <x-filament::button type="submit" :color="$zeusForm->options['primary_color'] ?? 'primary'">
+                <x-filament::button
+                    form="store"
+                    type="submit"
+                    :color="$zeusForm->options['primary_color'] ?? 'primary'"
+                >
                     {{ __('Save') }}
                 </x-filament::button>
             </div>
@@ -110,5 +114,7 @@
                 {{ \LaraZeus\Bolt\Facades\Bolt::renderHookBlade('zeus-form.after') }}
             @endif
         </x-filament-panels::form>
+
+        <x-filament-actions::modals/>
     @endif
 </div>

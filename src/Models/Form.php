@@ -2,7 +2,9 @@
 
 namespace LaraZeus\Bolt\Models;
 
+use Filament\Notifications\Notification;
 use Illuminate\Database\Eloquent\Casts\Attribute;
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -57,7 +59,7 @@ class Form extends Model
         'user_id' => 'integer',
     ];
 
-    public function getTable()
+    public function getTable(): string
     {
         return config('zeus-bolt.table-prefix') . 'forms';
     }
@@ -65,33 +67,38 @@ class Form extends Model
     protected static function booted(): void
     {
         static::deleting(function (Form $form) {
+            $canDelete = Extensions::init($form, 'canDelete', []);
+
+            if ($canDelete === null) {
+                $canDelete = true;
+            }
+
+            if (! $canDelete) {
+                Notification::make()
+                    ->title(__('Can\'t delete a form linked to an Extensions'))
+                    ->danger()
+                    ->send();
+
+                return false;
+            }
+
             if ($form->isForceDeleting()) {
-                $form->fieldsResponses()->withTrashed()->get()->each(function ($item) {
-                    $item->forceDelete();
-                });
-                $form->responses()->withTrashed()->get()->each(function ($item) {
-                    $item->forceDelete();
-                });
+                $form->fieldsResponses()->withTrashed()->get()->each(fn ($item) => $item->forceDelete());
+                $form->responses()->withTrashed()->get()->each(fn ($item) => $item->forceDelete());
                 $form->sections()->withTrashed()->get()->each(function ($item) {
-                    $item->fields()->withTrashed()->get()->each(function ($item) {
-                        $item->forceDelete();
-                    });
+                    $item->fields()->withTrashed()->get()->each(fn ($item) => $item->forceDelete());
                     $item->forceDelete();
                 });
             } else {
-                $form->fieldsResponses->each(function ($item) {
-                    $item->delete();
-                });
-                $form->responses->each(function ($item) {
-                    $item->delete();
-                });
+                $form->fieldsResponses->each(fn ($item) => $item->delete());
+                $form->responses->each(fn ($item) => $item->delete());
                 $form->sections->each(function ($item) {
-                    $item->fields->each(function ($item) {
-                        $item->delete();
-                    });
+                    $item->fields->each(fn ($item) => $item->delete());
                     $item->delete();
                 });
             }
+
+            return true;
         });
     }
 
@@ -100,7 +107,7 @@ class Form extends Model
         return 'slug';
     }
 
-    protected static function newFactory(): FormFactory
+    protected static function newFactory(): Factory
     {
         return FormFactory::new();
     }

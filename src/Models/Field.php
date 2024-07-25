@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Models;
 
+use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -52,15 +53,9 @@ class Field extends Model
         });
     }
 
-    protected static function newFactory(): FieldFactory
+    protected static function newFactory(): Factory
     {
         return FieldFactory::new();
-    }
-
-    /** @return BelongsTo<Form, Field> */
-    public function form(): BelongsTo
-    {
-        return $this->belongsTo(config('zeus-bolt.models.Form'));
     }
 
     /** @return BelongsTo<Section, Field> */

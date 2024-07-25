@@ -32,6 +32,7 @@ use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Concerns\HasOptions;
 use LaraZeus\Bolt\Concerns\Schemata;
 use LaraZeus\Bolt\Enums\Resources;
+use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Filament\Actions\ReplicateFormAction;
 use LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 use LaraZeus\Bolt\Models\Form as ZeusForm;
@@ -156,8 +157,8 @@ class FormResource extends BoltResource
                 IconColumn::make('is_active')->boolean()->label(__('Is Active'))->sortable()->toggleable(),
                 TextColumn::make('start_date')->dateTime()->searchable()->sortable()->label(__('Start Date'))->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('end_date')->dateTime()->searchable()->sortable()->label(__('End Date'))->toggleable(isToggledHiddenByDefault: true),
-                IconColumn::make('responses_exists')->boolean()->exists('responses')->label(__('Responses Exists'))->sortable()->toggleable(),
-                TextColumn::make('responses_count')->counts('responses')->label(__('Responses Count'))->sortable()->toggleable(),
+                IconColumn::make('responses_exists')->boolean()->exists('responses')->label(__('Responses Exists'))->sortable()->toggleable()->searchable(false),
+                TextColumn::make('responses_count')->counts('responses')->label(__('Responses Count'))->sortable()->toggleable()->searchable(false),
             ])
             ->actions(static::getActions())
             ->filters([
@@ -204,7 +205,7 @@ class FormResource extends BoltResource
             'viewResponse' => Pages\ViewResponse::route('/{record}/response/{responseID}'),
         ];
 
-        if (class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class)) {
+        if (Bolt::hasPro()) {
             //@phpstan-ignore-next-line
             $pages['prefilled'] = \LaraZeus\BoltPro\Livewire\PrefilledForm::route('/{record}/prefilled');
             //@phpstan-ignore-next-line
@@ -223,7 +224,7 @@ class FormResource extends BoltResource
             FormResource\Widgets\ResponsesPerFields::class,
         ];
 
-        if (class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class)) {
+        if (Bolt::hasPro()) {
             //@phpstan-ignore-next-line
             $widgets[] = \LaraZeus\BoltPro\Widgets\ResponsesPerCollection::class;
         }
@@ -247,19 +248,19 @@ class FormResource extends BoltResource
                     ->label(__('Entries'))
                     ->icon('clarity-data-cluster-line')
                     ->tooltip(__('view all entries'))
-                    ->url(fn (ZeusForm $record): string => url('admin/responses?form_id=' . $record->id)),
+                    ->url(fn (ZeusForm $record): string => FormResource::getUrl('report', ['record' => $record])),
             ])
                 ->dropdown(false),
         ];
 
         $advancedActions = $moreActions = [];
 
-        if (class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class)) {
+        if (Bolt::hasPro()) {
             $advancedActions[] = Action::make('prefilledLink')
                 ->label(__('Prefilled Link'))
                 ->icon('iconpark-formone-o')
                 ->tooltip(__('Get Prefilled Link'))
-                ->visible(class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class))
+                ->visible(Bolt::hasPro())
                 ->url(fn (ZeusForm $record): string => FormResource::getUrl('prefilled', ['record' => $record]));
         }
 
@@ -282,7 +283,7 @@ class FormResource extends BoltResource
             Pages\EditForm::class,
         ];
 
-        if (class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class)) {
+        if (Bolt::hasPro()) {
             //@phpstan-ignore-next-line
             $formNavs[] = \LaraZeus\BoltPro\Livewire\ShareForm::class;
         }

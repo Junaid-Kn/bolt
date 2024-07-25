@@ -3,6 +3,7 @@
 namespace LaraZeus\Bolt\Contracts;
 
 use LaraZeus\Bolt\Models\Form;
+use LaraZeus\Bolt\Models\Response;
 
 interface Extension
 {
@@ -80,4 +81,14 @@ interface Extension
      * return the url to the form, when clicking on `open`. append any parameters you need to your Extension
      */
     public function getUrl(Form $form, array $extension): string;
+
+    /*
+     * check if its allowed to delete the form
+     */
+    public function canDelete(Form $form, array $extension): bool;
+
+    /*
+     * check if its allowed to delete the response
+     */
+    public function canDeleteResponse(Form $form, array $extension): bool;
 }

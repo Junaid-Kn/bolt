@@ -2,6 +2,205 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v3.0.62 - 2024-07-17
+
+### What's Changed
+
+* fix if the field is from a preset by @atmonshi in https://github.com/lara-zeus/bolt/pull/318
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.61...v3.0.62
+
+## v3.0.61 - 2024-07-12
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.1.0 to 2.2.0 by @dependabot in https://github.com/lara-zeus/bolt/pull/315
+* add loading indicator for the form submit button by @atmonshi in https://github.com/lara-zeus/bolt/pull/317
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.60...v3.0.61
+
+## v3.0.60 - 2024-07-03
+
+### What's Changed
+
+* Added Spanish translations by @dkstudio86 in https://github.com/lara-zeus/bolt/pull/314
+
+### New Contributors
+
+* @dkstudio86 made their first contribution in https://github.com/lara-zeus/bolt/pull/314
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.59...v3.0.60
+
+## v3.0.59 - 2024-06-20
+
+### What's Changed
+
+* [Feature] Filament Modal Form Component by @mohaphez in https://github.com/lara-zeus/bolt/pull/311
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.58...v3.0.59
+
+## v3.0.58 - 2024-06-19
+
+### What's Changed
+
+* prevent delete if the form or response is linked to Extension by @atmonshi in https://github.com/lara-zeus/bolt/pull/312
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.57...v3.0.58
+
+## v3.0.57 - 2024-06-13
+
+### What's Changed
+
+* up the accordion version by @atmonshi in https://github.com/lara-zeus/bolt/pull/309
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.56...v3.0.57
+
+## v3.0.56 - 2024-06-11
+
+### What's Changed
+
+* set export toggle to yes no by @atmonshi in https://github.com/lara-zeus/bolt/pull/308
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.55...v3.0.56
+
+## v3.0.55 - 2024-06-11
+
+### What's Changed
+
+* remove default filter date by @atmonshi in https://github.com/lara-zeus/bolt/pull/307
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.54...v3.0.55
+
+## v3.0.54 - 2024-06-11
+
+### What's Changed
+
+* allow for custom entry for responses by @atmonshi in https://github.com/lara-zeus/bolt/pull/304
+* fix toggle table column and use custom entry by @atmonshi in https://github.com/lara-zeus/bolt/pull/305
+* add created at filter for responses  by @atmonshi in https://github.com/lara-zeus/bolt/pull/306
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.53...v3.0.54
+
+## v3.0.53 - 2024-06-10
+
+### What's Changed
+
+* Custom schema by @atmonshi in https://github.com/lara-zeus/bolt/pull/301
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.52...v3.0.53
+
+## v3.0.52 - 2024-06-09
+
+### What's Changed
+
+* fix clone field to set the HTML ID by @atmonshi in https://github.com/lara-zeus/bolt/pull/302
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.51...v3.0.52
+
+## v3.0.51 - 2024-06-07
+
+### What's Changed
+
+* hot fix for fields options on edit by @atmonshi in https://github.com/lara-zeus/bolt/pull/299
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.50...v3.0.51
+
+## v3.0.50 - 2024-06-06
+
+### What's Changed
+
+* clean up some codes by @atmonshi in https://github.com/lara-zeus/bolt/pull/298
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.49...v3.0.50
+
+## v3.0.49 - 2024-06-06
+
+### What's Changed
+
+* fix return type for Factory by @atmonshi in https://github.com/lara-zeus/bolt/pull/297
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.48...v3.0.49
+
+## v3.0.48 - 2024-06-02
+
+### What's Changed
+
+* fix sortable by @atmonshi in https://github.com/lara-zeus/bolt/pull/296
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.47...v3.0.48
+
+## v3.0.47 - 2024-05-31
+
+### What's Changed
+
+* fix for is pro not installed by @atmonshi in https://github.com/lara-zeus/bolt/pull/295
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.46...v3.0.47
+
+## v3.0.46 - 2024-05-30
+
+### What's Changed
+
+* empty boltModels by default, set the config or override them in your … by @atmonshi in https://github.com/lara-zeus/bolt/pull/293
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.45...v3.0.46
+
+## v3.0.45 - 2024-05-30
+
+### What's Changed
+
+* fixes and improvements for grading and disable searchable for counts … by @atmonshi in https://github.com/lara-zeus/bolt/pull/292
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.44...v3.0.45
+
+## v3.0.44 - 2024-05-30
+
+### What's Changed
+
+* Paragraph with html by @atmonshi in https://github.com/lara-zeus/bolt/pull/290
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.43...v3.0.44
+
+## v3.0.43 - 2024-05-29
+
+### What's Changed
+
+* fix response action url by @atmonshi in https://github.com/lara-zeus/bolt/pull/289
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.42...v3.0.43
+
+## v3.0.42 - 2024-05-28
+
+### What's Changed
+
+* improvements on how to check if pro version installed by @atmonshi in https://github.com/lara-zeus/bolt/pull/288
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.41...v3.0.42
+
+## v3.0.41 - 2024-05-28
+
+### What's Changed
+
+* fix collection not found by @atmonshi in https://github.com/lara-zeus/bolt/pull/287
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.40...v3.0.41
+
+## v3.0.40 - 2024-05-27
+
+### What's Changed
+
+* fix visibility with live select by @atmonshi in https://github.com/lara-zeus/bolt/pull/286
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.39...v3.0.40
+
+## v3.0.39 - 2024-05-17
+
+### What's Changed
+
+* [Bugfix/select options] Resolve HasOptions Merge Issue and Documentation Update by @mohaphez in https://github.com/lara-zeus/bolt/pull/285
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.38...v3.0.39
+
 ## v3.0.38 - 2024-05-03
 
 ### What's Changed
@@ -300,54 +499,30 @@ and you can remove the fork for `alperenersoy/filament-export`
 * fix pre-filled link for tenant by @atmonshi in https://github.com/lara-zeus/bolt/pull/233
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.3...v2.1.32
 ## v3.0.3 - 2024-01-10
-
 ### What's Changed
-
 * improve Conditional Visibility by @atmonshi in https://github.com/lara-zeus/bolt/pull/232
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.2...v3.0.3
-
 ## v2.1.30 - 2024-01-08
-
 ### What's Changed
-
 * Bump aglipanci/laravel-pint-action from 2.3.0 to 2.3.1 by @dependabot in https://github.com/lara-zeus/bolt/pull/221
 * fix badge count for multi tenant by @atmonshi in https://github.com/lara-zeus/bolt/pull/226
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/v2.1.29...v2.1.30
-
 ## v2.1.29 - 2023-12-14
-
 ### What's Changed
-
 * update docs by @atmonshi in https://github.com/lara-zeus/bolt/pull/219
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/v2.1.28...v2.1.29
-
 ## v2.1.28 - 2023-12-14
-
 ### What's Changed
-
 * Update doc and css by @atmonshi in https://github.com/lara-zeus/bolt/pull/218
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/v2.1.27...v2.1.28
-
 ## 1.2.12 - 2023-08-14
-
 ### What's Changed
-
 - change reactive to debounce by @atmonshi in https://github.com/lara-zeus/bolt/pull/119
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.11...1.2.12
-
 ## 1.2.11 - 2023-08-06
-
 ### What's Changed
-
 - add german translation by @grafst in https://github.com/lara-zeus/bolt/pull/107
-
 ### New Contributors
-
 - @grafst made their first contribution in https://github.com/lara-zeus/bolt/pull/107
 
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.10...1.2.11

@@ -51,3 +51,13 @@ This will allow you to get the user name by another attribute like `full_name`
 ## Usage
 
 To access the forms, visit the URL `/admin` , and `/bolt`.
+
+## Deploying to Production
+
+to Improve performance in the production environment, make sure to run these commands with your deployment workflow:
+
+```bash
+php artisan icons:cache
+```
+
+To learn more about performance in the production, check out [filament docs](https://filamentphp.com/docs/3.x/panels/installation#improving-filament-panel-performance).

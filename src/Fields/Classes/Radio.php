@@ -6,6 +6,7 @@ use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Toggle;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
+use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Fields\FieldsContract;
 use LaraZeus\Bolt\Models\Field;
 use LaraZeus\Bolt\Models\FieldResponse;
@@ -31,7 +32,7 @@ class Radio extends FieldsContract
         return __('single choice from a datasource');
     }
 
-    public static function getOptions(?array $sections = null): array
+    public static function getOptions(?array $sections = null, ?array $field = null): array
     {
         return [
             self::dataSource(),
@@ -49,6 +50,9 @@ class Radio extends FieldsContract
                         ]),
                     self::hintOptions(),
                     self::visibility($sections),
+                    // @phpstan-ignore-next-line
+                    ...Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::schema($field) : [],
+                    Bolt::getCustomSchema('field', resolve(static::class)) ?? [],
                 ]),
         ];
     }
@@ -57,7 +61,9 @@ class Radio extends FieldsContract
     {
         return [
             self::hiddenIsActive(),
-            self::hiddenIsActive(),
+            // @phpstan-ignore-next-line
+            Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::hidden() : [],
+            ...Bolt::getHiddenCustomSchema('field', resolve(static::class)) ?? [],
             self::hiddenVisibility(),
             self::hiddenHtmlID(),
             self::hiddenHintOptions(),

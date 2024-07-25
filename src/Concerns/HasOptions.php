@@ -40,6 +40,7 @@ trait HasOptions
                 Select::make('options.visibility.fieldID')
                     ->label(__('show when the field:'))
                     ->live()
+                    ->searchable(false)
                     ->visible(fn (Get $get): bool => ! empty($get('options.visibility.active')))
                     ->required(fn (Get $get): bool => ! empty($get('options.visibility.active')))
                     ->options(optional($getFields)->pluck('name', 'id')),
@@ -47,6 +48,7 @@ trait HasOptions
                 Select::make('options.visibility.values')
                     ->label(__('has the value:'))
                     ->live()
+                    ->searchable(false)
                     ->required(fn (Get $get): bool => ! empty($get('options.visibility.fieldID')))
                     ->visible(fn (Get $get): bool => ! empty($get('options.visibility.fieldID')))
                     ->options(function (Get $get) use ($getFields) {
@@ -136,6 +138,7 @@ trait HasOptions
                     ],
                 ];
             })
+            ->toBase()
             ->merge(
                 Bolt::availableDataSource()
                     ->mapWithKeys(function ($item, $key) {

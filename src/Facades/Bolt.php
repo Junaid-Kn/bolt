@@ -3,12 +3,18 @@
 namespace LaraZeus\Bolt\Facades;
 
 use Filament\Forms\Components\Placeholder;
+use Filament\Forms\Components\Tabs\Tab;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Facade;
+use LaraZeus\Accordion\Forms\Accordion;
+use LaraZeus\Bolt\BoltPlugin;
+use LaraZeus\Bolt\Contracts\CustomFormSchema;
+use LaraZeus\Bolt\Contracts\CustomSchema;
+use LaraZeus\Bolt\Fields\FieldsContract;
 
 class Bolt extends Facade
 {
@@ -37,8 +43,12 @@ class Bolt extends Facade
                 $fields = $fields->merge($appFields);
             }
 
-            if (class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class)) {
-                $boltProFields = Collectors::collectClasses(base_path('vendor/lara-zeus/bolt-pro/src/Fields'), 'LaraZeus\\BoltPro\\Fields\\');
+            if (static::hasPro()) {
+                $boltProFields = Collectors::collectClasses(
+                    base_path('vendor/lara-zeus/bolt-pro/src/Fields'),
+                    'LaraZeus\\BoltPro\\Fields\\'
+                );
+
                 if ($boltProFields->isNotEmpty()) {
                     $fields = $fields->merge($boltProFields);
                 }
@@ -101,5 +111,40 @@ class Bolt extends Facade
         }
 
         return true;
+    }
+
+    public static function hasPro(): bool
+    {
+        return class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class);
+    }
+
+    public static function getCustomSchema(string $hook, ?FieldsContract $field = null): Tab | Accordion | null
+    {
+        $class = BoltPlugin::getSchema($hook);
+        if ($class !== null) {
+            $getClass = new $class;
+            if ($hook === 'form' && $getClass instanceof CustomFormSchema) {
+                return $getClass->make();
+            }
+
+            if ($getClass instanceof CustomSchema) {
+                return $getClass->make($field);
+            }
+        }
+
+        return null;
+    }
+
+    public static function getHiddenCustomSchema(string $hook, ?FieldsContract $field = null): ?array
+    {
+        $class = BoltPlugin::getSchema($hook);
+        if ($class !== null) {
+            $getClass = new $class;
+            if ($getClass instanceof CustomSchema) {
+                return $getClass->hidden($field);
+            }
+        }
+
+        return null;
     }
 }

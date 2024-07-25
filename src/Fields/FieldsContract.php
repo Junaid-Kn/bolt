@@ -85,6 +85,17 @@ abstract class FieldsContract implements Arrayable, Fields
         $component
             ->label($zeusField->name)
             ->id($htmlId)
+            ->hint(function () use ($zeusField) {
+                if (! Bolt::hasPro()) {
+                    return null;
+                }
+
+                if (! $zeusField instanceof FieldPreset && $zeusField->section->form->extensions !== 'LaraZeus\\BoltPro\\Extensions\\Grades') {
+                    return null;
+                }
+
+                return optional($zeusField->options)['grades']['points'] ?? 0 . ' ' . __('marks');
+            })
             ->helperText($zeusField->description);
 
         if (optional($zeusField->options)['is_required']) {
@@ -157,10 +168,10 @@ abstract class FieldsContract implements Arrayable, Fields
         if ((int) $field->options['dataSource'] !== 0) {
             $response = BoltPlugin::getModel('Collection')::query()
                 ->find($field->options['dataSource'])
-                ->values
+                ?->values
                 ->whereIn('itemKey', $response)
                 ->pluck('itemValue')
-                ->join(', ');
+                ->join(', ') ?? '';
         } else {
             $dataSourceClass = new $field->options['dataSource'];
             $response = $dataSourceClass->getQuery()
@@ -232,6 +243,7 @@ abstract class FieldsContract implements Arrayable, Fields
     {
         return TextColumn::make('zeusData.' . $field->id)
             ->label($field->name)
+            ->sortable(false)
             ->searchable(query: function (Builder $query, string $search): Builder {
                 return $query
                     ->whereHas('fieldsResponses', function ($query) use ($search) {
@@ -269,5 +281,10 @@ abstract class FieldsContract implements Arrayable, Fields
         }
 
         return (new $field->type)->getResponse($field, $fieldResponse);
+    }
+
+    public function entry(Field $field, FieldResponse $resp): string
+    {
+        return $this->getResponse($field, $resp);
     }
 }

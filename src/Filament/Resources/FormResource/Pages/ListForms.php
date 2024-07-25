@@ -5,6 +5,7 @@ namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
+use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 
 class ListForms extends ListRecords
@@ -27,7 +28,7 @@ class ListForms extends ListRecords
                 ->openUrlInNewTab(),
         ];
 
-        if (class_exists(\LaraZeus\BoltPro\Facades\BoltPro::class)) {
+        if (Bolt::hasPro()) {
             //@phpstan-ignore-next-line
             $actions[] = \LaraZeus\BoltPro\Actions\PresetAction::make('new from preset')
                 ->visible(config('zeus-bolt.show_presets'));

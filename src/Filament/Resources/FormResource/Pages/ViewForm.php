@@ -6,6 +6,7 @@ use Filament\Actions\Action;
 use Filament\Actions\LocaleSwitcher;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Contracts\Support\Htmlable;
+use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\Bolt\Models\Form;
 
@@ -52,7 +53,7 @@ class ViewForm extends ViewRecord
             FormResource\Widgets\ResponsesPerFields::class,
         ];
 
-        if (class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class)) {
+        if (Bolt::hasPro()) {
             //@phpstan-ignore-next-line
             $widgets[] = \LaraZeus\BoltPro\Widgets\ResponsesCharts::class;
         }
