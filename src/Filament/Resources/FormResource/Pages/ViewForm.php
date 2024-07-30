@@ -21,12 +21,12 @@ class ViewForm extends ViewRecord
 
     public function getTitle(): string | Htmlable
     {
-        return __('View Form');
+        return __('zeus-bolt::forms.view_form');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('View Form');
+        return __('zeus-bolt::forms.view_form');
     }
 
     protected function getHeaderActions(): array
@@ -34,9 +34,9 @@ class ViewForm extends ViewRecord
         return [
             LocaleSwitcher::make(),
             Action::make('open')
-                ->label(__('Open'))
+                ->label(__('zeus-bolt::forms.actions.open'))
                 ->icon('heroicon-o-arrow-top-right-on-square')
-                ->tooltip(__('open form'))
+                ->tooltip(__('zeus-bolt::forms.actions.open_tooltip'))
                 ->color('warning')
                 ->url(fn () => route('bolt.form.show', $this->record))
                 ->visible(fn (Form $record) => $record->extensions === null)

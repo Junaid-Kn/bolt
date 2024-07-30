@@ -14,19 +14,9 @@ class Paragraph extends FieldsContract
 
     public int $sort = 10;
 
-    public function title(): string
-    {
-        return __('Paragraph');
-    }
-
     public function icon(): string
     {
         return 'tabler-text-recognition';
-    }
-
-    public function description(): string
-    {
-        return __('display a paragraph in your form');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
@@ -35,7 +25,7 @@ class Paragraph extends FieldsContract
             Accordions::make('check-list-options')
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->schema([
                             self::isActive(),

@@ -40,7 +40,7 @@ class ResponsesPerStatus extends ChartWidget
 
     public function getHeading(): string
     {
-        return __('Responses Status');
+        return __('zeus-bolt::forms.widgets.responses_status');
     }
 
     protected function getData(): array
@@ -62,7 +62,7 @@ class ResponsesPerStatus extends ChartWidget
         return [
             'datasets' => [
                 [
-                    'label' => __('entries per month'),
+                    'label' => __('zeus-bolt::forms.widgets.entries_per_month_desc'),
                     'data' => $dataset,
                     'backgroundColor' => $statuses->pluck('chartColor'),
                     'borderColor' => '#ffffff',

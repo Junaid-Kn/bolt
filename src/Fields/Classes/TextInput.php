@@ -20,19 +20,9 @@ class TextInput extends FieldsContract
 
     public int $sort = 1;
 
-    public function title(): string
-    {
-        return __('Text Input');
-    }
-
     public function icon(): string
     {
         return 'tabler-input-search';
-    }
-
-    public function description(): string
-    {
-        return __('text input');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
@@ -41,28 +31,28 @@ class TextInput extends FieldsContract
             Accordions::make('options')
                 ->accordions([
                     Accordion::make('validation-options')
-                        ->label(__('Validation Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.validation_options'))
                         ->icon('iconpark-checkcorrect-o')
                         ->columns()
                         ->schema([
                             Select::make('options.dateType')
-                                ->label(__('Data type'))
+                                ->label(__('zeus-bolt::forms.fields.options.data_type'))
                                 ->required()
                                 ->options([
-                                    'string' => __('text'),
-                                    'email' => __('email'),
-                                    'numeric' => __('numeric'),
-                                    'password' => __('password'),
-                                    'tel' => __('tel'),
-                                    'url' => __('url'),
-                                    'activeUrl' => __('active url'),
-                                    'alpha' => __('alpha'),
-                                    'alphaDash' => __('alpha dash'),
-                                    'alphaNum' => __('alpha num'),
-                                    'ip' => __('ip'),
-                                    'ipv4' => __('ip v4'),
-                                    'ipv6' => __('ip v6'),
-                                    'macAddress' => __('mac address'),
+                                    'string' => __('zeus-bolt::forms.fields.options.data_type_types.string'),
+                                    'email' => __('zeus-bolt::forms.fields.options.data_type_types.email'),
+                                    'numeric' => __('zeus-bolt::forms.fields.options.data_type_types.numeric'),
+                                    'password' => __('zeus-bolt::forms.fields.options.data_type_types.password'),
+                                    'tel' => __('zeus-bolt::forms.fields.options.data_type_types.tel'),
+                                    'url' => __('zeus-bolt::forms.fields.options.data_type_types.url'),
+                                    'activeUrl' => __('zeus-bolt::forms.fields.options.data_type_types.activeUrl'),
+                                    'alpha' => __('zeus-bolt::forms.fields.options.data_type_types.alpha'),
+                                    'alphaDash' => __('zeus-bolt::forms.fields.options.data_type_types.alphaDash'),
+                                    'alphaNum' => __('zeus-bolt::forms.fields.options.data_type_types.alphaNum'),
+                                    'ip' => __('zeus-bolt::forms.fields.options.data_type_types.ip'),
+                                    'ipv4' => __('zeus-bolt::forms.fields.options.data_type_types.ipv4'),
+                                    'ipv6' => __('zeus-bolt::forms.fields.options.data_type_types.ipv6'),
+                                    'macAddress' => __('zeus-bolt::forms.fields.options.data_type_types.macAddress'),
                                 ])
                                 ->default('string')
                                 ->columnSpanFull()
@@ -70,25 +60,25 @@ class TextInput extends FieldsContract
 
                             TextInputAlias::make('options.minValue')
                                 ->visible(fn (Get $get): bool => $get('options.dateType') === 'numeric')
-                                ->label(__('min value')),
+                                ->label(__('zeus-bolt::forms.fields.options.min_value')),
 
                             TextInputAlias::make('options.maxValue')
                                 ->visible(fn (Get $get): bool => $get('options.dateType') === 'numeric')
-                                ->label(__('max value')),
+                                ->label(__('zeus-bolt::forms.fields.options.max_value')),
 
                             self::isActive(),
                             self::required(),
                         ]),
 
                     Accordion::make('visual-options')
-                        ->label(__('Visual Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.visual_options'))
                         ->columns()
                         ->icon('iconpark-viewgriddetail-o')
                         ->schema([
                             TextInputAlias::make('options.prefix')
-                                ->label(__('prefix')),
+                                ->label(__('zeus-bolt::forms.fields.options.prefix')),
                             TextInputAlias::make('options.suffix')
-                                ->label(__('suffix')),
+                                ->label(__('zeus-bolt::forms.fields.options.suffix')),
 
                             IconPicker::make('options.prefix-icon')
                                 ->columns([
@@ -96,19 +86,19 @@ class TextInput extends FieldsContract
                                     'lg' => 3,
                                     '2xl' => 5,
                                 ])
-                                ->label(__('Prefix Icon')),
+                                ->label(__('zeus-bolt::forms.fields.options.prefix_icon')),
                             IconPicker::make('options.suffix-icon')
                                 ->columns([
                                     'default' => 1,
                                     'lg' => 3,
                                     '2xl' => 5,
                                 ])
-                                ->label(__('Suffix Icon')),
+                                ->label(__('zeus-bolt::forms.fields.options.suffix_icon')),
 
                             ColorPicker::make('options.prefix-icon-color')
-                                ->label(__('Prefix Icon Color')),
+                                ->label(__('zeus-bolt::forms.fields.options.prefix_icon_color')),
                             ColorPicker::make('options.suffix-icon-color')
-                                ->label(__('Suffix Icon Color')),
+                                ->label(__('zeus-bolt::forms.fields.options.suffix_icon_color')),
 
                             self::columnSpanFull(),
                             self::htmlID(),

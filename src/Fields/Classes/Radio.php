@@ -17,19 +17,9 @@ class Radio extends FieldsContract
 
     public int $sort = 4;
 
-    public function title(): string
-    {
-        return __('Radio');
-    }
-
     public function icon(): string
     {
         return 'tabler-circle-check';
-    }
-
-    public function description(): string
-    {
-        return __('single choice from a datasource');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
@@ -39,12 +29,13 @@ class Radio extends FieldsContract
             Accordions::make('check-list-options')
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->schema([
                             self::isActive(),
                             self::required(),
-                            Toggle::make('options.is_inline')->label(__('Is inline')),
+                            Toggle::make('options.is_inline')
+                                ->label(__('zeus-bolt::forms.fields.options.is_inline')),
                             self::columnSpanFull(),
                             self::htmlID(),
                         ]),

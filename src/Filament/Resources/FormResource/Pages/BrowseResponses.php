@@ -32,7 +32,7 @@ class BrowseResponses extends ManageRelatedRecords
             ->query(BoltPlugin::getModel('Response')::query()->where('form_id', $this->record->id))
             ->columns([
                 ViewColumn::make('response')
-                    ->label(__('Browse Entries'))
+                    ->label(__('zeus-bolt::forms.browse_entries'))
                     ->view('zeus::filament.resources.response-resource.pages.browse-entry'),
             ])
             ->actions([
@@ -41,17 +41,17 @@ class BrowseResponses extends ManageRelatedRecords
             ->filters([
                 SelectFilter::make('status')
                     ->options(BoltPlugin::getModel('FormsStatus')::query()->pluck('label', 'key'))
-                    ->label(__('Status')),
+                    ->label(__('zeus-bolt::forms.status')),
             ]);
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('Browse Entries');
+        return __('zeus-bolt::forms.browse_entries');
     }
 
     public function getTitle(): string
     {
-        return __('Browse Entries');
+        return __('zeus-bolt::forms.browse_entries');
     }
 }

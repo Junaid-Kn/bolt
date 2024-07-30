@@ -59,7 +59,7 @@ trait Designer
                         return (new $class)->label();
                     }
 
-                    return __('Extension');
+                    return __('zeus-bolt::forms.extension');
                 })
                 ->schema($getExtComponent),
         ];

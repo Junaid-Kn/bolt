@@ -75,7 +75,7 @@ class Form extends Model
 
             if (! $canDelete) {
                 Notification::make()
-                    ->title(__('Can\'t delete a form linked to an Extensions'))
+                    ->title(__('zeus-bolt::forms.cant_delete'))
                     ->danger()
                     ->send();
 

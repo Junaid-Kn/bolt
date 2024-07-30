@@ -36,7 +36,7 @@ class FormSubmission extends Mailable implements ShouldQueue
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: __('New Submission in') . ' ' . $this->form->name,
+            subject: __('zeus-bolt::response.new_submission_in') . ' ' . $this->form->name,
         );
     }
 

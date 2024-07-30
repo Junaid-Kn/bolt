@@ -14,7 +14,6 @@ use Filament\Tables\Actions\EditAction;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use LaraZeus\Bolt\BoltPlugin;
-use LaraZeus\Bolt\Enums\Resources;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Widgets\EditCollectionWarning;
 
@@ -33,7 +32,7 @@ class CollectionResource extends BoltResource
 
     public static function getNavigationBadge(): ?string
     {
-        if (! BoltPlugin::getNavigationBadgesVisibility(Resources::CollectionResource)) {
+        if (! BoltPlugin::getNavigationBadgesVisibility(static::class)) {
             return null;
         }
 
@@ -42,17 +41,17 @@ class CollectionResource extends BoltResource
 
     public static function getModelLabel(): string
     {
-        return __('Collection');
+        return __('zeus-bolt::collection.label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Collections');
+        return __('zeus-bolt::collection.navigation_label');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('Collections');
+        return __('zeus-bolt::collection.navigation_label');
     }
 
     public static function form(Form $form): Form
@@ -61,14 +60,18 @@ class CollectionResource extends BoltResource
             ->schema([
                 TextInput::make('name')
                     ->live(onBlur: true)
-                    ->label(__('Collections Name'))->required()->maxLength(255)->columnSpan(2),
+                    ->label(__('zeus-bolt::collection.name'))
+                    ->required()
+                    ->maxLength(255)
+                    ->columnSpan(2),
+
                 Repeater::make('values')
                     ->grid([
                         'default' => 1,
                         'md' => 2,
                         'lg' => 3,
                     ])
-                    ->label(__('Collections Values'))
+                    ->label(__('zeus-bolt::collection.values'))
                     ->columnSpan(2)
                     ->columns(1)
                     ->schema([
@@ -79,11 +82,18 @@ class CollectionResource extends BoltResource
                                     $set('itemKey', $get('itemValue'));
                                 }
                             })
-                            ->required()->label(__('Value'))->hint(__('what the user will see')),
+                            ->required()
+                            ->label(__('zeus-bolt::collection.value'))
+                            ->hint(__('zeus-bolt::collection.value_help')),
+
                         TextInput::make('itemKey')
                             ->live(onBlur: true)
-                            ->required()->label(__('Key'))->hint(__('what store in the form')),
-                        Toggle::make('itemIsDefault')->label(__('selected by default')),
+                            ->required()
+                            ->label(__('zeus-bolt::collection.key'))
+                            ->hint(__('zeus-bolt::collection.key_help')),
+
+                        Toggle::make('itemIsDefault')
+                            ->label(__('zeus-bolt::collection.default')),
                     ]),
             ]);
     }
@@ -93,14 +103,14 @@ class CollectionResource extends BoltResource
         return $table
             ->columns([
                 TextColumn::make('name')
-                    ->label(__('Collections Name'))
+                    ->label(__('zeus-bolt::collection.name'))
                     ->searchable()
                     ->sortable()
                     ->toggleable(),
                 TextColumn::make('values-list')
                     ->badge()
                     ->separator(',')
-                    ->label(__('Collections Values'))
+                    ->label(__('zeus-bolt::collection.values'))
                     ->searchable(['values'])
                     ->toggleable(),
             ])

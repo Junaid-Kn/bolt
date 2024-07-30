@@ -13,19 +13,9 @@ class RichEditor extends FieldsContract
 
     public int $sort = 7;
 
-    public function title(): string
-    {
-        return __('Rich Editor');
-    }
-
     public function icon(): string
     {
         return 'tabler-cursor-text';
-    }
-
-    public function description(): string
-    {
-        return __('Text editor with styling');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
@@ -34,7 +24,7 @@ class RichEditor extends FieldsContract
             Accordions::make('check-list-options')
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->schema([
                             self::isActive(),

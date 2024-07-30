@@ -21,14 +21,14 @@ class ResponseExporter extends Exporter
         $getUserModel = config('auth.providers.users.model')::getBoltUserFullNameAttribute();
         $mainColumns = [
             ExportColumn::make('user.' . $getUserModel)
-                ->label(__('Name'))
-                ->default(__('guest')),
+                ->label(__('zeus-bolt::response.name'))
+                ->default(__('zeus-bolt::response.guest')),
 
             ExportColumn::make('status')
-                ->label(__('status')),
+                ->label(__('zeus-bolt::response.status')),
 
             ExportColumn::make('notes')
-                ->label(__('notes')),
+                ->label(__('zeus-bolt::response.notes')),
         ];
 
         /**
@@ -43,7 +43,7 @@ class ResponseExporter extends Exporter
         }
 
         $mainColumns[] = ExportColumn::make('created_at')
-            ->label(__('created at'));
+            ->label(__('zeus-bolt::response.created_at'));
 
         return $mainColumns;
     }

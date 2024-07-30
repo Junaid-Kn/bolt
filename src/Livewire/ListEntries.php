@@ -34,17 +34,19 @@ class ListEntries extends Component implements HasForms, HasTable
                 Split::make([
                     TextColumn::make('status')
                         ->badge()
-                        ->label(__('status'))
+                        ->label(__('zeus-bolt::forms.status'))
                         ->colors(config('zeus-bolt.models.FormsStatus')::pluck('key', 'color')->toArray())
                         ->icons(config('zeus-bolt.models.FormsStatus')::pluck('key', 'icon')->toArray())
                         ->grow(false),
                     TextColumn::make('form.name')
                         ->searchable('name')
-                        ->label(__('Form Name'))
+                        ->label(__('zeus-bolt::forms.options.tabs.title.name'))
                         ->url(fn (Response $record): string => route('bolt.entry.show', $record)),
                 ]),
                 Stack::make([
-                    TextColumn::make('updated_at')->label(__('Updated At'))->dateTime(),
+                    TextColumn::make('updated_at')
+                        ->label(__('zeus-bolt::forms.updated_at'))
+                        ->dateTime(),
                 ]),
             ]);
     }
@@ -52,8 +54,8 @@ class ListEntries extends Component implements HasForms, HasTable
     public function render(): View
     {
         seo()
-            ->title(__('My Responses') . ' ' . config('zeus.site_title', 'Laravel'))
-            ->description(__('My Responses') . ' ' . config('zeus.site_description', 'Laravel'))
+            ->title(__('zeus-bolt::response.my_responses') . ' ' . config('zeus.site_title', 'Laravel'))
+            ->description(__('zeus-bolt::response.my_responses') . ' ' . config('zeus.site_description', 'Laravel'))
             ->site(config('zeus.site_title', 'Laravel'))
             ->rawTag('favicon', '<link rel="icon" type="image/x-icon" href="' . asset('favicon/favicon.ico') . '">')
             ->rawTag('<meta name="theme-color" content="' . config('zeus.site_color') . '" />')

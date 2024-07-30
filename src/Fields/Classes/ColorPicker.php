@@ -15,19 +15,9 @@ class ColorPicker extends FieldsContract
 
     public int $sort = 9;
 
-    public function title(): string
-    {
-        return __('Color Picker');
-    }
-
     public function icon(): string
     {
         return 'tabler-color-picker';
-    }
-
-    public function description(): string
-    {
-        return __('pick a color with rgb, rgba or hsl');
     }
 
     public static function getOptions(?array $sections = null): array
@@ -36,11 +26,11 @@ class ColorPicker extends FieldsContract
             Accordions::make('check-list-options')
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->schema([
                             \Filament\Forms\Components\Select::make('options.colorType')
-                                ->label(__('Color Type'))
+                                ->label(__('zeus-bolt::forms.fields.options.color_type'))
                                 ->options([
                                     'hsl' => 'hsl',
                                     'rgb' => 'rgb',

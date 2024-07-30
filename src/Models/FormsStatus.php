@@ -22,7 +22,7 @@ class FormsStatus extends Model
         return [
             [
                 'key' => 'NEW',
-                'label' => __('New'),
+                'label' => __('zeus-bolt::forms.status_labels.new'),
                 'description' => 'used when a new form created by the user or an employee',
                 'color' => 'success',
                 'chartColor' => '#21C55D',
@@ -31,7 +31,7 @@ class FormsStatus extends Model
             ],
             [
                 'key' => 'OPEN',
-                'label' => __('Open'),
+                'label' => __('zeus-bolt::forms.status_labels.open'),
                 'description' => 'used when a new form created by the user or an employee',
                 'color' => 'success',
                 'chartColor' => '#21C55D',
@@ -40,7 +40,7 @@ class FormsStatus extends Model
             ],
             [
                 'key' => 'CLOSE',
-                'label' => __('closed'),
+                'label' => __('zeus-bolt::forms.status_labels.closed'),
                 'description' => 'used when a new form created by the user or an employee',
                 'color' => 'danger',
                 'chartColor' => '#EF4444',

@@ -13,19 +13,9 @@ class DatePicker extends FieldsContract
 
     public int $sort = 6;
 
-    public function title(): string
-    {
-        return __('Date Picker');
-    }
-
     public function icon(): string
     {
         return 'tabler-calendar';
-    }
-
-    public function description(): string
-    {
-        return __('full date picker');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
@@ -34,7 +24,7 @@ class DatePicker extends FieldsContract
             Accordions::make('check-list-options')
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->schema([
                             self::isActive(),

@@ -22,19 +22,9 @@ class Textarea extends FieldsContract
 
     public int $sort = 8;
 
-    public function title(): string
-    {
-        return __('Textarea');
-    }
-
     public function icon(): string
     {
         return 'tabler-text-size';
-    }
-
-    public function description(): string
-    {
-        return __('multi line textarea');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
@@ -44,20 +34,20 @@ class Textarea extends FieldsContract
                 ->columns()
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->schema([
                             TextInput::make('options.rows')
-                                ->label(__('rows')),
+                                ->label(__('zeus-bolt::forms.fields.options.rows')),
 
                             TextInput::make('options.cols')
-                                ->label(__('cols')),
+                                ->label(__('zeus-bolt::forms.fields.options.cols')),
 
                             TextInput::make('options.minLength')
-                                ->label(__('min length')),
+                                ->label(__('zeus-bolt::forms.fields.options.min_length')),
 
                             TextInput::make('options.maxLength')
-                                ->label(__('max length')),
+                                ->label(__('zeus-bolt::forms.fields.options.max_length')),
 
                             self::isActive(),
                             self::required(),

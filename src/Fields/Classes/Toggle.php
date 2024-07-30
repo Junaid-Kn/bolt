@@ -25,19 +25,9 @@ class Toggle extends FieldsContract
 
     public int $sort = 5;
 
-    public function title(): string
-    {
-        return __('Toggle');
-    }
-
     public function icon(): string
     {
         return 'tabler-toggle-left';
-    }
-
-    public function description(): string
-    {
-        return __('toggle');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
@@ -46,7 +36,7 @@ class Toggle extends FieldsContract
             Accordions::make('check-list-options')
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->schema([
                             Grid::make()
@@ -58,7 +48,7 @@ class Toggle extends FieldsContract
                                             'lg' => 3,
                                             '2xl' => 5,
                                         ])
-                                        ->label(__('On Icon')),
+                                        ->label(__('zeus-bolt::forms.fields.options.on_icon')),
 
                                     IconPicker::make('options.off-icon')
                                         ->columns([
@@ -66,10 +56,14 @@ class Toggle extends FieldsContract
                                             'lg' => 3,
                                             '2xl' => 5,
                                         ])
-                                        ->label(__('Off Icon')),
+                                        ->label(__('zeus-bolt::forms.fields.options.off_icon')),
 
-                                    ColorPicker::make('options.on-color')->hex(),
-                                    ColorPicker::make('options.off-color')->hex(),
+                                    ColorPicker::make('options.on-color')
+                                        ->label(__('zeus-bolt::forms.fields.options.off_color'))
+                                        ->hex(),
+                                    ColorPicker::make('options.off-color')
+                                        ->label(__('zeus-bolt::forms.fields.options.off_color'))
+                                        ->hex(),
 
                                     \Filament\Forms\Components\Toggle::make('options.is-inline'),
                                 ]),
@@ -155,7 +149,7 @@ class Toggle extends FieldsContract
     {
         $response = (int) $resp->response;
 
-        return ($response === 1) ? __('yes') : __('no');
+        return ($response === 1) ? __('zeus-bolt::forms.fields.options.yes') : __('zeus-bolt::forms.fields.options.no');
     }
 
     public function ExportColumn(Field $field): ?ExportColumn
@@ -167,7 +161,7 @@ class Toggle extends FieldsContract
                 $response = $record->fieldsResponses()->where('field_id', $field->id)->first();
                 $response = (int) $response->response;
 
-                return ($response === 1) ? __('yes') : __('no');
+                return ($response === 1) ? __('zeus-bolt::forms.fields.options.yes') : __('zeus-bolt::forms.fields.options.no');
             });
     }
 }

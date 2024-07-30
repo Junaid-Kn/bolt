@@ -25,7 +25,9 @@ trait HasHiddenOptions
     public static function hiddenIsActive(): array
     {
         return [
-            Hidden::make('options.is_active')->default(true),
+            Hidden::make('options.is_active')
+                ->formatStateUsing(fn($record)=> $record->options['is_active'] ?? true)
+                ->default(true),
         ];
     }
 

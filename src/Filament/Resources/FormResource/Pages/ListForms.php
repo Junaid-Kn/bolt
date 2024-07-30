@@ -20,9 +20,9 @@ class ListForms extends ListRecords
             Actions\LocaleSwitcher::make(),
             Actions\CreateAction::make('create'),
             Action::make('open')
-                ->label(__('Open'))
+                ->label(__('zeus-bolt::forms.actions.open'))
                 ->icon('heroicon-o-arrow-top-right-on-square')
-                ->tooltip(__('open all forms'))
+                ->tooltip(__('zeus-bolt::forms.actions.open_tooltip_all'))
                 ->color('warning')
                 ->url(fn () => route('bolt.forms.list'))
                 ->openUrlInNewTab(),

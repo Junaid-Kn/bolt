@@ -27,7 +27,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Illuminate\Support\Str;
 use LaraZeus\Bolt\BoltPlugin;
-use LaraZeus\Bolt\Enums\Resources;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\CreateCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\EditCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\ListCategories;
@@ -48,7 +47,7 @@ class CategoryResource extends BoltResource
 
     public static function getNavigationBadge(): ?string
     {
-        if (! BoltPlugin::getNavigationBadgesVisibility(Resources::CategoryResource)) {
+        if (! BoltPlugin::getNavigationBadgesVisibility(static::class)) {
             return null;
         }
 
@@ -66,23 +65,38 @@ class CategoryResource extends BoltResource
                             ->required()
                             ->maxLength(255)
                             ->live(onBlur: true)
-                            ->label(__('Name'))
+                            ->label(__('zeus-bolt::category.name'))
                             ->afterStateUpdated(function (Set $set, $state, $context) {
                                 if ($context === 'edit') {
                                     return;
                                 }
                                 $set('slug', Str::slug($state));
                             }),
-                        TextInput::make('slug')->required()->maxLength(255)->label(__('slug')),
-                        TextInput::make('ordering')->required()->numeric()->label(__('ordering')),
-                        Toggle::make('is_active')->label(__('Is Active'))->default(1),
-                        Textarea::make('description')->maxLength(65535)->columnSpan(['sm' => 2])->label(__('Description')),
+                        TextInput::make('slug')
+                            ->required()
+                            ->maxLength(255)
+                            ->label(__('zeus-bolt::category.slug')),
+
+                        TextInput::make('ordering')
+                            ->required()
+                            ->numeric()
+                            ->label(__('zeus-bolt::category.ordering')),
+
+                        Toggle::make('is_active')
+                            ->label(__('zeus-bolt::category.is_active'))
+                            ->default(1),
+
+                        Textarea::make('description')
+                            ->maxLength(65535)
+                            ->columnSpan(['sm' => 2])
+                            ->label(__('zeus-bolt::category.description')),
+
                         FileUpload::make('logo')
                             ->disk(config('zeus-bolt.uploadDisk'))
                             ->directory(config('zeus-bolt.uploadDirectory'))
                             ->visibility(config('zeus-bolt.uploadVisibility'))
                             ->columnSpan(['sm' => 2])
-                            ->label(__('logo')),
+                            ->label(__('zeus-bolt::category.logo')),
                     ]),
             ]);
     }
@@ -95,22 +109,22 @@ class CategoryResource extends BoltResource
                     ->disk(config('zeus-bolt.uploadDisk'))
                     ->visibility(config('zeus-bolt.uploadVisibility'))
                     ->toggleable()
-                    ->label(__('Logo')),
+                    ->label(__('zeus-bolt::category.logo')),
                 TextColumn::make('name')
-                    ->label(__('Name'))
+                    ->label(__('zeus-bolt::category.name'))
                     ->sortable()
                     ->toggleable()
                     ->searchable(),
                 TextColumn::make('forms_count')
                     ->counts('forms')
-                    ->label(__('Forms'))
+                    ->label(__('zeus-bolt::category.forms'))
                     ->toggleable()
                     ->searchable(),
                 IconColumn::make('is_active')
                     ->boolean()
                     ->sortable()
                     ->toggleable()
-                    ->label(__('Is Active')),
+                    ->label(__('zeus-bolt::category.is_active')),
             ])
             ->reorderable('ordering')
             ->defaultSort('id', 'description')
@@ -125,11 +139,11 @@ class CategoryResource extends BoltResource
             ->filters([
                 TrashedFilter::make(),
                 Filter::make('is_active')
-                    ->label(__('is active'))
+                    ->label(__('zeus-bolt::category.is_active'))
                     ->toggle()
                     ->query(fn (Builder $query): Builder => $query->where('is_active', true)),
                 Filter::make('not_active')
-                    ->label(__('not active'))
+                    ->label(__('zeus-bolt::category.not_active'))
                     ->toggle()
                     ->query(fn (Builder $query): Builder => $query->where('is_active', false)),
             ])
@@ -160,16 +174,16 @@ class CategoryResource extends BoltResource
 
     public static function getModelLabel(): string
     {
-        return __('Category');
+        return __('zeus-bolt::category.label');
     }
 
     public static function getPluralModelLabel(): string
     {
-        return __('Categories');
+        return __('zeus-bolt::category.plural_label');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('Categories');
+        return __('zeus-bolt::category.navigation_label');
     }
 }

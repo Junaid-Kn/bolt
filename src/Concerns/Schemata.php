@@ -58,12 +58,12 @@ trait Schemata
             TextInput::make('description')
                 ->nullable()
                 ->visible($formOptions['show-as'] !== 'tabs')
-                ->label(__('Section Description')),
+                ->label(__('zeus-bolt::forms.section.description')),
 
             Accordions::make('section-options')
                 ->accordions(fn () => array_filter([
                     Accordion::make('visual-options')
-                        ->label(__('Visual Options'))
+                        ->label(__('zeus-bolt::forms.section.options.visual_options'))
                         ->columns()
                         ->icon('iconpark-viewgriddetail-o')
                         ->schema([
@@ -71,23 +71,23 @@ trait Schemata
                                 ->options(fn (): array => array_combine(range(1, 12), range(1, 12)))
                                 ->required()
                                 ->default(1)
-                                ->hint(__('fields per row'))
-                                ->label(__('Section Columns')),
+                                ->hint(__('zeus-bolt::forms.section.options.columns_hint'))
+                                ->label(__('zeus-bolt::forms.section.options.columns_label')),
                             IconPicker::make('icon')
                                 ->columns([
                                     'default' => 1,
                                     'lg' => 3,
                                     '2xl' => 5,
                                 ])
-                                ->label(__('Section icon')),
+                                ->label(__('zeus-bolt::forms.section.options.icon')),
                             Toggle::make('aside')
                                 ->default(false)
                                 ->visible($formOptions['show-as'] === 'page')
-                                ->label(__('show as aside')),
+                                ->label(__('zeus-bolt::forms.section.options.aside')),
                             Toggle::make('compact')
                                 ->default(false)
                                 ->visible($formOptions['show-as'] === 'page')
-                                ->label(__('compact section')),
+                                ->label(__('zeus-bolt::forms.section.options.compact')),
                         ]),
                     self::visibility($allSections),
                     Bolt::getCustomSchema('section') ?? [],
@@ -109,7 +109,7 @@ trait Schemata
                 ->schema(static::getSectionsSchema())
                 ->relationship()
                 ->orderColumn('ordering')
-                ->addActionLabel(__('Add Section'))
+                ->addActionLabel(__('zeus-bolt::forms.section.options.add'))
                 ->cloneable()
                 ->collapsible()
                 ->collapsed(fn (string $operation) => $operation === 'edit')
@@ -119,10 +119,10 @@ trait Schemata
                     Bolt::hasPro() ? \LaraZeus\BoltPro\Actions\SectionMarkAction::make('marks') : null,
 
                     Action::make('options')
-                        ->label(__('section options'))
+                        ->label(__('zeus-bolt::forms.section.options.title'))
                         ->slideOver()
                         ->color('warning')
-                        ->tooltip(__('more section options'))
+                        ->tooltip(__('zeus-bolt::forms.section.options.more'))
                         ->icon('heroicon-m-cog')
                         ->fillForm(fn (
                             array $arguments,
@@ -152,14 +152,14 @@ trait Schemata
     {
         $tabs = [
             Tabs\Tab::make('title-slug-tab')
-                ->label(__('Title & Slug'))
+                ->label(__('zeus-bolt::forms.options.tabs.title.label'))
                 ->columns()
                 ->schema([
                     TextInput::make('name')
                         ->required()
                         ->maxLength(255)
                         ->live(onBlur: true)
-                        ->label(__('Form Name'))
+                        ->label(__('zeus-bolt::forms.options.tabs.title.name'))
                         ->afterStateUpdated(function (Set $set, $state, $context) {
                             if ($context === 'edit') {
                                 return;
@@ -171,10 +171,10 @@ trait Schemata
                         ->maxLength(255)
                         ->rules(['alpha_dash'])
                         ->unique(ignoreRecord: true)
-                        ->label(__('Form Slug')),
+                        ->label(__('zeus-bolt::forms.options.tabs.title.slug')),
 
                     Select::make('category_id')
-                        ->label(__('Category'))
+                        ->label(__('zeus-bolt::forms.options.tabs.title.category.label'))
                         ->searchable()
                         ->preload()
                         ->relationship(
@@ -188,41 +188,44 @@ trait Schemata
                                 return BoltPlugin::getModel('Category')::query()->whereBelongsTo(Filament::getTenant());
                             },
                         )
-                        ->helperText(__('optional, organize your forms into categories'))
+                        ->helperText(__('zeus-bolt::forms.options.tabs.title.category.hint'))
                         ->createOptionForm([
                             TextInput::make('name')
                                 ->required()
                                 ->maxLength(255)
                                 ->live(onBlur: true)
-                                ->label(__('Name'))
+                                ->label(__('zeus-bolt::forms.options.tabs.title.category.name'))
                                 ->afterStateUpdated(function (Set $set, $state, $context) {
                                     if ($context === 'edit') {
                                         return;
                                     }
                                     $set('slug', Str::slug($state));
                                 }),
-                            TextInput::make('slug')->required()->maxLength(255)->label(__('slug')),
+                            TextInput::make('slug')
+                                ->required()
+                                ->maxLength(255)
+                                ->label(__('zeus-bolt::forms.options.tabs.title.category.slug')),
                         ])
                         ->createOptionAction(fn (Action $action) => $action->hidden(auth()->user()->cannot('create', BoltPlugin::getModel('Category'))))
                         ->getOptionLabelFromRecordUsing(fn (Category $record) => $record->name),
                 ]),
 
             Tabs\Tab::make('text-details-tab')
-                ->label(__('Text & Details'))
+                ->label(__('zeus-bolt::forms.options.tabs.details.label'))
                 ->schema([
                     Textarea::make('description')
-                        ->label(__('Form Description'))
-                        ->helperText(__('shown under the title of the form and used in SEO')),
+                        ->label(__('zeus-bolt::forms.options.tabs.details.description'))
+                        ->helperText(__('zeus-bolt::forms.options.tabs.details.description_help')),
                     RichEditor::make('details')
-                        ->label(__('Form Details'))
-                        ->helperText(__('a highlighted section above the form, to show some instructions or more details')),
+                        ->label(__('zeus-bolt::forms.options.tabs.details.details'))
+                        ->helperText(__('zeus-bolt::forms.options.tabs.details.details_help')),
                     RichEditor::make('options.confirmation-message')
-                        ->label(__('Confirmation Message'))
-                        ->helperText(__('optional, show a massage whenever any one submit a new entry')),
+                        ->label(__('zeus-bolt::forms.options.tabs.details.confirmation_message'))
+                        ->helperText(__('zeus-bolt::forms.options.tabs.details.confirmation_message_help')),
                 ]),
 
             Tabs\Tab::make('display-access-tab')
-                ->label(__('Display & Access'))
+                ->label(__('zeus-bolt::forms.options.tabs.display.label'))
                 ->columns()
                 ->schema([
                     Grid::make()
@@ -230,16 +233,16 @@ trait Schemata
                         ->columns(1)
                         ->schema([
                             Toggle::make('is_active')
-                                ->label(__('Is Active'))
+                                ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
                                 ->default(1)
-                                ->helperText(__('Activate the form and let users start submissions')),
+                                ->helperText(__('zeus-bolt::forms.options.tabs.display.is_active_help')),
                             Toggle::make('options.require-login')
-                                ->label(__('require Login'))
-                                ->helperText(__('User must be logged in or create an account before can submit a new entry'))
+                                ->label(__('zeus-bolt::forms.options.tabs.display.require_login'))
+                                ->helperText(__('zeus-bolt::forms.options.tabs.display.require_login_help'))
                                 ->live(),
                             Toggle::make('options.one-entry-per-user')
-                                ->label(__('One Entry Per User'))
-                                ->helperText(__('to check if the user already submitted an entry in this form'))
+                                ->label(__('zeus-bolt::forms.options.tabs.display.one_entry_per_user'))
+                                ->helperText(__('zeus-bolt::forms.options.tabs.display.one_entry_per_user_help'))
                                 ->visible(function (Get $get) {
                                     return $get('options.require-login');
                                 }),
@@ -249,59 +252,59 @@ trait Schemata
                         ->columns(1)
                         ->schema([
                             Radio::make('options.show-as')
-                                ->label(__('Show the form as'))
+                                ->label(__('zeus-bolt::forms.options.tabs.display.show_as.label'))
                                 ->live()
                                 ->default('page')
                                 ->descriptions([
-                                    'page' => __('show all sections on one page'),
-                                    'wizard' => __('separate each section in steps'),
-                                    'tabs' => __('Show the Form as Tabs'),
+                                    'page' => __('zeus-bolt::forms.options.tabs.display.show_as.type_desc.page'),
+                                    'wizard' => __('zeus-bolt::forms.options.tabs.display.show_as.type_desc.wizard'),
+                                    'tabs' => __('zeus-bolt::forms.options.tabs.display.show_as.type_desc.tabs'),
                                 ])
                                 ->options([
-                                    'page' => __('Show on one page'),
-                                    'wizard' => __('Show As Wizard'),
-                                    'tabs' => __('Show As Tabs'),
+                                    'page' => __('zeus-bolt::forms.options.tabs.display.show_as.type.page'),
+                                    'wizard' => __('zeus-bolt::forms.options.tabs.display.show_as.type.wizard'),
+                                    'tabs' => __('zeus-bolt::forms.options.tabs.display.show_as.type.tabs'),
                                 ]),
                         ]),
 
                     TextInput::make('ordering')
                         ->numeric()
-                        ->label(__('ordering'))
+                        ->label(__('zeus-bolt::forms.options.tabs.display.ordering'))
                         ->default(1),
                 ]),
 
             Tabs\Tab::make('advanced-tab')
-                ->label(__('Advanced'))
+                ->label(__('zeus-bolt::forms.options.tabs.advanced.label'))
                 ->schema([
                     Grid::make()
                         ->columns()
                         ->schema([
                             Placeholder::make('form-dates')
-                                ->label(__('Form Dates'))
-                                ->content(__('optional, specify when the form will be active and receiving new entries'))
+                                ->label(__('zeus-bolt::forms.options.tabs.advanced.dates'))
+                                ->content(__('zeus-bolt::forms.options.tabs.advanced.dates_help'))
                                 ->columnSpanFull(),
                             DateTimePicker::make('start_date')
                                 ->requiredWith('end_date')
-                                ->label(__('Start Date')),
+                                ->label(__('zeus-bolt::forms.options.tabs.advanced.start_date')),
                             DateTimePicker::make('end_date')
                                 ->requiredWith('start_date')
-                                ->label(__('End Date')),
+                                ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date')),
                         ]),
                     Grid::make()
                         ->columns()
                         ->schema([
                             TextInput::make('options.emails-notification')
-                                ->label(__('Emails Notifications'))
-                                ->helperText(__('optional, enter the emails (comma separated) you want to receive notification when ever you got a new entry')),
+                                ->label(__('zeus-bolt::forms.options.tabs.advanced.emails_notifications'))
+                                ->helperText(__('zeus-bolt::forms.options.tabs.advanced.emails_notifications_help')),
                         ]),
                 ]),
 
             Tabs\Tab::make('extensions-tab')
-                ->label(__('Extensions'))
+                ->label(__('zeus-bolt::forms.options.tabs.extensions.label'))
                 ->visible(BoltPlugin::get()->getExtensions() !== null)
                 ->schema([
                     Select::make('extensions')
-                        ->label(__('Extensions'))
+                        ->label(__('zeus-bolt::forms.options.tabs.extensions.label'))
                         ->preload()
                         ->live()
                         ->options(function () {
@@ -318,7 +321,7 @@ trait Schemata
                 ]),
 
             Tabs\Tab::make('design')
-                ->label(__('Design'))
+                ->label(__('zeus-bolt::forms.options.tabs.design.label'))
                 ->visible(Bolt::hasPro() && config('zeus-bolt.allow_design'))
                 ->schema([
                     ViewField::make('options.primary_color')
@@ -330,14 +333,14 @@ trait Schemata
                         ->visibility(config('zeus-bolt.uploadVisibility'))
                         ->image()
                         ->imageEditor()
-                        ->label(__('Logo')),
+                        ->label(__('zeus-bolt::forms.options.tabs.design.logo')),
                     FileUpload::make('options.cover')
                         ->disk(config('zeus-bolt.uploadDisk'))
                         ->directory(config('zeus-bolt.uploadDirectory'))
                         ->visibility(config('zeus-bolt.uploadVisibility'))
                         ->image()
                         ->imageEditor()
-                        ->label(__('Cover')),
+                        ->label(__('zeus-bolt::forms.options.tabs.design.cover')),
                 ]),
         ];
 
@@ -357,10 +360,10 @@ trait Schemata
                 ->columnSpanFull()
                 ->required()
                 ->lazy()
-                ->label(__('Section Name')),
+                ->label(__('zeus-bolt::forms.section.name')),
 
             Placeholder::make('section-fields-placeholder')
-                ->label(__('Section Fields')),
+                ->label(__('zeus-bolt::forms.section.name')),
 
             Repeater::make('fields')
                 ->relationship()
@@ -391,9 +394,9 @@ trait Schemata
                     'xl' => 3,
                     '2xl' => 3,
                 ])
-                ->label('')
+                ->hiddenLabel()
                 ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
-                ->addActionLabel(__('Add field'))
+                ->addActionLabel(__('zeus-bolt::forms.fields.add'))
                 ->extraItemActions([
                     // @phpstan-ignore-next-line
                     Bolt::hasPro() ? \LaraZeus\BoltPro\Actions\FieldMarkAction::make('marks') : null,
@@ -404,7 +407,7 @@ trait Schemata
                         ->tooltip('more field options')
                         ->icon('heroicon-m-cog')
                         ->modalIcon('heroicon-m-cog')
-                        ->modalDescription(__('advanced fields settings'))
+                        ->modalDescription(__('zeus-bolt::forms.fields.settings'))
                         ->fillForm(fn (
                             $state,
                             array $arguments,
@@ -415,9 +418,9 @@ trait Schemata
 
                             return [
                                 Textarea::make('description')
-                                    ->label(__('Field Description')),
+                                    ->label(__('zeus-bolt::forms.fields.description')),
                                 Group::make()
-                                    ->label(__('Field Options'))
+                                    ->label(__('zeus-bolt::forms.fields.options'))
                                     ->schema(function (Get $get) use ($allSections, $component, $arguments) {
                                         $class = $get('type');
                                         if (class_exists($class)) {
@@ -466,7 +469,7 @@ trait Schemata
             TextInput::make('name')
                 ->required()
                 ->lazy()
-                ->label(__('Field Name')),
+                ->label(__('zeus-bolt::forms.fields.name')),
             Select::make('type')
                 ->required()
                 ->searchable()
@@ -488,7 +491,7 @@ trait Schemata
                 })
                 ->live()
                 ->default('\LaraZeus\Bolt\Fields\Classes\TextInput')
-                ->label(__('Field Type')),
+                ->label(__('zeus-bolt::forms.fields.type')),
             Group::make()
                 ->schema(function (Get $get) {
                     $class = $get('type');

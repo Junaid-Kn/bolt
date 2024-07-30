@@ -50,12 +50,14 @@ abstract class FieldsContract implements Arrayable, Fields
 
     public function title(): string
     {
-        return __(class_basename($this));
+        $fieldType = str(class_basename($this))->snake();
+        return __('zeus-bolt::fields_types.'.$fieldType.'.title');
     }
 
     public function description(): string
     {
-        return __('field text for all the text you need');
+        $fieldType = str(class_basename($this))->snake();
+        return __('zeus-bolt::fields_types.'.$fieldType.'.description');
     }
 
     public function icon(): string
@@ -94,7 +96,7 @@ abstract class FieldsContract implements Arrayable, Fields
                     return null;
                 }
 
-                return optional($zeusField->options)['grades']['points'] ?? 0 . ' ' . __('marks');
+                return optional($zeusField->options)['grades']['points'] ?? 0 . ' ' . __('zeus-bolt::forms.fields.marks.suffix');
             })
             ->helperText($zeusField->description);
 

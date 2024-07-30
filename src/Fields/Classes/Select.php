@@ -17,31 +17,22 @@ class Select extends FieldsContract
 
     public int $sort = 2;
 
-    public function title(): string
-    {
-        return __('Select Menu');
-    }
-
     public function icon(): string
     {
         return 'tabler-selector';
-    }
-
-    public function description(): string
-    {
-        return __('select single or multiple items from a dropdown list');
     }
 
     public static function getOptions(?array $sections = null, ?array $field = null): array
     {
         return [
             self::dataSource(),
-            Toggle::make('options.allow_multiple')->label(__('Allow Multiple')),
+            Toggle::make('options.allow_multiple')
+                ->label(__('zeus-bolt::forms.fields.options.allow_multiple')),
             Accordions::make('options')
                 ->activeAccordion(1)
                 ->accordions([
                     Accordion::make('general-options')
-                        ->label(__('General Options'))
+                        ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('iconpark-checklist-o')
                         ->columns()
                         ->schema([

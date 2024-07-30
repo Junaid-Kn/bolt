@@ -26,12 +26,12 @@ class EditForm extends EditRecord
 
     public function getTitle(): string | Htmlable
     {
-        return __('Edit Form');
+        return __('zeus-bolt::forms.edit_form');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('Edit Form');
+        return __('zeus-bolt::forms.edit_form');
     }
 
     protected function getHeaderActions(): array
@@ -39,9 +39,9 @@ class EditForm extends EditRecord
         return [
             LocaleSwitcher::make(),
             Action::make('open')
-                ->label(__('Open'))
+                ->label(__('zeus-bolt::forms.actions.open'))
                 ->icon('heroicon-o-arrow-top-right-on-square')
-                ->tooltip(__('open form'))
+                ->tooltip(__('zeus-bolt::forms.actions.open_tooltip'))
                 ->color('warning')
                 ->url(fn () => route('bolt.form.show', $this->record))
                 ->openUrlInNewTab(),
