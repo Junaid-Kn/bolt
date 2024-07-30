@@ -3,14 +3,36 @@
 namespace LaraZeus\Bolt;
 
 use Closure;
-use LaraZeus\Bolt\Enums\Resources;
+use Filament\Support\Concerns\EvaluatesClosures;
+use LaraZeus\Bolt\Filament\Resources\CategoryResource;
+use LaraZeus\Bolt\Filament\Resources\CollectionResource;
+use LaraZeus\Bolt\Filament\Resources\FormResource;
+use LaraZeus\Core\Concerns\CanGloballySearch;
+use LaraZeus\Core\Concerns\CanStickyActions;
+use LaraZeus\Core\Concerns\HasModels;
+use LaraZeus\Core\Concerns\HasNavigationGroupLabel;
+use LaraZeus\Core\Concerns\CanHideResources;
+use LaraZeus\Core\Concerns\HasNavigationBadges;
+use LaraZeus\Core\Concerns\HasUploads;
 
 trait Configuration
 {
-    /**
-     * you can overwrite any model and use your own
-     */
-    protected array $boltModels = [];
+    use CanGloballySearch;
+    use EvaluatesClosures;
+    use HasModels;
+    use HasNavigationGroupLabel;
+    use CanHideResources;
+    use CanStickyActions;
+    use HasNavigationBadges;
+    use HasUploads;
+
+    public array $defaultGloballySearchableAttributes = [
+        CategoryResource::class => ['name', 'slug'],
+        CollectionResource::class => ['name', 'values'],
+        FormResource::class => ['name', 'slug'],
+    ];
+
+    protected Closure | string $navigationGroupLabel = 'Bolt';
 
     protected array $customSchema = [
         'form' => null,
@@ -18,28 +40,19 @@ trait Configuration
         'field' => null,
     ];
 
-    protected array $hideResources = [];
-
     /**
      * available extensions, leave it null to disable the extensions tab from the forms
      */
     protected ?array $extensions = null;
 
-    /**
-     * the resources navigation group
-     */
-    protected Closure | string $navigationGroupLabel = 'Bolt';
-
-    protected bool $formActionsAreSticky = false;
-
-    protected Closure | bool $showNavigationBadges = true;
-
-    protected array $showNavigationBadgesArray = [];
+    public static function getDefaultModelsToMerge():array
+    {
+        return config('zeus-bolt.models');
+    }
 
     public function customSchema(array $schema): static
     {
         $this->customSchema = $schema;
-
         return $this;
     }
 
@@ -53,50 +66,6 @@ trait Configuration
         return (new static())::get()->getCustomSchema()[$type];
     }
 
-    public function boltModels(array $models): static
-    {
-        $this->boltModels = $models;
-
-        return $this;
-    }
-
-    public function getBoltModels(): array
-    {
-        return $this->boltModels;
-    }
-
-    public static function getModel(string $model): string
-    {
-        return array_merge(
-            config('zeus-bolt.models'),
-            (new static())::get()->getBoltModels()
-        )[$model];
-    }
-
-    public function navigationGroupLabel(Closure | string $label): static
-    {
-        $this->navigationGroupLabel = $label;
-
-        return $this;
-    }
-
-    public function getNavigationGroupLabel(): Closure | string
-    {
-        return $this->evaluate($this->navigationGroupLabel);
-    }
-
-    public function formActionsAreSticky(bool $condition = false): static
-    {
-        $this->formActionsAreSticky = $condition;
-
-        return $this;
-    }
-
-    public function isFormActionsAreSticky(): bool
-    {
-        return $this->evaluate($this->formActionsAreSticky);
-    }
-
     public function extensions(?array $extensions): static
     {
         $this->extensions = $extensions;
@@ -107,52 +76,5 @@ trait Configuration
     public function getExtensions(): ?array
     {
         return $this->extensions;
-    }
-
-    public function hideResources(array $resources): static
-    {
-        $this->hideResources = $resources;
-
-        return $this;
-    }
-
-    public function getHiddenResources(): ?array
-    {
-        return $this->hideResources;
-    }
-
-    public function hideNavigationBadges(Closure | bool $show = false, ?Resources $resource = null): static
-    {
-        return $this->setShowNavigationBadges($show, $resource);
-    }
-
-    public function showNavigationBadges(Closure | bool $show = true, ?Resources $resource = null): static
-    {
-        return $this->setShowNavigationBadges($show, $resource);
-    }
-
-    private function setShowNavigationBadges(Closure | bool $show = true, ?Resources $resource = null): static
-    {
-        if ($resource !== null) {
-            $this->showNavigationBadgesArray[$resource->value] = $show;
-        } else {
-            $this->showNavigationBadges = $show;
-        }
-
-        return $this;
-    }
-
-    public function getShowNavigationBadges(?Resources $resource = null): bool
-    {
-        if ($resource !== null) {
-            return $this->showNavigationBadgesArray[$resource->value] ?? $this->evaluate($this->showNavigationBadges);
-        }
-
-        return $this->evaluate($this->showNavigationBadges);
-    }
-
-    public static function getNavigationBadgesVisibility(?Resources $resource = null): bool
-    {
-        return (new static())::get()->getShowNavigationBadges($resource);
     }
 }
