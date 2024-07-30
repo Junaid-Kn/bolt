@@ -25,7 +25,7 @@ class Collectors
     {
         $allClasses = [];
         foreach ($classes as $class) {
-            $getClass = new $class();
+            $getClass = new $class;
             if (! $getClass->disabled) {
                 $allClasses[str($class)->explode('\\')->last()] = $getClass->toArray();
             }
@@ -39,7 +39,7 @@ class Collectors
         $classes = [];
         $path = array_unique(Arr::wrap($path));
 
-        foreach ((new Finder())->in($path)->files() as $className) {
+        foreach ((new Finder)->in($path)->files() as $className) {
             $classes[] = $namespace . $className->getFilenameWithoutExtension();
         }
 

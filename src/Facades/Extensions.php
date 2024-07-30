@@ -11,7 +11,7 @@ class Extensions
     {
         if ($form->extensions !== null) {
             if (class_exists($form->extensions)) {
-                return (new $form->extensions())->{$hook}($form, $data, $action);
+                return (new $form->extensions)->{$hook}($form, $data, $action);
             }
         }
 

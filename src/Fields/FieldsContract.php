@@ -51,13 +51,15 @@ abstract class FieldsContract implements Arrayable, Fields
     public function title(): string
     {
         $fieldType = str(class_basename($this))->snake();
-        return __('zeus-bolt::fields_types.'.$fieldType.'.title');
+
+        return __('zeus-bolt::fields_types.' . $fieldType . '.title');
     }
 
     public function description(): string
     {
         $fieldType = str(class_basename($this))->snake();
-        return __('zeus-bolt::fields_types.'.$fieldType.'.description');
+
+        return __('zeus-bolt::fields_types.' . $fieldType . '.description');
     }
 
     public function icon(): string

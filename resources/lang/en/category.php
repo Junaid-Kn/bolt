@@ -1,4 +1,5 @@
 <?php
+
 return [
     'label' => 'Category',
     'plural_label' => 'Categories',

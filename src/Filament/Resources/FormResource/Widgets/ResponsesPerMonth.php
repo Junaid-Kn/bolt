@@ -12,7 +12,7 @@ class ResponsesPerMonth extends ChartWidget
 {
     public Form $record;
 
-    protected int|string|array $columnSpan = 'full';
+    protected int | string | array $columnSpan = 'full';
 
     protected static ?string $maxHeight = '300px';
 
@@ -51,7 +51,7 @@ class ResponsesPerMonth extends ChartWidget
             default => $data->perYear()
         };
 
-        $label = __('zeus-bolt::forms.widgets.'.$this->filter);
+        $label = __('zeus-bolt::forms.widgets.' . $this->filter);
 
         $data = $data->count();
 
@@ -59,10 +59,10 @@ class ResponsesPerMonth extends ChartWidget
             'datasets' => [
                 [
                     'label' => $label,
-                    'data' => $data->map(fn(TrendValue $value) => $value->aggregate),
+                    'data' => $data->map(fn (TrendValue $value) => $value->aggregate),
                 ],
             ],
-            'labels' => $data->map(fn(TrendValue $value) => $value->date),
+            'labels' => $data->map(fn (TrendValue $value) => $value->date),
         ];
     }
 }

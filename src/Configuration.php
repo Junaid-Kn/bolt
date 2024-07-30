@@ -8,22 +8,22 @@ use LaraZeus\Bolt\Filament\Resources\CategoryResource;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\Core\Concerns\CanGloballySearch;
+use LaraZeus\Core\Concerns\CanHideResources;
 use LaraZeus\Core\Concerns\CanStickyActions;
 use LaraZeus\Core\Concerns\HasModels;
-use LaraZeus\Core\Concerns\HasNavigationGroupLabel;
-use LaraZeus\Core\Concerns\CanHideResources;
 use LaraZeus\Core\Concerns\HasNavigationBadges;
+use LaraZeus\Core\Concerns\HasNavigationGroupLabel;
 use LaraZeus\Core\Concerns\HasUploads;
 
 trait Configuration
 {
     use CanGloballySearch;
-    use EvaluatesClosures;
-    use HasModels;
-    use HasNavigationGroupLabel;
     use CanHideResources;
     use CanStickyActions;
+    use EvaluatesClosures;
+    use HasModels;
     use HasNavigationBadges;
+    use HasNavigationGroupLabel;
     use HasUploads;
 
     public array $defaultGloballySearchableAttributes = [
@@ -45,7 +45,7 @@ trait Configuration
      */
     protected ?array $extensions = null;
 
-    public static function getDefaultModelsToMerge():array
+    public static function getDefaultModelsToMerge(): array
     {
         return config('zeus-bolt.models');
     }
@@ -53,6 +53,7 @@ trait Configuration
     public function customSchema(array $schema): static
     {
         $this->customSchema = $schema;
+
         return $this;
     }
 
@@ -63,7 +64,7 @@ trait Configuration
 
     public static function getSchema(string $type): ?string
     {
-        return (new static())::get()->getCustomSchema()[$type];
+        return (new static)::get()->getCustomSchema()[$type];
     }
 
     public function extensions(?array $extensions): static

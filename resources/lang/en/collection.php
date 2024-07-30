@@ -1,4 +1,5 @@
 <?php
+
 return [
     'label' => 'Collection',
     'plural_label' => 'Collections',
