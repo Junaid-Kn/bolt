@@ -91,8 +91,8 @@ trait Schemata
                                 ->live()
                                 ->default(false)
                                 ->visible($formOptions['show-as'] === 'page')
-                                ->label(__('Borderless Section'))
-                                ->helperText('Show the section without borders'),
+                                ->label(__('zeus-bolt::forms.section.options.borderless'))
+                                ->helperText(__('zeus-bolt::forms.section.options.borderless_help')),
                             Toggle::make('compact')
                                 ->default(false)
                                 ->visible(fn (Get $get) => $formOptions['show-as'] === 'page' && $get('borderless') === false)

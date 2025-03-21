@@ -131,6 +131,9 @@ return [
             'icon' => 'Section icon',
             'compact' => 'compact section',
             'add' => 'Add Section',
+            'aside' => 'Aside',
+            'borderless' => 'Borderless Section',
+            'borderless_help' => 'Show the section without borders',
         ],
     ],
     'widgets' => [
