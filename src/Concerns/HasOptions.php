@@ -156,4 +156,15 @@ trait HasOptions
             ])
             ->columns(1);
     }
+
+    public static function isActive(): Grid
+    {
+        return Grid::make()
+            ->schema([
+                Toggle::make('options.is_active')
+                    ->default(1)
+                    ->label(__('zeus-bolt::forms.options.is_active')),
+            ])
+            ->columns(1);
+    }
 }

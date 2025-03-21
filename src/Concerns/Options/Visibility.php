@@ -18,17 +18,16 @@ trait Visibility
                 ->pluck('fields')
                 ->mapWithKeys(function (array $item) {
                     return $item;
-                })
-            ->toArray();
+                });
         }
 
         return Accordion::make('visibility-options')
             ->label(__('zeus-bolt::forms.options.conditional_visibility.title'))
             ->icon('tabler-eye-cog')
             ->visible(fn (Livewire $livewire) => str($livewire->getName())
-                    ->replace('-form', '')
-                    ->explode('.')
-                    ->last() === 'edit')
+                ->replace('-form', '')
+                ->explode('.')
+                ->last() === 'edit')
             ->schema([
                 Toggle::make('options.visibility.active')
                     ->live()

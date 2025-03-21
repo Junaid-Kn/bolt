@@ -22,12 +22,12 @@ final class BoltPlugin implements Plugin
     use CanDisableBadges;
     use CanGloballySearch;
     use CanHideResources;
+    use CanStickyActions;
     use Configuration;
     use EvaluatesClosures;
     use HasModels;
     use HasNavigationGroupLabel;
     use HasRouteNamePrefix;
-    use CanStickyActions;
 
     protected Closure | string $navigationGroupLabel = 'Bolt';
 
