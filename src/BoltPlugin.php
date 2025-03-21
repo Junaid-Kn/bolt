@@ -12,6 +12,7 @@ use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\FilamentPluginTools\Concerns\CanDisableBadges;
 use LaraZeus\FilamentPluginTools\Concerns\CanGloballySearch;
 use LaraZeus\FilamentPluginTools\Concerns\CanHideResources;
+use LaraZeus\FilamentPluginTools\Concerns\CanStickyActions;
 use LaraZeus\FilamentPluginTools\Concerns\HasModels;
 use LaraZeus\FilamentPluginTools\Concerns\HasNavigationGroupLabel;
 use LaraZeus\FilamentPluginTools\Concerns\HasRouteNamePrefix;
@@ -26,6 +27,7 @@ final class BoltPlugin implements Plugin
     use HasModels;
     use HasNavigationGroupLabel;
     use HasRouteNamePrefix;
+    use CanStickyActions;
 
     protected Closure | string $navigationGroupLabel = 'Bolt';
 
