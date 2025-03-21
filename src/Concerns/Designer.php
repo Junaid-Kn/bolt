@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Concerns;
 
+use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -36,7 +37,7 @@ trait Designer
             return [
                 Wizard::make($sections)
                     ->live(condition: $hasSectionVisibility),
-                //->skippable() // todo still not working
+                // ->skippable() // todo still not working
             ];
         }
 
@@ -97,20 +98,19 @@ trait Designer
         return $fields;
     }
 
-    private static function drawSections(Form $zeusForm, ZeusSection $section, array $fields): Tab | Step | Section
+    private static function drawSections(Form $zeusForm, ZeusSection $section, array $fields): Tab | Step | Section | Grid
     {
         if (optional($zeusForm->options)['show-as'] === 'tabs') {
             $component = Tab::make($section->name)
-              //  ->live()
                 ->icon($section->icon ?? null);
         } elseif (optional($zeusForm->options)['show-as'] === 'wizard') {
             $component = Step::make($section->name)
-             //   ->live()
                 ->description($section->description)
                 ->icon($section->icon ?? null);
+        } elseif ((bool) $section->borderless === true) {
+            $component = Grid::make($section->name);
         } else {
             $component = Section::make($section->name)
-                //  ->live()
                 ->description($section->description)
                 ->aside(fn () => $section->aside)
                 ->compact(fn () => $section->compact)
@@ -139,9 +139,7 @@ trait Designer
         });
 
         return $component
-            //->id(str($section->name)->slug() . '-' . $section->id)
             ->schema($fields)
-            //->live()
             ->columns($section->columns);
     }
 }

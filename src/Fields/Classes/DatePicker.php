@@ -25,11 +25,12 @@ class DatePicker extends FieldsContract
                 ->accordions([
                     Accordion::make('general-options')
                         ->label(__('zeus-bolt::forms.fields.options.general'))
-                        ->icon('iconpark-checklist-o')
+                        ->icon('tabler-settings')
                         ->schema([
                             self::isActive(),
                             self::required(),
                             self::columnSpanFull(),
+                            self::hiddenLabel(),
                             self::htmlID(),
                         ]),
                     self::hintOptions(),
@@ -52,6 +53,7 @@ class DatePicker extends FieldsContract
             self::hiddenHintOptions(),
             self::hiddenRequired(),
             self::hiddenColumnSpanFull(),
+            self::hiddenHiddenLabel(),
             self::hiddenVisibility(),
         ];
     }

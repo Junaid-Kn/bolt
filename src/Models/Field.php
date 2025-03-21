@@ -33,7 +33,7 @@ class Field extends Model
         'options' => 'array',
     ];
 
-    public function getTable()
+    public function getTable(): string
     {
         return config('zeus-bolt.table-prefix') . 'fields';
     }
@@ -42,6 +42,7 @@ class Field extends Model
     {
         static::deleting(function (Field $field) {
             if ($field->isForceDeleting()) {
+                // @phpstan-ignore-next-line
                 $field->fieldResponses()->withTrashed()->get()->each(function ($item) {
                     $item->forceDelete();
                 });
@@ -58,13 +59,11 @@ class Field extends Model
         return FieldFactory::new();
     }
 
-    /** @return BelongsTo<Section, Field> */
     public function section(): BelongsTo
     {
         return $this->belongsTo(config('zeus-bolt.models.Section'));
     }
 
-    /** @return HasMany<FieldResponse> */
     public function fieldResponses(): HasMany
     {
         return $this->hasMany(config('zeus-bolt.models.FieldResponse'));

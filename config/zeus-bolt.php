@@ -7,7 +7,7 @@ return [
     'domain' => null,
 
     /**
-     * set the default path for the blog homepage.
+     * set the default path for the forms homepage.
      */
     'prefix' => 'bolt',
 
@@ -36,6 +36,7 @@ return [
         'FormsStatus' => \LaraZeus\Bolt\Models\FormsStatus::class,
         'Response' => \LaraZeus\Bolt\Models\Response::class,
         'Section' => \LaraZeus\Bolt\Models\Section::class,
+        'User' => config('auth.providers.users.model'),
     ],
 
     'collectors' => [
@@ -52,13 +53,37 @@ return [
 
     'defaultMailable' => \LaraZeus\Bolt\Mail\FormSubmission::class,
 
-    'uploadDisk' => 'public',
+    'uploadDisk' => env('BOLT_FILESYSTEM_DISK', 'public'),
 
-    'uploadDirectory' => 'forms',
+    'uploadDirectory' => env('BOLT_FILESYSTEM_DIRECTORY', 'forms'),
 
-    'uploadVisibility' => 'public',
+    'uploadVisibility' => env('BOLT_FILESYSTEM_VISIBILITY', 'public'),
 
+    /*
+     * if you have installed Bolt Pro, you can enable the presets here
+     */
     'show_presets' => false,
 
+    /**
+     * the preset comes with a demo forms:
+     * a Contact form and Ticket support form.
+     * if you dont want them, feel free to set this to false
+     * */
+    'show_core_presets' => true,
+
+    /*
+     * if you have installed Bolt Pro, you can enable the form design option here
+     */
     'allow_design' => false,
+
+    /**
+     * since `collections` or 'data sources' have many types, we cannot lazy load them
+     * but we cache them for a while to get better performance
+     * the key is: dataSource_*_response_md5
+     *
+     * here you can set the duration of the cache
+     */
+    'cache' => [
+        'collection_values' => 30, // on seconds
+    ],
 ];

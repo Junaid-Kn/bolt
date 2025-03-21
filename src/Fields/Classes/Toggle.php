@@ -37,7 +37,7 @@ class Toggle extends FieldsContract
                 ->accordions([
                     Accordion::make('general-options')
                         ->label(__('zeus-bolt::forms.fields.options.general'))
-                        ->icon('iconpark-checklist-o')
+                        ->icon('tabler-settings')
                         ->schema([
                             Grid::make()
                                 ->columns()
@@ -70,6 +70,7 @@ class Toggle extends FieldsContract
                             self::isActive(),
                             self::required(),
                             self::columnSpanFull(),
+                            self::hiddenLabel(),
                             self::htmlID(),
                         ]),
                     self::hintOptions(),
@@ -93,6 +94,7 @@ class Toggle extends FieldsContract
             self::hiddenHintOptions(),
             self::hiddenRequired(),
             self::hiddenColumnSpanFull(),
+            self::hiddenHiddenLabel(),
             Hidden::make('options.on-icon'),
             Hidden::make('options.off-icon'),
             Hidden::make('options.on-color'),
@@ -122,7 +124,7 @@ class Toggle extends FieldsContract
             $component = $component->offColor(Color::hex($zeusField->options['off-color']));
         }
 
-        if (optional($zeusField->options)['is-inline']) {
+        if (isset($zeusField->options['is-inline'])) {
             $component = $component->inline($zeusField->options['is-inline']);
         }
 
@@ -157,7 +159,7 @@ class Toggle extends FieldsContract
         return ExportColumn::make('zeusData.' . $field->options['htmlId'])
             ->label($field->name)
             ->state(function (Response $record) use ($field) {
-
+                /** @var ?Response $response */
                 $response = $record->fieldsResponses()->where('field_id', $field->id)->first();
                 $response = (int) $response->response;
 

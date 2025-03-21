@@ -26,12 +26,14 @@ class Paragraph extends FieldsContract
                 ->accordions([
                     Accordion::make('general-options')
                         ->label(__('zeus-bolt::forms.fields.options.general'))
-                        ->icon('iconpark-checklist-o')
+                        ->icon('tabler-settings')
                         ->schema([
                             self::isActive(),
                             self::columnSpanFull(),
+                            self::hiddenLabel(),
                             self::hintOptions(),
                         ]),
+                    self::visibility($sections),
                 ]),
         ];
     }
@@ -42,6 +44,8 @@ class Paragraph extends FieldsContract
             self::hiddenIsActive(),
             self::hiddenHintOptions(),
             self::hiddenColumnSpanFull(),
+            self::hiddenHiddenLabel(),
+            self::hiddenVisibility(),
         ];
     }
 

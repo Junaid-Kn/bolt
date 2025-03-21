@@ -1,5 +1,5 @@
 <p align="center">
-<a href="https://larazeus.com"><img src="https://larazeus.com/images/lara-zeus-bolt.png?v=3" /></a>
+<a href="https://larazeus.com"><img src="https://larazeus.com/images/lara-zeus-bolt.webp?v=3" /></a>
 </p>
 
 <h4 align="center">Lara-zeus bolt is a form builder for your users with many use cases.</h4>
@@ -20,7 +20,7 @@ _💖 if you think this has potential, star ⭐️ the project to let me know :)
 ## Support Filament
 
 <a href="https://github.com/sponsors/danharrin">
-<img alt="filament-logo" src="https://larazeus.com/images/filament-sponsor-banner.png">
+<img alt="filament-logo" src="https://larazeus.com/images/filament-sponsor-banner.webp">
 </a>
 
 ## Features
@@ -33,7 +33,7 @@ _💖 if you think this has potential, star ⭐️ the project to let me know :)
 
 ## Bolt Pro
 
-[![bolt-pro](https://larazeus.com/images/bolt-pro-ad.png)](https://larazeus.com/bolt-pro)
+[![bolt-pro](https://larazeus.com/images/bolt-pro-ad.webp)](https://larazeus.com/bolt-pro)
 
 ## Overview
 
@@ -50,8 +50,8 @@ _💖 if you think this has potential, star ⭐️ the project to let me know :)
 
 ## Quick start
 
-[![starter-kit](https://larazeus.com/images/starter-kit-mini.png?v=2)](https://github.com/lara-zeus/zeus)
-[![artemis](https://larazeus.com/images/artemis-mini.png?v=2)](https://github.com/lara-zeus/artemis)
+[![starter-kit](https://larazeus.com/images/starter-kit-mini.webp?v=2)](https://github.com/lara-zeus/zeus)
+[![artemis](https://larazeus.com/images/artemis-mini.webp?v=2)](https://github.com/lara-zeus/artemis)
 
 ## Changelog
 
@@ -72,7 +72,7 @@ If you find any security-related issues, please email info@larazeus.com instead 
 
 ## Credits
 
--   [php coder](https://github.com/atmonshi)
+-   [Lara Zeus (Ash)](https://github.com/atmonshi)
 -   [All Contributors](../../contributors)
 
 ## License

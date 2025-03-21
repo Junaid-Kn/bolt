@@ -32,7 +32,7 @@ class TextInput extends FieldsContract
                 ->accordions([
                     Accordion::make('validation-options')
                         ->label(__('zeus-bolt::forms.fields.options.validation_options'))
-                        ->icon('iconpark-checkcorrect-o')
+                        ->icon('tabler-input-check')
                         ->columns()
                         ->schema([
                             Select::make('options.dateType')
@@ -73,7 +73,7 @@ class TextInput extends FieldsContract
                     Accordion::make('visual-options')
                         ->label(__('zeus-bolt::forms.fields.options.visual_options'))
                         ->columns()
-                        ->icon('iconpark-viewgriddetail-o')
+                        ->icon('tabler-float-center')
                         ->schema([
                             TextInputAlias::make('options.prefix')
                                 ->label(__('zeus-bolt::forms.fields.options.prefix')),
@@ -101,6 +101,7 @@ class TextInput extends FieldsContract
                                 ->label(__('zeus-bolt::forms.fields.options.suffix_icon_color')),
 
                             self::columnSpanFull(),
+                            self::hiddenLabel(),
                             self::htmlID(),
                         ]),
                     self::hintOptions(),
@@ -124,6 +125,7 @@ class TextInput extends FieldsContract
             self::hiddenHintOptions(),
             self::hiddenRequired(),
             self::hiddenColumnSpanFull(),
+            self::hiddenHiddenLabel(),
 
             Hidden::make('options.dateType'),
 

@@ -29,11 +29,12 @@ class CheckboxList extends FieldsContract
                 ->accordions([
                     Accordion::make('general-options')
                         ->label(__('zeus-bolt::forms.fields.options.general'))
-                        ->icon('iconpark-checklist-o')
+                        ->icon('tabler-settings')
                         ->schema([
                             self::isActive(),
                             self::required(),
                             self::columnSpanFull(),
+                            self::hiddenLabel(),
                             self::htmlID(),
                         ]),
                     self::hintOptions(),
@@ -58,6 +59,7 @@ class CheckboxList extends FieldsContract
             self::hiddenHintOptions(),
             self::hiddenRequired(),
             self::hiddenColumnSpanFull(),
+            self::hiddenHiddenLabel(),
         ];
     }
 
@@ -78,7 +80,7 @@ class CheckboxList extends FieldsContract
         if (request()->filled($zeusField->options['htmlId'])) {
             $component = $component->default(request($zeusField->options['htmlId']));
 
-            //todo set default items for datasources
+            // todo set default items for datasources
         } elseif ($selected = $options->where('itemIsDefault', true)->pluck('itemKey')->isNotEmpty()) {
             $component = $component->default($selected);
         }

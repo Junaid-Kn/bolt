@@ -34,7 +34,7 @@ use LaraZeus\Bolt\Models\Category;
 
 class CategoryResource extends BoltResource
 {
-    protected static ?string $navigationIcon = 'clarity-tags-line';
+    protected static ?string $navigationIcon = 'tabler-tags-filled';
 
     protected static ?int $navigationSort = 4;
 
@@ -47,7 +47,7 @@ class CategoryResource extends BoltResource
 
     public static function getNavigationBadge(): ?string
     {
-        if (! BoltPlugin::getNavigationBadgesVisibility(static::class)) {
+        if (! BoltPlugin::getNavigationBadgesVisibility(self::class)) {
             return null;
         }
 
@@ -112,6 +112,7 @@ class CategoryResource extends BoltResource
                     ->label(__('zeus-bolt::category.logo')),
                 TextColumn::make('name')
                     ->label(__('zeus-bolt::category.name'))
+                    ->forceSearchCaseInsensitive()
                     ->sortable()
                     ->toggleable()
                     ->searchable(),

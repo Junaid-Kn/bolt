@@ -2,6 +2,201 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v3.0.80 - 2025-03-18
+
+### What's Changed
+
+* fixes and improvements for Grade preset by @atmonshi in https://github.com/lara-zeus/bolt/pull/362
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.79...v3.0.80
+
+## v3.0.79 - 2025-03-17
+
+### What's Changed
+
+* fix test by @atmonshi in https://github.com/lara-zeus/bolt/pull/356
+* fix loading size by @atmonshi in https://github.com/lara-zeus/bolt/pull/361
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.78...v3.0.79
+
+## v3.0.78 - 2025-03-07
+
+### What's Changed
+
+* remove iconpark by @atmonshi in https://github.com/lara-zeus/bolt/pull/355
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.77...v3.0.78
+
+## v3.0.77 - 2025-03-07
+
+### What's Changed
+
+* refactor configration by @atmonshi in https://github.com/lara-zeus/bolt/pull/353
+* remove clarity icons by @atmonshi in https://github.com/lara-zeus/bolt/pull/354
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.76...v3.0.77
+
+## v3.0.76 - 2025-03-05
+
+### What's Changed
+
+* fix duplicated column borderless by @atmonshi in https://github.com/lara-zeus/bolt/pull/351
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.75...v3.0.76
+
+## v3.0.75 - 2025-03-03
+
+### What's Changed
+
+* fix core trait by @atmonshi in https://github.com/lara-zeus/bolt/pull/350
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.74...v3.0.75
+
+## v3.0.74 - 2025-03-03
+
+### What's Changed
+
+* add support for laravel 12 by @atmonshi in https://github.com/lara-zeus/bolt/pull/349
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.73...v3.0.74
+
+## v3.0.73 - 2025-02-24
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.2.0 to 2.3.0 by @dependabot in https://github.com/lara-zeus/bolt/pull/344
+* Bump aglipanci/laravel-pint-action from 2.4 to 2.5 by @dependabot in https://github.com/lara-zeus/bolt/pull/345
+* make searching case insensitive by @atmonshi in https://github.com/lara-zeus/bolt/pull/348
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.72...v3.0.73
+
+## v3.0.72 - 2025-01-05
+
+### What's Changed
+
+* Update composer.lock by @atmonshi in https://github.com/lara-zeus/bolt/pull/343
+* Allow sections to be styled as a Grid component instead of a Section by @holmesadam in https://github.com/lara-zeus/bolt/pull/336
+
+### to update:
+
+- run: `composer update`
+- run: `php artisan vendor:publish --tag=zeus-bolt-migrations`, there is a [new column on section table](https://github.com/lara-zeus/bolt/blob/3.x/database/migrations/add_borderless_to_section.php.stub) `borderless`. For more info check the #336
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.71...v3.0.72
+
+## v3.0.71 - 2024-12-24
+
+### What's Changed
+
+* When cloning, merge in all the options from the original item by @holmesadam in https://github.com/lara-zeus/bolt/pull/340
+* Fix issue with cloning form fields by @holmesadam in https://github.com/lara-zeus/bolt/pull/338
+* Fix conditional visibility when relying on a toggle field being false by @holmesadam in https://github.com/lara-zeus/bolt/pull/339
+* Don't use the hint text in the tooltip by @holmesadam in https://github.com/lara-zeus/bolt/pull/342
+* Allow label to be hidden on all fields by @holmesadam in https://github.com/lara-zeus/bolt/pull/341
+* Fix issue with inline not working on Toggle by @holmesadam in https://github.com/lara-zeus/bolt/pull/337
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.70...v3.0.71
+
+## v3.0.70 - 2024-12-24
+
+### What's Changed
+
+* Update documentation to fix typos and update consistency by @holmesadam in https://github.com/lara-zeus/bolt/pull/333
+* Support for  downloading File Uploads to Private Filedisks by @aSeriousDeveloper in https://github.com/lara-zeus/bolt/pull/334
+
+### New Contributors
+
+* @holmesadam made their first contribution in https://github.com/lara-zeus/bolt/pull/333
+* @aSeriousDeveloper made their first contribution in https://github.com/lara-zeus/bolt/pull/334
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.69...v3.0.70
+
+## v3.0.69 - 2024-10-29
+
+### What's Changed
+
+* add filament tools package by @atmonshi in https://github.com/lara-zeus/bolt/pull/332
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.68...v3.0.69
+
+## v3.0.68 - 2024-10-08
+
+### What's Changed
+
+* fix exported values if they're arrays by @atmonshi in https://github.com/lara-zeus/bolt/pull/330
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.67...v3.0.68
+
+## v3.0.67 - 2024-10-02
+
+### What's Changed
+
+* add HasRouteNamePrefix core trait by @atmonshi in https://github.com/lara-zeus/bolt/pull/329
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.66...v3.0.67
+
+## v3.0.66 - 2024-09-13
+
+### What's Changed
+
+* [Feat] : Implement caching mechanism for collection queries by @mohaphez in https://github.com/lara-zeus/bolt/pull/327
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.65...v3.0.66
+
+## v3.0.65 - 2024-09-01
+
+### What's Changed
+
+* feat: custom user model by @atmonshi in https://github.com/lara-zeus/bolt/pull/324
+
+#### Custom User Model:
+
+By default Bolt will use this model to get the user info:
+
+`config('auth.providers.users.model')`
+
+if you need to change this to use another model, add the following in your config file: `zeus-bolt.php`:
+
+```php
+'models' => [
+    //...
+    'User' => AnotherUserModel::class,
+],
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+```
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.64...v3.0.65
+
+## v3.0.64 - 2024-08-23
+
+### What's Changed
+
+* add the ability conditional visibility for paragraph field by @atmonshi in https://github.com/lara-zeus/bolt/pull/322
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.63...v3.0.64
+
+## v3.0.63 - 2024-08-16
+
+### What's Changed
+
+* hide visibility on create form by @atmonshi in https://github.com/lara-zeus/bolt/pull/319
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.62...v3.0.63
+
 ## v3.0.62 - 2024-07-17
 
 ### What's Changed
@@ -524,47 +719,29 @@ and you can remove the fork for `alperenersoy/filament-export`
 - add german translation by @grafst in https://github.com/lara-zeus/bolt/pull/107
 ### New Contributors
 - @grafst made their first contribution in https://github.com/lara-zeus/bolt/pull/107
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.10...1.2.11
-
 ## 1.2.10 - 2023-07-13
-
 ### What's Changed
-
 - allow to toggle Conditional Visibility by a toggle field by @atmonshi in https://github.com/lara-zeus/bolt/pull/101
 - fix sections ID when display the form as a wizard by @atmonshi in https://github.com/lara-zeus/bolt/pull/102
 - Embed by @atmonshi in https://github.com/lara-zeus/bolt/pull/103
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.9...1.2.10
-
 ## 1.2.9 - 2023-07-12
-
 ### What's Changed
-
 - fix sorting in collections by @atmonshi in https://github.com/lara-zeus/bolt/pull/97
 - fix date ended and add some validation by @atmonshi in https://github.com/lara-zeus/bolt/pull/98
 - update core by @atmonshi in https://github.com/lara-zeus/bolt/pull/99
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.8...1.2.9
-
 ## 1.2.8 - 2023-07-11
-
 ### What's Changed
-
 - allow to set the default value by string param by @atmonshi in https://github.com/lara-zeus/bolt/pull/96
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.7...1.2.8
-
 ## 1.2.7 - 2023-07-06
-
 ### What's Changed
-
 - add some tests for the form resource and fill-form frontend page by @atmonshi in https://github.com/lara-zeus/bolt/pull/92
 - require at least one section and field by @atmonshi in https://github.com/lara-zeus/bolt/pull/95
 - add more tests by @atmonshi in https://github.com/lara-zeus/bolt/pull/94
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.6...1.2.7
-
 ## 1.2.6 - 2023-07-04
 
 ### What's Changed

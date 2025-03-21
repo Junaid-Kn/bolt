@@ -30,13 +30,14 @@ class Radio extends FieldsContract
                 ->accordions([
                     Accordion::make('general-options')
                         ->label(__('zeus-bolt::forms.fields.options.general'))
-                        ->icon('iconpark-checklist-o')
+                        ->icon('tabler-settings')
                         ->schema([
                             self::isActive(),
                             self::required(),
                             Toggle::make('options.is_inline')
                                 ->label(__('zeus-bolt::forms.fields.options.is_inline')),
                             self::columnSpanFull(),
+                            self::hiddenLabel(),
                             self::htmlID(),
                         ]),
                     self::hintOptions(),
@@ -60,6 +61,7 @@ class Radio extends FieldsContract
             self::hiddenHintOptions(),
             self::hiddenRequired(),
             self::hiddenColumnSpanFull(),
+            self::hiddenHiddenLabel(),
             Hidden::make('options.dataSource'),
             Hidden::make('options.is_inline')->default(false),
         ];
@@ -85,7 +87,7 @@ class Radio extends FieldsContract
 
         if (request()->filled($zeusField->options['htmlId'])) {
             $component = $component->default(request($zeusField->options['htmlId']));
-            //todo set default items for datasources
+            // todo set default items for datasources
         } elseif ($selected = $options->where('itemIsDefault', true)->pluck('itemKey')->isNotEmpty()) {
             $component = $component->default($selected);
         }

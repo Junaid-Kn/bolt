@@ -19,7 +19,7 @@ use LaraZeus\Bolt\Filament\Resources\CollectionResource\Widgets\EditCollectionWa
 
 class CollectionResource extends BoltResource
 {
-    protected static ?string $navigationIcon = 'clarity-folder-open-outline-badged';
+    protected static ?string $navigationIcon = 'tabler-brand-databricks';
 
     protected static ?int $navigationSort = 3;
 
@@ -32,7 +32,7 @@ class CollectionResource extends BoltResource
 
     public static function getNavigationBadge(): ?string
     {
-        if (! BoltPlugin::getNavigationBadgesVisibility(static::class)) {
+        if (! BoltPlugin::getNavigationBadgesVisibility(self::class)) {
             return null;
         }
 
@@ -104,6 +104,7 @@ class CollectionResource extends BoltResource
             ->columns([
                 TextColumn::make('name')
                     ->label(__('zeus-bolt::collection.name'))
+                    ->forceSearchCaseInsensitive()
                     ->searchable()
                     ->sortable()
                     ->toggleable(),

@@ -42,7 +42,7 @@ class FormResource extends BoltResource
     use HasOptions;
     use Schemata;
 
-    protected static ?string $navigationIcon = 'clarity-form-line';
+    protected static ?string $navigationIcon = 'tabler-file-description';
 
     protected static ?int $navigationSort = 1;
 
@@ -59,7 +59,7 @@ class FormResource extends BoltResource
 
     public static function getNavigationBadge(): ?string
     {
-        if (! BoltPlugin::getNavigationBadgesVisibility(static::class)) {
+        if (! BoltPlugin::getNavigationBadgesVisibility(self::class)) {
             return null;
         }
 
@@ -97,7 +97,7 @@ class FormResource extends BoltResource
 
                     TextEntry::make('slug')
                         ->label(__('zeus-bolt::forms.options.tabs.title.slug'))
-                        ->url(fn (ZeusForm $record) => route('bolt.form.show', ['slug' => $record->slug]))
+                        ->url(fn (ZeusForm $record) => route(BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show', ['slug' => $record->slug]))
                         ->visible(fn (ZeusForm $record) => $record->extensions === null)
                         ->icon('heroicon-o-arrow-top-right-on-square')
                         ->openUrlInNewTab(),
@@ -107,8 +107,8 @@ class FormResource extends BoltResource
                     IconEntry::make('is_active')
                         ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
                         ->icon(fn (string $state): string => match ($state) {
-                            '0' => 'clarity-times-circle-solid',
-                            default => 'clarity-check-circle-line',
+                            '0' => 'tabler-circle-x',
+                            default => 'tabler-circle-check',
                         })
                         ->color(fn (string $state): string => match ($state) {
                             '0' => 'warning',
@@ -155,45 +155,48 @@ class FormResource extends BoltResource
                     ->label(__('zeus-bolt::forms.form_id'))
                     ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('name')
+                    ->forceSearchCaseInsensitive()
                     ->searchable()
                     ->sortable()
                     ->label(__('zeus-bolt::forms.options.tabs.title.name'))
                     ->toggleable(),
                 TextColumn::make('category.name')
+                    ->forceSearchCaseInsensitive()
                     ->searchable()
                     ->label(__('zeus-bolt::forms.options.tabs.title.category.label'))
                     ->sortable()
                     ->toggleable(),
                 IconColumn::make('is_active')
-                    ->boolean()
-                    ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
-                    ->sortable()
-                    ->toggleable(),
+                ->boolean()
+                ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
+                ->sortable()
+                ->toggleable(),
                 TextColumn::make('start_date')
-                    ->dateTime()
-                    ->searchable()
-                    ->sortable()
-                    ->label(__('zeus-bolt::forms.options.tabs.advanced.start_date'))
-                    ->toggleable(isToggledHiddenByDefault: true),
+                ->dateTime()
+                ->searchable()
+                ->sortable()
+                ->label(__('zeus-bolt::forms.options.tabs.advanced.start_date'))
+                ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('end_date')
-                    ->dateTime()
-                    ->searchable()
-                    ->sortable()
-                    ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date'))
-                    ->toggleable(isToggledHiddenByDefault: true),
+                ->dateTime()
+                ->searchable()
+                ->sortable()
+                ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date'))
+                ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('responses_exists')
-                    ->boolean()
-                    ->exists('responses')
-                    ->label(__('zeus-bolt::forms.responses_exists'))
-                    ->sortable()
-                    ->toggleable()
-                    ->searchable(false),
+                ->boolean()
+                ->exists('responses')
+                ->label(__('zeus-bolt::forms.responses_exists'))
+                ->sortable()
+                ->toggleable()
+                ->searchable(false),
                 TextColumn::make('responses_count')
                     ->counts('responses')
                     ->label(__('zeus-bolt::forms.responses_count'))
                     ->sortable()
                     ->toggleable()
                     ->searchable(false),
+
             ])
             ->actions(static::getActions())
             ->filters([
@@ -241,9 +244,9 @@ class FormResource extends BoltResource
         ];
 
         if (Bolt::hasPro()) {
-            //@phpstan-ignore-next-line
+            // @phpstan-ignore-next-line
             $pages['prefilled'] = \LaraZeus\BoltPro\Livewire\PrefilledForm::route('/{record}/prefilled');
-            //@phpstan-ignore-next-line
+            // @phpstan-ignore-next-line
             $pages['share'] = \LaraZeus\BoltPro\Livewire\ShareForm::route('/{record}/share');
         }
 
@@ -260,7 +263,7 @@ class FormResource extends BoltResource
         ];
 
         if (Bolt::hasPro()) {
-            //@phpstan-ignore-next-line
+            // @phpstan-ignore-next-line
             $widgets[] = \LaraZeus\BoltPro\Widgets\ResponsesPerCollection::class;
         }
 
@@ -281,7 +284,7 @@ class FormResource extends BoltResource
                 Action::make('entries')
                     ->color('warning')
                     ->label(__('zeus-bolt::forms.entries'))
-                    ->icon('clarity-data-cluster-line')
+                    ->icon('tabler-folders')
                     ->tooltip(__('zeus-bolt::forms.view_all_entries'))
                     ->url(fn (ZeusForm $record): string => FormResource::getUrl('report', ['record' => $record])),
             ])
@@ -293,17 +296,17 @@ class FormResource extends BoltResource
         if (Bolt::hasPro()) {
             $advancedActions[] = Action::make('prefilledLink')
                 ->label(__('zeus-bolt::forms.actions.prefilled_link'))
-                ->icon('iconpark-formone-o')
+                ->icon('tabler-input-spark')
                 ->tooltip(__('zeus-bolt::forms.actions.prefilled_link_tooltip'))
                 ->visible(Bolt::hasPro())
                 ->url(fn (ZeusForm $record): string => FormResource::getUrl('prefilled', ['record' => $record]));
         }
 
         if (class_exists(\LaraZeus\Helen\HelenServiceProvider::class)) {
-            //@phpstan-ignore-next-line
+            // @phpstan-ignore-next-line
             $advancedActions[] = \LaraZeus\Helen\Actions\ShortUrlAction::make('get-link')
                 ->label(__('zeus-bolt::forms.actions.short_link'))
-                ->distUrl(fn (ZeusForm $record) => route('bolt.form.show', $record));
+                ->distUrl(fn (ZeusForm $record) => route(BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show', $record));
         }
 
         $moreActions[] = ActionGroup::make($advancedActions)->dropdown(false);
@@ -319,7 +322,7 @@ class FormResource extends BoltResource
         ];
 
         if (Bolt::hasPro()) {
-            //@phpstan-ignore-next-line
+            // @phpstan-ignore-next-line
             $formNavs[] = \LaraZeus\BoltPro\Livewire\ShareForm::class;
         }
 

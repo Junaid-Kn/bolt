@@ -27,7 +27,7 @@ class ColorPicker extends FieldsContract
                 ->accordions([
                     Accordion::make('general-options')
                         ->label(__('zeus-bolt::forms.fields.options.general'))
-                        ->icon('iconpark-checklist-o')
+                        ->icon('tabler-settings')
                         ->schema([
                             \Filament\Forms\Components\Select::make('options.colorType')
                                 ->label(__('zeus-bolt::forms.fields.options.color_type'))
@@ -39,6 +39,7 @@ class ColorPicker extends FieldsContract
                             self::isActive(),
                             self::required(),
                             self::columnSpanFull(),
+                            self::hiddenLabel(),
                             self::htmlID(),
                         ]),
                     self::hintOptions(),
@@ -58,6 +59,7 @@ class ColorPicker extends FieldsContract
             self::hiddenHintOptions(),
             self::hiddenRequired(),
             self::hiddenColumnSpanFull(),
+            self::hiddenHiddenLabel(),
             self::hiddenVisibility(),
         ];
     }
