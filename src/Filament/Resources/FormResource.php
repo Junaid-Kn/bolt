@@ -167,29 +167,29 @@ class FormResource extends BoltResource
                     ->sortable()
                     ->toggleable(),
                 IconColumn::make('is_active')
-                ->boolean()
-                ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
-                ->sortable()
-                ->toggleable(),
+                    ->boolean()
+                    ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
+                    ->sortable()
+                    ->toggleable(),
                 TextColumn::make('start_date')
-                ->dateTime()
-                ->searchable()
-                ->sortable()
-                ->label(__('zeus-bolt::forms.options.tabs.advanced.start_date'))
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime()
+                    ->searchable()
+                    ->sortable()
+                    ->label(__('zeus-bolt::forms.options.tabs.advanced.start_date'))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 TextColumn::make('end_date')
-                ->dateTime()
-                ->searchable()
-                ->sortable()
-                ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date'))
-                ->toggleable(isToggledHiddenByDefault: true),
+                    ->dateTime()
+                    ->searchable()
+                    ->sortable()
+                    ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date'))
+                    ->toggleable(isToggledHiddenByDefault: true),
                 IconColumn::make('responses_exists')
-                ->boolean()
-                ->exists('responses')
-                ->label(__('zeus-bolt::forms.responses_exists'))
-                ->sortable()
-                ->toggleable()
-                ->searchable(false),
+                    ->boolean()
+                    ->exists('responses')
+                    ->label(__('zeus-bolt::forms.responses_exists'))
+                    ->sortable()
+                    ->toggleable()
+                    ->searchable(false),
                 TextColumn::make('responses_count')
                     ->counts('responses')
                     ->label(__('zeus-bolt::forms.responses_count'))
