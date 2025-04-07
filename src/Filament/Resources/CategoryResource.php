@@ -3,20 +3,20 @@
 namespace LaraZeus\Bolt\Filament\Resources;
 
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
-use Filament\Forms\Set;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ForceDeleteAction;
-use Filament\Tables\Actions\ForceDeleteBulkAction;
-use Filament\Tables\Actions\RestoreAction;
-use Filament\Tables\Actions\RestoreBulkAction;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
@@ -34,7 +34,7 @@ use LaraZeus\Bolt\Models\Category;
 
 class CategoryResource extends BoltResource
 {
-    protected static ?string $navigationIcon = 'tabler-tags-filled';
+    protected static string | \BackedEnum | null $navigationIcon = 'tabler-tags-filled';
 
     protected static ?int $navigationSort = 4;
 
@@ -54,12 +54,13 @@ class CategoryResource extends BoltResource
         return (string) BoltPlugin::getModel('Category')::query()->count();
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 Section::make()
-                    ->columns(2)
+                    ->columnSpanFull()
+                    ->columns()
                     ->schema([
                         TextInput::make('name')
                             ->required()

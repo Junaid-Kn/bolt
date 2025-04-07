@@ -10,14 +10,14 @@ class ResponsesPerFields extends ChartWidget
 {
     public Form $record;
 
-    protected static ?string $maxHeight = '300px';
+    protected ?string $maxHeight = '300px';
 
     protected int | string | array $columnSpan = [
         'lg' => 1,
         'md' => 2,
     ];
 
-    protected static ?array $options = [
+    protected ?array $options = [
         'scales' => [
             'y' => [
                 'grid' => [

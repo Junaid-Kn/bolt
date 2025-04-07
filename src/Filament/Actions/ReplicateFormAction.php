@@ -2,24 +2,21 @@
 
 namespace LaraZeus\Bolt\Filament\Actions;
 
-use Filament\Actions\Concerns\CanReplicateRecords;
-use Filament\Actions\Contracts\ReplicatesRecords;
+use Filament\Actions\Concerns\CanCustomizeProcess;
+use Filament\Actions\ReplicateAction;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Set;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Support\Facades\FilamentIcon;
-use Filament\Tables\Actions\Action;
 use Illuminate\Support\Str;
 use LaraZeus\Bolt\Models\Form as ZeusForm;
 
-class ReplicateFormAction extends Action implements ReplicatesRecords
+class ReplicateFormAction extends ReplicateAction
 {
-    use CanReplicateRecords {
-        CanReplicateRecords::setUp as baseSetUp;
-    }
+    use CanCustomizeProcess;
 
     protected function setUp(): void
     {
-        $this->baseSetUp();
+        parent::setUp();
 
         $this->icon(FilamentIcon::resolve('actions::replicate-action') ?? 'heroicon-m-square-2-stack')
             ->label(__('zeus-bolt::forms.actions.replicate'))

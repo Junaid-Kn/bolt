@@ -4,7 +4,7 @@ namespace LaraZeus\Bolt\Concerns\Options;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\Utilities\Get;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Bolt\Fields\FieldsContract;
 use Livewire\Component as Livewire;

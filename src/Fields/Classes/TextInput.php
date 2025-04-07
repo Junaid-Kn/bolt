@@ -6,9 +6,8 @@ use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput as TextInputAlias;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Support\Colors\Color;
-use Guava\FilamentIconPicker\Forms\IconPicker;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
 use LaraZeus\Bolt\Facades\Bolt;
@@ -80,7 +79,8 @@ class TextInput extends FieldsContract
                             TextInputAlias::make('options.suffix')
                                 ->label(__('zeus-bolt::forms.fields.options.suffix')),
 
-                            IconPicker::make('options.prefix-icon')
+                            // todo
+                            /*IconPicker::make('options.prefix-icon')
                                 ->columns([
                                     'default' => 1,
                                     'lg' => 3,
@@ -93,7 +93,7 @@ class TextInput extends FieldsContract
                                     'lg' => 3,
                                     '2xl' => 5,
                                 ])
-                                ->label(__('zeus-bolt::forms.fields.options.suffix_icon')),
+                                ->label(__('zeus-bolt::forms.fields.options.suffix_icon')),*/
 
                             ColorPicker::make('options.prefix-icon-color')
                                 ->label(__('zeus-bolt::forms.fields.options.prefix_icon_color')),

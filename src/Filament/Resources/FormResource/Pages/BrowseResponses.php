@@ -21,9 +21,9 @@ class BrowseResponses extends ManageRelatedRecords
 
     protected static string $relationship = 'responses';
 
-    protected static string $view = 'zeus::filament.resources.response-resource.pages.browse-responses';
+    protected string $view = 'zeus::filament.resources.response-resource.pages.browse-responses';
 
-    protected static ?string $navigationIcon = 'heroicon-o-eye';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-eye';
 
     public function table(Table $table): Table
     {

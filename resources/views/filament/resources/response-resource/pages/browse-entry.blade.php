@@ -48,7 +48,7 @@
                 @endif
                 <p class="flex flex-col my-1 gap-1">
                     <span class="text-base font-light">{{ __('created at') }}:</span>
-                    <span class="font-semibold">{{ $getRecord->created_at->format(\Filament\Infolists\Infolist::$defaultDateDisplayFormat) }}-{{ $getRecord->created_at->format(\Filament\Infolists\Infolist::$defaultTimeDisplayFormat) }}</span>
+                    <span class="font-semibold">{{ $getRecord->created_at->format(\Filament\Schemas\Schema::$defaultTimeDisplayFormat) }}-{{ $getRecord->created_at->format(\Filament\Schemas\Schema::$defaultTimeDisplayFormat) }}</span>
                 </p>
             </x-filament::section>
             <x-filament::section>

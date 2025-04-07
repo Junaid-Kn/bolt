@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
+use Filament\Actions;
 use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables;
@@ -13,7 +14,6 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Actions\SetResponseStatus;
-use LaraZeus\Bolt\Filament\Exports\ResponseExporter;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\Bolt\Models\Field;
 use LaraZeus\Bolt\Models\Form;
@@ -30,7 +30,7 @@ class ManageResponses extends ManageRelatedRecords
 
     protected static string $relationship = 'responses';
 
-    protected static ?string $navigationIcon = 'heroicon-o-document-chart-bar';
+    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-document-chart-bar';
 
     public function table(Table $table): Table
     {
@@ -101,13 +101,13 @@ class ManageResponses extends ManageRelatedRecords
             ->columns($mainColumns)
             ->actions([
                 SetResponseStatus::make(),
-                Tables\Actions\DeleteAction::make(),
-                Tables\Actions\ForceDeleteAction::make(),
-                Tables\Actions\RestoreAction::make(),
+                Actions\DeleteAction::make(),
+                Actions\ForceDeleteAction::make(),
+                Actions\RestoreAction::make(),
             ])
             ->filters([
                 Tables\Filters\Filter::make('created_at')
-                    ->form([
+                    ->schema([
                         DatePicker::make('created_from'),
                         DatePicker::make('created_until'),
                     ])
@@ -128,16 +128,16 @@ class ManageResponses extends ManageRelatedRecords
                     ->label(__('zeus-bolt::response.status')),
             ])
             ->bulkActions([
-                Tables\Actions\DeleteBulkAction::make(),
-                Tables\Actions\RestoreBulkAction::make(),
-                Tables\Actions\ForceDeleteBulkAction::make(),
-                ExportBulkAction::make()
+                Actions\DeleteBulkAction::make(),
+                Actions\RestoreBulkAction::make(),
+                Actions\ForceDeleteBulkAction::make(),
+                /*ExportBulkAction::make()
                     ->exports([
                         ExcelExport::make()
                             ->fromTable()
                             ->queue(),
                     ])
-                    ->label(__('Export Responses')),
+                    ->label(__('Export Responses')),*/
                 // disabled for now due to issue with queues
                 /*Tables\Actions\ExportBulkAction::make()
                     ->label(__('Export Responses'))

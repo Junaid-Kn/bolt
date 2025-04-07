@@ -3,23 +3,22 @@
 namespace LaraZeus\Bolt\Filament\Resources;
 
 use Closure;
-use Filament\Forms\Form;
+use Filament\Actions\Action;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\EditAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\ForceDeleteBulkAction;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ViewAction;
 use Filament\Infolists\Components\IconEntry;
-use Filament\Infolists\Components\Section;
 use Filament\Infolists\Components\TextEntry;
-use Filament\Infolists\Infolist;
-use Filament\Pages\SubNavigationPosition;
+use Filament\Pages\Enums\SubNavigationPosition;
 use Filament\Resources\Pages\Page;
-use Filament\Tables\Actions\Action;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\DeleteBulkAction;
-use Filament\Tables\Actions\EditAction;
-use Filament\Tables\Actions\ForceDeleteAction;
-use Filament\Tables\Actions\ForceDeleteBulkAction;
-use Filament\Tables\Actions\RestoreAction;
-use Filament\Tables\Actions\RestoreBulkAction;
-use Filament\Tables\Actions\ViewAction;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -42,15 +41,15 @@ class FormResource extends BoltResource
     use HasOptions;
     use Schemata;
 
-    protected static ?string $navigationIcon = 'tabler-file-description';
+    protected static string|\BackedEnum|null $navigationIcon = 'tabler-file-description';
 
     protected static ?int $navigationSort = 1;
 
     protected static ?string $recordTitleAttribute = 'name';
 
-    protected static Closure | array | null $boltFormSchema = null;
+    protected static Closure|array|null $boltFormSchema = null;
 
-    protected static SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function getModel(): string
     {
@@ -59,7 +58,7 @@ class FormResource extends BoltResource
 
     public static function getNavigationBadge(): ?string
     {
-        if (! BoltPlugin::getNavigationBadgesVisibility(self::class)) {
+        if (!BoltPlugin::getNavigationBadgesVisibility(self::class)) {
             return null;
         }
 
@@ -81,63 +80,67 @@ class FormResource extends BoltResource
         return __('zeus-bolt::forms.navigation_label');
     }
 
-    public static function infolist(Infolist $infolist): Infolist
+    public static function infolist(Schema $schema): Schema
     {
-        return $infolist
+        return $schema
             ->schema([
-                Section::make()->schema([
-                    TextEntry::make('name')
-                        ->label(__('zeus-bolt::forms.options.tabs.title.name')),
+                Section::make()
+                    ->columnSpanFull()
+                    ->schema([
+                        TextEntry::make('name')
+                            ->label(__('zeus-bolt::forms.options.tabs.title.name')),
 
-                    ListEntry::make('items')
-                        ->visible(fn (ZeusForm $record) => $record->extensions !== null)
-                        ->heading(__('zeus-bolt::forms.options.tabs.title.links'))
-                        ->list()
-                        ->state(fn ($record) => $record->slug_url),
+                        ListEntry::make('items')
+                            ->visible(fn(ZeusForm $record) => $record->extensions !== null)
+                            ->heading(__('zeus-bolt::forms.options.tabs.title.links'))
+                            ->list()
+                            ->state(fn($record) => $record->slug_url),
 
-                    TextEntry::make('slug')
-                        ->label(__('zeus-bolt::forms.options.tabs.title.slug'))
-                        ->url(fn (ZeusForm $record) => route(BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show', ['slug' => $record->slug]))
-                        ->visible(fn (ZeusForm $record) => $record->extensions === null)
-                        ->icon('heroicon-o-arrow-top-right-on-square')
-                        ->openUrlInNewTab(),
+                        TextEntry::make('slug')
+                            ->label(__('zeus-bolt::forms.options.tabs.title.slug'))
+                            ->url(fn(ZeusForm $record
+                            ) => route(BoltPlugin::get()->getRouteNamePrefix().'bolt.form.show',
+                                ['slug' => $record->slug]))
+                            ->visible(fn(ZeusForm $record) => $record->extensions === null)
+                            ->icon('heroicon-o-arrow-top-right-on-square')
+                            ->openUrlInNewTab(),
 
-                    TextEntry::make('description')
-                        ->label(__('zeus-bolt::forms.options.tabs.details.description')),
-                    IconEntry::make('is_active')
-                        ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
-                        ->icon(fn (string $state): string => match ($state) {
-                            '0' => 'tabler-circle-x',
-                            default => 'tabler-circle-check',
-                        })
-                        ->color(fn (string $state): string => match ($state) {
-                            '0' => 'warning',
-                            '1' => 'success',
-                            default => 'gray',
-                        }),
+                        TextEntry::make('description')
+                            ->label(__('zeus-bolt::forms.options.tabs.details.description')),
+                        IconEntry::make('is_active')
+                            ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
+                            ->icon(fn(string $state): string => match ($state) {
+                                '0' => 'tabler-circle-x',
+                                default => 'tabler-circle-check',
+                            })
+                            ->color(fn(string $state): string => match ($state) {
+                                '0' => 'warning',
+                                '1' => 'success',
+                                default => 'gray',
+                            }),
 
-                    TextEntry::make('start_date')
-                        ->label(__('zeus-bolt::forms.options.tabs.advanced.start_date'))
-                        ->dateTime(),
-                    TextEntry::make('end_date')
-                        ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date'))
-                        ->dateTime(),
-                ])
+                        TextEntry::make('start_date')
+                            ->label(__('zeus-bolt::forms.options.tabs.advanced.start_date'))
+                            ->dateTime(),
+                        TextEntry::make('end_date')
+                            ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date'))
+                            ->dateTime(),
+                    ])
                     ->columns(),
             ]);
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema(static::$boltFormSchema ?? static::getMainFormSchema());
+        return $schema->schema(static::$boltFormSchema ?? static::getMainFormSchema());
     }
 
-    public function getBoltFormSchema(): array | Closure | null
+    public function getBoltFormSchema(): array|Closure|null
     {
         return static::$boltFormSchema;
     }
 
-    public static function getBoltFormSchemaUsing(array | Closure | null $form): void
+    public static function getBoltFormSchemaUsing(array|Closure|null $form): void
     {
         static::$boltFormSchema = $form;
     }
@@ -196,19 +199,18 @@ class FormResource extends BoltResource
                     ->sortable()
                     ->toggleable()
                     ->searchable(false),
-
             ])
             ->actions(static::getActions())
             ->filters([
                 TrashedFilter::make(),
                 Filter::make('is_active')
                     ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->where('is_active', true))
+                    ->query(fn(Builder $query): Builder => $query->where('is_active', true))
                     ->label(__('zeus-bolt::forms.options.tabs.display.is_active')),
 
                 Filter::make('not_active')
                     ->toggle()
-                    ->query(fn (Builder $query): Builder => $query->where('is_active', false))
+                    ->query(fn(Builder $query): Builder => $query->where('is_active', false))
                     ->label(__('zeus-bolt::forms.options.tabs.display.inactive')),
 
                 SelectFilter::make('category_id')
@@ -286,7 +288,7 @@ class FormResource extends BoltResource
                     ->label(__('zeus-bolt::forms.entries'))
                     ->icon('tabler-folders')
                     ->tooltip(__('zeus-bolt::forms.view_all_entries'))
-                    ->url(fn (ZeusForm $record): string => FormResource::getUrl('report', ['record' => $record])),
+                    ->url(fn(ZeusForm $record): string => FormResource::getUrl('report', ['record' => $record])),
             ])
                 ->dropdown(false),
         ];
@@ -299,14 +301,15 @@ class FormResource extends BoltResource
                 ->icon('tabler-input-spark')
                 ->tooltip(__('zeus-bolt::forms.actions.prefilled_link_tooltip'))
                 ->visible(Bolt::hasPro())
-                ->url(fn (ZeusForm $record): string => FormResource::getUrl('prefilled', ['record' => $record]));
+                ->url(fn(ZeusForm $record): string => FormResource::getUrl('prefilled', ['record' => $record]));
         }
 
         if (class_exists(\LaraZeus\Helen\HelenServiceProvider::class)) {
             // @phpstan-ignore-next-line
             $advancedActions[] = \LaraZeus\Helen\Actions\ShortUrlAction::make('get-link')
                 ->label(__('zeus-bolt::forms.actions.short_link'))
-                ->distUrl(fn (ZeusForm $record) => route(BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show', $record));
+                ->distUrl(fn(ZeusForm $record) => route(BoltPlugin::get()->getRouteNamePrefix().'bolt.form.show',
+                    $record));
         }
 
         $moreActions[] = ActionGroup::make($advancedActions)->dropdown(false);

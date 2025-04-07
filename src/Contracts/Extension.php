@@ -3,7 +3,6 @@
 namespace LaraZeus\Bolt\Contracts;
 
 use LaraZeus\Bolt\Models\Form;
-use LaraZeus\Bolt\Models\Response;
 
 interface Extension
 {

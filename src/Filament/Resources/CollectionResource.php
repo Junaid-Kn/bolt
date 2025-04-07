@@ -5,12 +5,12 @@ namespace LaraZeus\Bolt\Filament\Resources;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Form;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
-use Filament\Tables\Actions\ActionGroup;
-use Filament\Tables\Actions\DeleteAction;
-use Filament\Tables\Actions\EditAction;
+use Filament\Actions\ActionGroup;
+use Filament\Actions\DeleteAction;
+use Filament\Actions\EditAction;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use LaraZeus\Bolt\BoltPlugin;
@@ -19,7 +19,7 @@ use LaraZeus\Bolt\Filament\Resources\CollectionResource\Widgets\EditCollectionWa
 
 class CollectionResource extends BoltResource
 {
-    protected static ?string $navigationIcon = 'tabler-brand-databricks';
+    protected static string | \BackedEnum | null $navigationIcon = 'tabler-brand-databricks';
 
     protected static ?int $navigationSort = 3;
 
@@ -54,9 +54,9 @@ class CollectionResource extends BoltResource
         return __('zeus-bolt::collection.navigation_label');
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form
+        return $schema
             ->schema([
                 TextInput::make('name')
                     ->live(onBlur: true)

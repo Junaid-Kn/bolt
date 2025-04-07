@@ -2,14 +2,14 @@
 
 namespace LaraZeus\Bolt\Concerns\Options;
 
-use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Grid;
+use Filament\Actions\Action;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Facades\Bolt;
 

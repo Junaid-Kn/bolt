@@ -21,7 +21,7 @@ class ViewResponse extends ViewRecord
 
     public int $responseID;
 
-    protected static string $view = 'zeus::filament.resources.response-resource.pages.show-entry';
+    protected string $view = 'zeus::filament.resources.response-resource.pages.show-entry';
 
     protected static string $resource = FormResource::class;
 

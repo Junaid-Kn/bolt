@@ -16,9 +16,9 @@
                     <div class="text-gray-400 text-sm">
                         @svg('heroicon-o-calendar','h-4 w-4 inline-flex')
                         <span>{{ __('Available from') }}:</span>
-                        <span>{{ optional($zeusForm->start_date)->format(\Filament\Infolists\Infolist::$defaultDateDisplayFormat) }}</span>,
+                        <span>{{ optional($zeusForm->start_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>,
                         <span>{{ __('to') }}:</span>
-                        <span>{{ optional($zeusForm->end_date)->format(\Filament\Infolists\Infolist::$defaultDateDisplayFormat) }}</span>
+                        <span>{{ optional($zeusForm->end_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>
                     </div>
                 @endif
             </x-slot>
@@ -70,9 +70,9 @@
                         @svg('heroicon-o-calendar','h-5 w-5 inline-flex')
                         <span class="flex items-center justify-center gap-1">
                             <span>{{ __('Available from') }}:</span>
-                            <span>{{ optional($zeusForm->start_date)->format(\Filament\Infolists\Infolist::$defaultDateDisplayFormat) }}</span>,
+                            <span>{{ optional($zeusForm->start_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>,
                             <span>{{ __('to') }}:</span>
-                            <span>{{ optional($zeusForm->end_date)->format(\Filament\Infolists\Infolist::$defaultDateDisplayFormat) }}</span>
+                            <span>{{ optional($zeusForm->end_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>
                         </span>
                     </div>
                 @endif
@@ -83,7 +83,8 @@
     @if($sent)
         @include($boltTheme.'.submitted')
     @else
-        <x-filament-panels::form wire:submit.prevent="store" :class="!$inline ? 'mx-2' : ''">
+        <!--todo-->
+        <form wire:submit.prevent="store" :class="!$inline ? 'mx-2' : ''">
             @if(!$inline)
                 {{ \LaraZeus\Bolt\Facades\Bolt::renderHookBlade('zeus-form.before') }}
             @endif
@@ -113,7 +114,7 @@
             @if(!$inline)
                 {{ \LaraZeus\Bolt\Facades\Bolt::renderHookBlade('zeus-form.after') }}
             @endif
-        </x-filament-panels::form>
+        </form>
 
         <x-filament-actions::modals/>
     @endif

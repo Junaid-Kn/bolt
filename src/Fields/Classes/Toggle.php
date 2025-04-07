@@ -4,12 +4,11 @@ namespace LaraZeus\Bolt\Fields\Classes;
 
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Hidden;
+use Filament\Schemas\Components\Grid;
 use Filament\Support\Colors\Color;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\IconColumn;
-use Guava\FilamentIconPicker\Forms\IconPicker;
 use Illuminate\Database\Eloquent\Builder;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
@@ -42,7 +41,7 @@ class Toggle extends FieldsContract
                             Grid::make()
                                 ->columns()
                                 ->schema([
-                                    IconPicker::make('options.on-icon')
+                                    /*IconPicker::make('options.on-icon')
                                         ->columns([
                                             'default' => 1,
                                             'lg' => 3,
@@ -56,7 +55,7 @@ class Toggle extends FieldsContract
                                             'lg' => 3,
                                             '2xl' => 5,
                                         ])
-                                        ->label(__('zeus-bolt::forms.fields.options.off_icon')),
+                                        ->label(__('zeus-bolt::forms.fields.options.off_icon')),*/
 
                                     ColorPicker::make('options.on-color')
                                         ->label(__('zeus-bolt::forms.fields.options.off_color'))

@@ -2,8 +2,8 @@
 
 namespace LaraZeus\Bolt\Facades;
 
-use Filament\Forms\Components\Placeholder;
-use Filament\Forms\Components\Tabs\Tab;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Support\Facades\FilamentView;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Support\Carbon;
@@ -73,13 +73,13 @@ class Bolt extends Facade
         });
     }
 
-    public static function renderHook(string $hook): Placeholder
+    public static function renderHook(string $hook): TextEntry
     {
         $hookRendered = FilamentView::renderHook($hook);
 
-        return Placeholder::make('placeholder-' . $hook)
+        return TextEntry::make('placeholder-' . $hook)
             ->label('')
-            ->content($hookRendered)
+            ->state($hookRendered)
             ->visible(filled($hookRendered->toHtml()));
     }
 
@@ -94,17 +94,16 @@ class Bolt extends Facade
         return null;
     }
 
+    /**
+     * @throws \JsonException
+     */
     public static function isJson(string $string): bool
     {
         if ($string === '') {
             return false;
         }
 
-        /*if (is_int($string)) {
-            return false;
-        }*/
-
-        json_decode($string);
+        json_decode($string, false);
 
         if (json_last_error()) {
             return false;

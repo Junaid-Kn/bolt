@@ -3,26 +3,24 @@
 namespace LaraZeus\Bolt\Concerns;
 
 use Filament\Facades\Filament;
-use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Component;
+use Filament\Actions\Action;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Grid;
-use Filament\Forms\Components\Group;
 use Filament\Forms\Components\Hidden;
-use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Radio;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ViewField;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
-use Guava\FilamentIconPicker\Forms\IconPicker;
+use Filament\Infolists\Components\TextEntry;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Tabs;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
 use LaraZeus\Accordion\Forms\Accordion;
@@ -75,14 +73,15 @@ trait Schemata
                                 ->default(1)
                                 ->hint(__('zeus-bolt::forms.section.options.columns_hint'))
                                 ->label(__('zeus-bolt::forms.section.options.columns_label')),
-                            IconPicker::make('icon')
+                            // todo
+                            /*IconPicker::make('icon')
                                 ->columns([
                                     'default' => 1,
                                     'lg' => 3,
                                     '2xl' => 5,
                                 ])
                                 ->visible(fn (Get $get) => $formOptions['show-as'] === 'page' && $get('borderless') === false)
-                                ->label(__('zeus-bolt::forms.section.options.icon')),
+                                ->label(__('zeus-bolt::forms.section.options.icon')),*/
                             Toggle::make('aside')
                                 ->default(false)
                                 ->visible(fn (Get $get) => $formOptions['show-as'] === 'page' && $get('borderless') === false)
@@ -288,9 +287,9 @@ trait Schemata
                     Grid::make()
                         ->columns()
                         ->schema([
-                            Placeholder::make('form-dates')
+                            TextEntry::make('form-dates')
                                 ->label(__('zeus-bolt::forms.options.tabs.advanced.dates'))
-                                ->content(__('zeus-bolt::forms.options.tabs.advanced.dates_help'))
+                                ->state(__('zeus-bolt::forms.options.tabs.advanced.dates_help'))
                                 ->columnSpanFull(),
                             DateTimePicker::make('start_date')
                                 ->requiredWith('end_date')
@@ -371,7 +370,7 @@ trait Schemata
                 ->lazy()
                 ->label(__('zeus-bolt::forms.section.name')),
 
-            Placeholder::make('section-fields-placeholder')
+            TextEntry::make('section-fields-placeholder')
                 ->label(__('zeus-bolt::forms.section.name')),
 
             Repeater::make('fields')
@@ -379,7 +378,6 @@ trait Schemata
                 ->orderColumn('ordering')
                 ->cloneable()
                 ->minItems(1)
-
                 ->cloneAction(fn (Action $action) => $action->action(function (Component $component, $arguments) {
                     $items = $component->getState();
                     $originalItem = $items[$arguments['item']];
@@ -498,7 +496,7 @@ trait Schemata
                         ->toArray();
                 })
                 ->live()
-                ->default('\LaraZeus\Bolt\Fields\Classes\TextInput')
+                ->default(\LaraZeus\Bolt\Fields\Classes\TextInput::class)
                 ->label(__('zeus-bolt::forms.fields.type')),
             Group::make()
                 ->schema(function (Get $get) {

@@ -1,9 +1,9 @@
 <?php
 
 return [
-    'label' => 'Extension',
-    'plural_label' => 'Extension',
-    'navigation_label' => 'Extension',
+    'label' => 'Forms',
+    'plural_label' => 'Form',
+    'navigation_label' => 'Forms',
 
     'form_id' => 'Form ID',
     'extension' => 'Extension',

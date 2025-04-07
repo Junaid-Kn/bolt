@@ -5,7 +5,7 @@ namespace LaraZeus\Bolt\Filament\Actions;
 use Closure;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
-use Filament\Tables\Actions\Action;
+use Filament\Actions\Action;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Models\Response;
 

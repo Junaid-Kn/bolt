@@ -10,9 +10,9 @@ class ResponsesPerStatus extends ChartWidget
 {
     public Form $record;
 
-    protected static ?string $maxHeight = '300px';
+    protected ?string $maxHeight = '300px';
 
-    protected static ?array $options = [
+    protected ?array $options = [
         'scales' => [
             'y' => [
                 'grid' => [

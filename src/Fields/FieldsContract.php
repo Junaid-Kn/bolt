@@ -3,7 +3,7 @@
 namespace LaraZeus\Bolt\Fields;
 
 use Filament\Actions\Exports\ExportColumn;
-use Filament\Forms\Get;
+use Filament\Schemas\Components\Utilities\Get;
 use Filament\Support\Colors\Color;
 use Filament\Tables\Columns\Column;
 use Filament\Tables\Columns\TextColumn;

@@ -44,7 +44,7 @@
                 </p>
                 <p class="flex flex-col">
                     <span class="text-base font-light">{{ __('created at') }}:</span>
-                    <span class="font-semibold">{{ $response->created_at->format(\Filament\Infolists\Infolist::$defaultDateDisplayFormat) }}-{{ $response->created_at->format(\Filament\Infolists\Infolist::$defaultTimeDisplayFormat) }}</span>
+                    <span class="font-semibold">{{ $response->created_at->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}-{{ $response->created_at->format(\Filament\Schemas\Schema::$defaultTimeDisplayFormat) }}</span>
                 </p>
             </x-filament::section>
             <div>

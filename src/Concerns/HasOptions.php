@@ -2,16 +2,15 @@
 
 namespace LaraZeus\Bolt\Concerns;
 
-use Filament\Forms\Components\Actions\Action;
+use Filament\Actions\Action;
 use Filament\Forms\Components\ColorPicker;
-use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
-use Filament\Forms\Set;
-use Guava\FilamentIconPicker\Forms\IconPicker;
+use Filament\Schemas\Components\Grid;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Concerns\Options\DataSource;
@@ -44,13 +43,14 @@ trait HasOptions
                 TextInput::make('options.hint.icon-tooltip')
                     ->label(__('Hint Icon tooltip')),
                 ColorPicker::make('options.hint.color')->label(__('Hint Color')),
-                IconPicker::make('options.hint.icon')
+                // todo
+                /*IconPicker::make('options.hint.icon')
                     ->columns([
                         'default' => 1,
                         'lg' => 3,
                         '2xl' => 5,
                     ])
-                    ->label(__('Hint Icon')),
+                    ->label(__('Hint Icon')),*/
             ]);
     }
 
