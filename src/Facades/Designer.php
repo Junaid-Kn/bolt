@@ -1,6 +1,6 @@
 <?php
 
-namespace LaraZeus\Bolt\Concerns;
+namespace LaraZeus\Bolt\Facades;
 
 use Filament\Forms\Components\Grid;
 use Filament\Forms\Components\Section;
@@ -9,12 +9,10 @@ use Filament\Forms\Components\Tabs\Tab;
 use Filament\Forms\Components\Wizard;
 use Filament\Forms\Components\Wizard\Step;
 use Filament\Forms\Get;
-use LaraZeus\Bolt\Facades\Bolt;
-use LaraZeus\Bolt\Facades\Extensions;
 use LaraZeus\Bolt\Models\Form;
 use LaraZeus\Bolt\Models\Section as ZeusSection;
 
-trait Designer
+class Designer
 {
     public static function ui(Form $zeusForm, bool $inline = false): array
     {

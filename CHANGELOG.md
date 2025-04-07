@@ -2,6 +2,40 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v3.0.84 - 2025-04-05
+
+### What's Changed
+
+* change Designer trait to class by @atmonshi in https://github.com/lara-zeus/bolt/pull/366
+
+this internal change, but if you're using custom designer, make sure to update the namespace.
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.83...v3.0.84
+
+## v3.0.83 - 2025-04-05
+
+### What's Changed
+
+* add new export action to support queues by @atmonshi in https://github.com/lara-zeus/bolt/pull/358
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.82...v3.0.83
+
+## v3.0.82 - 2025-04-04
+
+### What's Changed
+
+* fix handling preset datasource by @atmonshi in https://github.com/lara-zeus/bolt/pull/364
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.81...v3.0.82
+
+## v3.0.81 - 2025-03-27
+
+### What's Changed
+
+* Cache preset by @atmonshi in https://github.com/lara-zeus/bolt/pull/363
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.80...v3.0.81
+
 ## v3.0.80 - 2025-03-18
 
 ### What's Changed
@@ -162,6 +196,10 @@ if you need to change this to use another model, add the following in your confi
     //...
     'User' => AnotherUserModel::class,
 ],
+
+
+
+
 
 
 
@@ -743,14 +781,10 @@ and you can remove the fork for `alperenersoy/filament-export`
 - add more tests by @atmonshi in https://github.com/lara-zeus/bolt/pull/94
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.6...1.2.7
 ## 1.2.6 - 2023-07-04
-
 ### What's Changed
-
 - Bump dependabot/fetch-metadata from 1.5.1 to 1.6.0 by @dependabot in https://github.com/lara-zeus/bolt/pull/91
 - update all dependecies by @atmonshi in https://github.com/lara-zeus/bolt/pull/93
-
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.5...1.2.6
-
 ## 1.2.5 - 2023-07-02
 
 ### What's Changed

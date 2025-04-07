@@ -71,6 +71,12 @@ return [
      * */
     'show_core_presets' => true,
 
+    /**
+     * the preview for the presets is using sushi:
+     * you can enable/disable the cache here
+     * */
+    'should_cache_preset' => env('BOLT_CACHE_PRESET', true),
+
     /*
      * if you have installed Bolt Pro, you can enable the form design option here
      */
