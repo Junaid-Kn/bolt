@@ -130,7 +130,7 @@ class Designer
             }
 
             if (is_array($get('zeusData.' . $relatedField))) {
-                return in_array($relatedFieldValues, $get('zeusData.'.$relatedField), true);
+                return in_array($relatedFieldValues, $get('zeusData.' . $relatedField), true);
             }
 
             return $relatedFieldValues === $get('zeusData.' . $relatedField);
