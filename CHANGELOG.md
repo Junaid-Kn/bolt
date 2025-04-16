@@ -2,6 +2,25 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v3.0.85 - 2025-04-14
+
+### What's Changed
+
+* pass the response to the Extensions SubmittedRender by @atmonshi in https://github.com/lara-zeus/bolt/pull/367
+
+note if you're overwriting the view `submitted.blade.php` make sure to update it to last version
+
+this the change:
+
+```php
+{!! \LaraZeus\Bolt\Facades\Extensions::init($zeusForm, 'SubmittedRender', [
+    'extensionData' => $extensionData['extInfo']['itemId'] ?? 0,
+    'response' => $extensionData['response'],
+]) !!}
+
+```
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.84...v3.0.85
+
 ## v3.0.84 - 2025-04-05
 
 ### What's Changed
@@ -196,6 +215,7 @@ if you need to change this to use another model, add the following in your confi
     //...
     'User' => AnotherUserModel::class,
 ],
+
 
 
 
@@ -786,7 +806,6 @@ and you can remove the fork for `alperenersoy/filament-export`
 - update all dependecies by @atmonshi in https://github.com/lara-zeus/bolt/pull/93
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.5...1.2.6
 ## 1.2.5 - 2023-07-02
-
 ### What's Changed
 
 - add Constraints and delete relations, with support for soft delete  by @atmonshi in https://github.com/lara-zeus/bolt/pull/90
