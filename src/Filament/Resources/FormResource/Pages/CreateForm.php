@@ -6,10 +6,12 @@ use Filament\Actions;
 use Filament\Resources\Pages\CreateRecord;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Resources\Pages\CreateRecord\Concerns\Translatable;
 
 class CreateForm extends CreateRecord
 {
-    use CreateRecord\Concerns\Translatable;
+    use Translatable;
 
     protected static string $resource = FormResource::class;
 
@@ -21,7 +23,7 @@ class CreateForm extends CreateRecord
     protected function getHeaderActions(): array
     {
         return [
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
         ];
     }
 }

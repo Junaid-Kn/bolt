@@ -1,11 +1,4 @@
-@php
-    $colors = \Illuminate\Support\Arr::toCssStyles([
-        \Filament\Support\get_color_css_variables($zeusForm->options['primary_color'] ?? 'primary', shades: [50, 100, 200, 300, 400, 500, 600, 700, 800, 900]),
-    ]);
-@endphp
-
-<div class="not-prose" style="{{ $colors }}">
-
+<div class="not-prose">
     @if(!$inline)
         @if(!class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class) || (optional($zeusForm->options)['logo'] === null && optional($zeusForm->options)['cover'] === null))
             <x-slot name="header">
@@ -40,9 +33,7 @@
                 {{ $zeusForm->name }}
             </li>
         </x-slot>
-    @endif
 
-    @if(!$inline)
         @include($boltTheme.'.loading')
     @endif
 
@@ -83,7 +74,6 @@
     @if($sent)
         @include($boltTheme.'.submitted')
     @else
-        <!--todo-->
         <form wire:submit.prevent="store" :class="!$inline ? 'mx-2' : ''">
             @if(!$inline)
                 {{ \LaraZeus\Bolt\Facades\Bolt::renderHookBlade('zeus-form.before') }}
@@ -92,7 +82,7 @@
             {!! \LaraZeus\Bolt\Facades\Extensions::init($zeusForm, 'render',$extensionData) !!}
 
             @if(!empty($zeusForm->details))
-                <div class="m-4">
+                <div class="my-4">
                     <x-filament::section :compact="true">
                         {!! nl2br($zeusForm->details) !!}
                     </x-filament::section>

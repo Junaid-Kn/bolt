@@ -8,17 +8,19 @@ use Filament\Resources\Pages\ListRecords;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
+use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
+use LaraZeus\SpatieTranslatable\Resources\Pages\ListRecords\Concerns\Translatable;
 
 class ListForms extends ListRecords
 {
-    use ListRecords\Concerns\Translatable;
+    use Translatable;
 
     protected static string $resource = FormResource::class;
 
     protected function getHeaderActions(): array
     {
         $actions = [
-            Actions\LocaleSwitcher::make(),
+            LocaleSwitcher::make(),
             Actions\CreateAction::make('create'),
             Action::make('open')
                 ->label(__('zeus-bolt::forms.actions.open'))
