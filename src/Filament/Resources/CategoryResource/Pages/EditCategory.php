@@ -2,7 +2,6 @@
 
 namespace LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages;
 
-use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
