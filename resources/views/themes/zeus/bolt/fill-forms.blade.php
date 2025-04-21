@@ -9,9 +9,9 @@
                     <div class="text-gray-400 text-sm">
                         @svg('heroicon-o-calendar','h-4 w-4 inline-flex')
                         <span>{{ __('Available from') }}:</span>
-                        <span>{{ optional($zeusForm->start_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>,
+                        <span>{{ optional($zeusForm->start_date)->format($this->form->getDefaultDateDisplayFormat()) }}</span>,
                         <span>{{ __('to') }}:</span>
-                        <span>{{ optional($zeusForm->end_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>
+                        <span>{{ optional($zeusForm->end_date)->format($this->form->getDefaultDateDisplayFormat()) }}</span>
                     </div>
                 @endif
             </x-slot>
@@ -61,9 +61,9 @@
                         @svg('heroicon-o-calendar','h-5 w-5 inline-flex')
                         <span class="flex items-center justify-center gap-1">
                             <span>{{ __('Available from') }}:</span>
-                            <span>{{ optional($zeusForm->start_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>,
+                            <span>{{ optional($zeusForm->start_date)->format($this->form->getDefaultDateDisplayFormat()) }}</span>,
                             <span>{{ __('to') }}:</span>
-                            <span>{{ optional($zeusForm->end_date)->format(\Filament\Schemas\Schema::$defaultDateDisplayFormat) }}</span>
+                            <span>{{ optional($zeusForm->end_date)->format($this->form->getDefaultDateDisplayFormat()) }}</span>
                         </span>
                     </div>
                 @endif

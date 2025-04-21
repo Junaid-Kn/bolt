@@ -4,6 +4,7 @@ namespace LaraZeus\Bolt\Livewire;
 
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
+use Filament\Pages\Page;
 use Filament\Tables\Columns\Layout\Split;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
@@ -14,9 +15,8 @@ use Illuminate\View\View;
 use LaraZeus\Bolt\Models\Response;
 use Livewire\Component;
 
-class ListEntries extends Component implements HasForms, HasTable
+class ListEntries extends Page implements HasTable
 {
-    use InteractsWithForms;
     use InteractsWithTable;
 
     public function table(Table $table): Table
