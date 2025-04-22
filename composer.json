@@ -33,7 +33,7 @@
         "lara-zeus/core": "*",
         "lara-zeus/filament-plugin-tools": "*",
         "lara-zeus/list-group": "*",
-        "secondnetwork/blade-tabler-icons": "^3.30"
+        "lara-zeus/tabler-icons-enum": "*"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.4",
