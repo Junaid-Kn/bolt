@@ -45,9 +45,9 @@
                     <p class="flex flex-col my-1 gap-1">
                         <span class="text-base font-light">{{ __('created at') }}:</span>
                         <span class="font-semibold">
-                            {{ $response->created_at->format(\Filament\Schemas\Schema::$defaultTimeDisplayFormat) }}
+                            {{ $response->created_at->format($this->form->getDefaultDateDisplayFormat()) }}
                             -
-                            {{ $response->created_at->format(\Filament\Schemas\Schema::$defaultTimeDisplayFormat) }}
+                            {{ $response->created_at->format($this->form->getDefaultDateDisplayFormat()) }}
                         </span>
                     </p>
                 </x-filament::section>
