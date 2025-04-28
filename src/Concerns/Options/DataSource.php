@@ -91,6 +91,7 @@ trait DataSource
                     ->options($dataSources)
                     ->label(__('zeus-bolt::forms.options.data_source.label')),
             ])
+            ->columnSpanFull()
             ->columns(1);
     }
 }

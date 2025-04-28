@@ -285,6 +285,7 @@ trait Schemata
                 ->label(__('zeus-bolt::forms.options.tabs.advanced.label'))
                 ->schema([
                     Grid::make()
+                        ->columnSpanFull()
                         ->columns()
                         ->schema([
                             TextEntry::make('form-dates')
@@ -299,6 +300,7 @@ trait Schemata
                                 ->label(__('zeus-bolt::forms.options.tabs.advanced.end_date')),
                         ]),
                     Grid::make()
+                        ->columnSpanFull()
                         ->columns()
                         ->schema([
                             TextInput::make('options.emails-notification')

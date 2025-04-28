@@ -39,6 +39,7 @@ class Toggle extends FieldsContract
                         ->icon('tabler-settings')
                         ->schema([
                             Grid::make()
+                                ->columnSpanFull()
                                 ->columns()
                                 ->schema([
                                     /*IconPicker::make('options.on-icon')

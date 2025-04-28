@@ -28,6 +28,7 @@ trait HasOptions
             ->schema([
                 Toggle::make('options.is_required')->label(__('Is Required')),
             ])
+            ->columnSpanFull()
             ->columns(1);
     }
 
@@ -62,6 +63,7 @@ trait HasOptions
                     ->helperText(__('show this field in full width row'))
                     ->label(__('Full Width')),
             ])
+            ->columnSpanFull()
             ->columns(1);
     }
 
@@ -72,6 +74,7 @@ trait HasOptions
                 Toggle::make('options.hidden_label')
                     ->label(__('Hidden Label')),
             ])
+            ->columnSpanFull()
             ->columns(1);
     }
 
@@ -142,6 +145,7 @@ trait HasOptions
                     ->options($dataSources)
                     ->label(__('Data Source')),
             ])
+            ->columnSpanFull()
             ->columns(1);
     }
 
@@ -154,6 +158,7 @@ trait HasOptions
                     ->default(str()->random(6))
                     ->label(__('HTML ID')),
             ])
+            ->columnSpanFull()
             ->columns(1);
     }
 
@@ -165,6 +170,7 @@ trait HasOptions
                     ->default(1)
                     ->label(__('zeus-bolt::forms.options.is_active')),
             ])
+            ->columnSpanFull()
             ->columns(1);
     }
 }

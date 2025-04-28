@@ -105,7 +105,8 @@ class Designer
                 ->description($section->description)
                 ->icon($section->icon ?? null);
         } elseif ((bool) $section->borderless === true) {
-            $component = Grid::make($section->name);
+            $component = Grid::make($section->name)
+                ->columnSpanFull();
         } else {
             $component = Section::make($section->name)
                 ->columnSpanFull()
