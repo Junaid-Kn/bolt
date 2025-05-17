@@ -63,14 +63,15 @@
 
                     <div class="mb-4">
                         <span>{{ __('status') }}</span>
-                            @php $getStatues = $response->statusDetails() @endphp
-                            <span class="{{ $getStatues['class']}}"
-                                  x-tooltip="{
-                                    content: @js(__('status')),
-                                    theme: $store.theme,
-                                  }">
-                            @svg($getStatues['icon'],'w-4 h-4 inline')
-                                {{ $getStatues['label'] }}
+                        <span
+                            color="{{ $response->status->getColor() }}"
+                            x-tooltip="{
+                                content: @js(__('status')),
+                                theme: $store.theme,
+                            }"
+                        >
+                            @svg($response->status->getIcon(),'w-4 h-4 inline')
+                            {{ $response->status->getLabel() }}
                         </span>
                     </div>
 

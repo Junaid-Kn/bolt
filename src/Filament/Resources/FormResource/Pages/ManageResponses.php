@@ -58,9 +58,6 @@ class ManageResponses extends ManageRelatedRecords
                 ->sortable()
                 ->badge()
                 ->label(__('zeus-bolt::response.status'))
-                ->formatStateUsing(fn ($state) => __(str($state)->title()->toString()))
-                ->colors(BoltPlugin::getModel('FormsStatus')::pluck('key', 'color')->toArray())
-                ->icons(BoltPlugin::getModel('FormsStatus')::pluck('key', 'icon')->toArray())
                 ->grow(false)
                 ->searchable('status'),
 
@@ -124,7 +121,7 @@ class ManageResponses extends ManageRelatedRecords
                     }),
                 Tables\Filters\TrashedFilter::make(),
                 SelectFilter::make('status')
-                    ->options(BoltPlugin::getModel('FormsStatus')::query()->pluck('label', 'key'))
+                    ->options(BoltPlugin::getModel('FormsStatus'))
                     ->label(__('zeus-bolt::response.status')),
             ])
             ->bulkActions([

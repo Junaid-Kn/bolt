@@ -15,9 +15,9 @@ return [
     'updated_at' => 'Updated At',
     'cant_delete' => 'Can\'t delete a form linked to an Extensions',
     'status_labels' => [
-        'new' => 'New',
-        'open' => 'Open',
-        'closed' => 'Closed',
+        'NEW' => 'New',
+        'OPEN' => 'Open',
+        'CLOSED' => 'Closed',
     ],
     'options' => [
         'tabs' => [

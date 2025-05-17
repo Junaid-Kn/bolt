@@ -32,8 +32,6 @@ class ListEntries extends Page implements HasTable
                     TextColumn::make('status')
                         ->badge()
                         ->label(__('zeus-bolt::forms.status'))
-                        ->colors(config('zeus-bolt.models.FormsStatus')::pluck('key', 'color')->toArray())
-                        ->icons(config('zeus-bolt.models.FormsStatus')::pluck('key', 'icon')->toArray())
                         ->grow(false),
                     TextColumn::make('form.name')
                         ->searchable('name')

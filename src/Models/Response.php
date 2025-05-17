@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use LaraZeus\Bolt\Concerns\HasUpdates;
 use LaraZeus\Bolt\Database\Factories\ResponseFactory;
+use LaraZeus\Bolt\Enums\FormsStatus;
 use LaraZeus\Bolt\Facades\Extensions;
 
 /**
@@ -33,9 +34,16 @@ class Response extends Model
 
     protected $guarded = [];
 
+    protected function casts(): array
+    {
+        return [
+            'status' => FormsStatus::class
+        ];
+    }
+
     public function getTable()
     {
-        return config('zeus-bolt.table-prefix') . 'responses';
+        return config('zeus-bolt.table-prefix').'responses';
     }
 
     protected static function booted(): void
@@ -47,7 +55,7 @@ class Response extends Model
                 $canDelete = true;
             }
 
-            if (! $canDelete) {
+            if (!$canDelete) {
                 Notification::make()
                     ->title(__('zeus-bolt::forms.cant_delete'))
                     ->danger()
@@ -58,9 +66,9 @@ class Response extends Model
 
             if ($response->isForceDeleting()) {
                 // @phpstan-ignore-next-line
-                $response->fieldsResponses()->withTrashed()->get()->each(fn ($item) => $item->forceDelete());
+                $response->fieldsResponses()->withTrashed()->get()->each(fn($item) => $item->forceDelete());
             } else {
-                $response->fieldsResponses->each(fn ($item) => $item->delete());
+                $response->fieldsResponses->each(fn($item) => $item->delete());
             }
 
             return true;
@@ -85,21 +93,5 @@ class Response extends Model
     public function form(): BelongsTo
     {
         return $this->belongsTo(config('zeus-bolt.models.Form'));
-    }
-
-    /**
-     * get status detail.
-     */
-    public function statusDetails(): array
-    {
-        $getStatues = config('zeus-bolt.models.FormsStatus')::where('key', $this->status)->first();
-
-        return [
-            'class' => $getStatues->class ?? '',
-            'icon' => $getStatues->icon ?? 'heroicon-s-document',
-            'label' => $getStatues->label ?? $this->status,
-            'key' => $getStatues->key ?? '',
-            'color' => $getStatues->color ?? '',
-        ];
     }
 }

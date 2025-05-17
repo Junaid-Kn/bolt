@@ -114,6 +114,7 @@ trait Schemata
 
             Repeater::make('sections')
                 ->hiddenLabel()
+                ->groupedActions()
                 ->schema(static::getSectionsSchema())
                 ->relationship()
                 ->orderColumn('ordering')
@@ -136,7 +137,7 @@ trait Schemata
                             array $arguments,
                             Repeater $component
                         ) => $component->getItemState($arguments['item']))
-                        ->form(function (array $arguments, Get $get) {
+                        ->schema(function (array $arguments, Get $get) {
                             $formOptions = $get('options');
                             $allSections = $get('sections');
                             unset($allSections[$arguments['item']]);
@@ -420,7 +421,7 @@ trait Schemata
                         ->fillForm(
                             fn (array $arguments, Repeater $component) => $component->getItemState($arguments['item'])
                         )
-                        ->form(function (Get $get, array $arguments, Repeater $component) {
+                        ->schema(function (Get $get, array $arguments, Repeater $component) {
                             $allSections = self::getVisibleFields($get('../../sections'), $arguments);
 
                             return [

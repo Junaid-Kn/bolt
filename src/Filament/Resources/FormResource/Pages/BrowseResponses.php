@@ -40,7 +40,7 @@ class BrowseResponses extends ManageRelatedRecords
             ], position: ActionsPosition::AfterContent)
             ->filters([
                 SelectFilter::make('status')
-                    ->options(BoltPlugin::getModel('FormsStatus')::query()->pluck('label', 'key'))
+                    ->options(BoltPlugin::getModel('FormsStatus'))
                     ->label(__('zeus-bolt::forms.status')),
             ]);
     }
