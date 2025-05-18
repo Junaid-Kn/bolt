@@ -6,7 +6,7 @@ use Filament\Support\Contracts\HasColor;
 use Filament\Support\Contracts\HasIcon;
 use Filament\Support\Contracts\HasLabel;
 
-enum FormsStatus: string implements HasLabel, HasColor, HasIcon
+enum FormsStatus: string implements HasColor, HasIcon, HasLabel
 {
     case NEW = 'NEW';
     case OPEN = 'OPEN';
@@ -14,10 +14,10 @@ enum FormsStatus: string implements HasLabel, HasColor, HasIcon
 
     public function getLabel(): ?string
     {
-        return __('zeus-bolt::forms.status_labels.'.$this->name);
+        return __('zeus-bolt::forms.status_labels.' . $this->name);
     }
 
-    public function getColor(): string|array|null
+    public function getColor(): string | array | null
     {
         return match ($this) {
             self::NEW => 'success',
@@ -26,12 +26,12 @@ enum FormsStatus: string implements HasLabel, HasColor, HasIcon
         };
     }
 
-    public function getChartColors(): string|array|null
+    public function getChartColors(): string | array | null
     {
         return [
-             'NEW'=>'#21C55D',
-             'OPEN'=>'#21C55D',
-             'CLOSE'=>'#EF4444',
+            'NEW' => '#21C55D',
+            'OPEN' => '#21C55D',
+            'CLOSE' => '#EF4444',
         ];
     }
 
