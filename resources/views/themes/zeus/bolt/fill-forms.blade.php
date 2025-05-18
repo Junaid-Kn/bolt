@@ -74,7 +74,7 @@
     @if($sent)
         @include($boltTheme.'.submitted')
     @else
-        <form wire:submit.prevent="store" :class="!$inline ? 'mx-2' : ''">
+        <form wire:submit.prevent="store" class="{{ (!$inline) ? 'mx-2' : '' }}">
             @if(!$inline)
                 {{ \LaraZeus\Bolt\Facades\Bolt::renderHookBlade('zeus-form.before') }}
             @endif
