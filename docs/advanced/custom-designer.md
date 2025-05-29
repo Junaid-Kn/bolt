@@ -19,7 +19,7 @@ Copy the class from `\LaraZeus\Bolt\Facades` to your app, lets say: `\App\Zeus\B
 In your register method of your `AppServiceProvider` add the following:
 
 ```php
-\LaraZeus\Bolt\Filament\Resources\FormResource::getBoltFormSchemaUsing(fn(): array => \App\Zeus\Bolt\Facades\Designer::getMainFormSchema());
+\LaraZeus\Bolt\Livewire\FillForms::getBoltFormDesignerUsing(\App\Zeus\Bolt\Concerns\Designer::class);
 ```
 
 You're done. Customize the form builder to fit your needs. Remember to keep an eye on any changes in future updates so that you avoid breaking changes.
