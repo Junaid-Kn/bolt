@@ -35,7 +35,7 @@ class ReplicateFormAction extends ReplicateAction
                     ->required()
                     ->maxLength(255)
                     ->rules(['alpha_dash'])
-                    ->unique(ignoreRecord: true)
+                    ->unique()
                     ->label(__('zeus-bolt::forms.options.tabs.title.slug')),
             ])
             ->beforeReplicaSaved(function (ZeusForm $replica, ZeusForm $record, array $data): void {

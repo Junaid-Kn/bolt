@@ -179,7 +179,7 @@ trait Schemata
                         ->required()
                         ->maxLength(255)
                         ->rules(['alpha_dash'])
-                        ->unique(ignoreRecord: true)
+                        ->unique()
                         ->label(__('zeus-bolt::forms.options.tabs.title.slug')),
 
                     Select::make('category_id')

@@ -69,6 +69,10 @@ class CheckboxList extends FieldsContract
     }
 
     // @phpstan-ignore-next-line
+
+    /**
+     * @throws \JsonException
+     */
     public function appendFilamentComponentsOptions($component, $zeusField, bool $hasVisibility = false)
     {
         parent::appendFilamentComponentsOptions($component, $zeusField, $hasVisibility);
