@@ -2,6 +2,15 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v3.0.86 - 2025-05-29
+
+### What's Changed
+
+* Bump dependabot/fetch-metadata from 2.3.0 to 2.4.0 by @dependabot in https://github.com/lara-zeus/bolt/pull/368
+* update docs
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.85...v3.0.86
+
 ## v3.0.85 - 2025-04-14
 
 ### What's Changed
@@ -17,6 +26,7 @@ this the change:
     'extensionData' => $extensionData['extInfo']['itemId'] ?? 0,
     'response' => $extensionData['response'],
 ]) !!}
+
 
 ```
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/v3.0.84...v3.0.85
@@ -215,6 +225,7 @@ if you need to change this to use another model, add the following in your confi
     //...
     'User' => AnotherUserModel::class,
 ],
+
 
 
 
@@ -807,7 +818,6 @@ and you can remove the fork for `alperenersoy/filament-export`
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.5...1.2.6
 ## 1.2.5 - 2023-07-02
 ### What's Changed
-
 - add Constraints and delete relations, with support for soft delete  by @atmonshi in https://github.com/lara-zeus/bolt/pull/90
 
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.4...1.2.5
