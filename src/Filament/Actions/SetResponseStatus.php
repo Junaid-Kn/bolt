@@ -43,7 +43,7 @@ class SetResponseStatus extends Action
             Select::make('status')
                 ->label(__('zeus-bolt::forms.status'))
                 ->default(fn (Response $record) => $record->status)
-                ->options(BoltPlugin::getModel('FormsStatus'))
+                ->options(BoltPlugin::getEnum('FormsStatus'))
                 ->required(),
             Textarea::make('notes')
                 ->default(fn (Response $record) => $record->notes)

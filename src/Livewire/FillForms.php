@@ -2,10 +2,8 @@
 
 namespace LaraZeus\Bolt\Livewire;
 
-use Filament\Forms\Contracts\HasForms;
-use Throwable;
-use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
+use Filament\Forms\Contracts\HasForms;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -15,6 +13,7 @@ use LaraZeus\Bolt\Facades\Designer;
 use LaraZeus\Bolt\Facades\Extensions;
 use LaraZeus\Bolt\Models\Form;
 use Livewire\Component;
+use Throwable;
 
 /**
  * @property mixed $form

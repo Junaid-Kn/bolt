@@ -2,9 +2,7 @@
 
 namespace LaraZeus\Bolt\Filament\Resources;
 
-use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\ListCollections;
-use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\CreateCollection;
-use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\EditCollection;
+use BackedEnum;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -17,12 +15,14 @@ use Filament\Schemas\Schema;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use LaraZeus\Bolt\BoltPlugin;
-use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages;
+use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\CreateCollection;
+use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\EditCollection;
+use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\ListCollections;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Widgets\EditCollectionWarning;
 
 class CollectionResource extends BoltResource
 {
-    protected static string | \BackedEnum | null $navigationIcon = 'tabler-brand-databricks';
+    protected static string | BackedEnum | null $navigationIcon = 'tabler-brand-databricks';
 
     protected static ?int $navigationSort = 3;
 

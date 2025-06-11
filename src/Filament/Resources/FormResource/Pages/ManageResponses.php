@@ -2,21 +2,21 @@
 
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
+use BackedEnum;
 use Filament\Actions\DeleteAction;
-use Filament\Actions\ForceDeleteAction;
-use Filament\Actions\RestoreAction;
-use Filament\Tables\Filters\Filter;
-use Filament\Tables\Filters\TrashedFilter;
 use Filament\Actions\DeleteBulkAction;
-use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
-use Filament\Actions;
+use Filament\Actions\RestoreAction;
+use Filament\Actions\RestoreBulkAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\Filter;
 use Filament\Tables\Filters\SelectFilter;
+use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -38,7 +38,7 @@ class ManageResponses extends ManageRelatedRecords
 
     protected static string $relationship = 'responses';
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-document-chart-bar';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-document-chart-bar';
 
     public function table(Table $table): Table
     {
@@ -129,7 +129,7 @@ class ManageResponses extends ManageRelatedRecords
                     }),
                 TrashedFilter::make(),
                 SelectFilter::make('status')
-                    ->options(BoltPlugin::getModel('FormsStatus'))
+                    ->options(BoltPlugin::getEnum('FormsStatus'))
                     ->label(__('zeus-bolt::response.status')),
             ])
             ->toolbarActions([

@@ -46,7 +46,7 @@ class ResponsesPerStatus extends ChartWidget
     protected function getData(): array
     {
         $dataset = [];
-        $statuses = BoltPlugin::getModel('FormsStatus');
+        $statuses = BoltPlugin::getEnum('FormsStatus')::cases();
 
         $form = BoltPlugin::getModel('Form')::query()
             ->with(['responses'])

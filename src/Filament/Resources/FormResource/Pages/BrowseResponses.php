@@ -2,9 +2,10 @@
 
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
-use Filament\Tables\Enums\RecordActionsPosition;
+use BackedEnum;
 use Filament\Resources\Pages\ManageRelatedRecords;
 use Filament\Tables\Columns\ViewColumn;
+use Filament\Tables\Enums\RecordActionsPosition;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use LaraZeus\Bolt\BoltPlugin;
@@ -23,7 +24,7 @@ class BrowseResponses extends ManageRelatedRecords
 
     protected string $view = 'zeus::filament.resources.response-resource.pages.browse-responses';
 
-    protected static string | \BackedEnum | null $navigationIcon = 'heroicon-o-eye';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-eye';
 
     public function table(Table $table): Table
     {
@@ -40,7 +41,7 @@ class BrowseResponses extends ManageRelatedRecords
             ], position: RecordActionsPosition::AfterContent)
             ->filters([
                 SelectFilter::make('status')
-                    ->options(BoltPlugin::getModel('FormsStatus'))
+                    ->options(BoltPlugin::getEnum('FormsStatus'))
                     ->label(__('zeus-bolt::forms.status')),
             ]);
     }

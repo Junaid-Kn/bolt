@@ -2,9 +2,9 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
-use Filament\Forms\Components\Select;
 use Filament\Forms\Components\ColorPicker as ColorPickerAlias;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Select;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
 use LaraZeus\Bolt\Facades\Bolt;

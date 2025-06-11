@@ -2,7 +2,6 @@
 
 namespace LaraZeus\Bolt\Filament\Exports;
 
-use Livewire\Livewire;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Actions\Exports\Exporter;
 use Filament\Actions\Exports\Models\Export;
@@ -10,6 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Models\Field;
 use LaraZeus\Bolt\Models\Response;
+use Livewire\Livewire;
 
 class ResponseExporter extends Exporter
 {

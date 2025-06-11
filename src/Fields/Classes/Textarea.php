@@ -2,7 +2,6 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
-use LaraZeus\BoltPro\Facades\GradeOptions;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Textarea as TextareaAlias;
 use Filament\Forms\Components\TextInput;
@@ -16,6 +15,7 @@ use LaraZeus\Bolt\Fields\FieldsContract;
 use LaraZeus\Bolt\Models\Field;
 use LaraZeus\Bolt\Models\FieldResponse;
 use LaraZeus\Bolt\Models\Response;
+use LaraZeus\BoltPro\Facades\GradeOptions;
 
 class Textarea extends FieldsContract
 {

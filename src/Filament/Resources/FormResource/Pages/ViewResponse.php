@@ -46,7 +46,7 @@ class ViewResponse extends ViewRecord
                     Select::make('status')
                         ->label(__('zeus-bolt::response.status'))
                         ->default(fn () => $this->response->status)
-                        ->options(BoltPlugin::getModel('FormsStatus'))
+                        ->options(BoltPlugin::getEnum('FormsStatus'))
                         ->required(),
                     Textarea::make('notes')
                         ->default(fn () => $this->response->notes)
