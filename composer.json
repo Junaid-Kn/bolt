@@ -22,18 +22,18 @@
     "type": "library",
     "authors": [
         {
-            "name": "Lara Zeus (Ash)",
+            "name": "Lara Zeus",
             "email": "info@larazeus.com"
         }
     ],
     "require": {
-        "php": "^8.1",
+        "php": "^8.2",
         "flowframe/laravel-trend": "^0.4",
-        "lara-zeus/accordion": "*",
-        "lara-zeus/core": "*",
-        "lara-zeus/filament-plugin-tools": "*",
-        "lara-zeus/list-group": "*",
-        "lara-zeus/tabler-icons-enum": "*"
+        "lara-zeus/accordion": "^2.0",
+        "lara-zeus/core": "^4.0",
+        "lara-zeus/filament-plugin-tools": "^2.0",
+        "lara-zeus/list-group": "^2.0",
+        "lara-zeus/tabler-icons-enum": "^1.0"
     },
     "require-dev": {
         "phpstan/extension-installer": "^1.4",

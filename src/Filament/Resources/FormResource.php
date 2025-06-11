@@ -2,6 +2,23 @@
 
 namespace LaraZeus\Bolt\Filament\Resources;
 
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ListForms;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\CreateForm;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\EditForm;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ViewForm;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ManageResponses;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\BrowseResponses;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ViewResponse;
+use LaraZeus\BoltPro\Livewire\PrefilledForm;
+use LaraZeus\BoltPro\Livewire\ShareForm;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\FormOverview;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerMonth;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerStatus;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerFields;
+use LaraZeus\BoltPro\Widgets\ResponsesPerCollection;
+use LaraZeus\Helen\HelenServiceProvider;
+use LaraZeus\Helen\Actions\ShortUrlAction;
+use Exception;
 use Closure;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
@@ -49,7 +66,7 @@ class FormResource extends BoltResource
 
     protected static Closure | array | null $boltFormSchema = null;
 
-    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+    protected static ?\Filament\Pages\Enums\SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function getModel(): string
     {
@@ -83,7 +100,7 @@ class FormResource extends BoltResource
     public static function infolist(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 Section::make()
                     ->columnSpanFull()
                     ->schema([
@@ -135,7 +152,7 @@ class FormResource extends BoltResource
 
     public static function form(Schema $schema): Schema
     {
-        return $schema->schema(static::$boltFormSchema ?? static::getMainFormSchema());
+        return $schema->components(static::$boltFormSchema ?? static::getMainFormSchema());
     }
 
     public function getBoltFormSchema(): array | Closure | null
@@ -149,7 +166,7 @@ class FormResource extends BoltResource
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public static function table(Table $table): Table
     {
@@ -203,7 +220,7 @@ class FormResource extends BoltResource
                     ->toggleable()
                     ->searchable(false),
             ])
-            ->actions(static::getActions())
+            ->recordActions(static::getActions())
             ->filters([
                 TrashedFilter::make(),
                 Filter::make('is_active')
@@ -220,7 +237,7 @@ class FormResource extends BoltResource
                     ->options(BoltPlugin::getModel('Category')::pluck('name', 'id'))
                     ->label(__('zeus-bolt::forms.options.tabs.title.category.label')),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 DeleteBulkAction::make(),
                 ForceDeleteBulkAction::make(),
                 RestoreBulkAction::make(),
@@ -239,20 +256,20 @@ class FormResource extends BoltResource
     public static function getPages(): array
     {
         $pages = [
-            'index' => Pages\ListForms::route('/'),
-            'create' => Pages\CreateForm::route('/create'),
-            'edit' => Pages\EditForm::route('/{record}/edit'),
-            'view' => Pages\ViewForm::route('/{record}'),
-            'report' => Pages\ManageResponses::route('/{record}/report'),
-            'browse' => Pages\BrowseResponses::route('/{record}/browse'),
-            'viewResponse' => Pages\ViewResponse::route('/{record}/response/{responseID}'),
+            'index' => ListForms::route('/'),
+            'create' => CreateForm::route('/create'),
+            'edit' => EditForm::route('/{record}/edit'),
+            'view' => ViewForm::route('/{record}'),
+            'report' => ManageResponses::route('/{record}/report'),
+            'browse' => BrowseResponses::route('/{record}/browse'),
+            'viewResponse' => ViewResponse::route('/{record}/response/{responseID}'),
         ];
 
         if (Bolt::hasPro()) {
             // @phpstan-ignore-next-line
-            $pages['prefilled'] = \LaraZeus\BoltPro\Livewire\PrefilledForm::route('/{record}/prefilled');
+            $pages['prefilled'] = PrefilledForm::route('/{record}/prefilled');
             // @phpstan-ignore-next-line
-            $pages['share'] = \LaraZeus\BoltPro\Livewire\ShareForm::route('/{record}/share');
+            $pages['share'] = ShareForm::route('/{record}/share');
         }
 
         return $pages;
@@ -261,15 +278,15 @@ class FormResource extends BoltResource
     public static function getWidgets(): array
     {
         $widgets = [
-            FormResource\Widgets\FormOverview::class,
-            FormResource\Widgets\ResponsesPerMonth::class,
-            FormResource\Widgets\ResponsesPerStatus::class,
-            FormResource\Widgets\ResponsesPerFields::class,
+            FormOverview::class,
+            ResponsesPerMonth::class,
+            ResponsesPerStatus::class,
+            ResponsesPerFields::class,
         ];
 
         if (Bolt::hasPro()) {
             // @phpstan-ignore-next-line
-            $widgets[] = \LaraZeus\BoltPro\Widgets\ResponsesPerCollection::class;
+            $widgets[] = ResponsesPerCollection::class;
         }
 
         return $widgets;
@@ -307,9 +324,9 @@ class FormResource extends BoltResource
                 ->url(fn (ZeusForm $record): string => FormResource::getUrl('prefilled', ['record' => $record]));
         }
 
-        if (class_exists(\LaraZeus\Helen\HelenServiceProvider::class)) {
+        if (class_exists(HelenServiceProvider::class)) {
             // @phpstan-ignore-next-line
-            $advancedActions[] = \LaraZeus\Helen\Actions\ShortUrlAction::make('get-link')
+            $advancedActions[] = ShortUrlAction::make('get-link')
                 ->label(__('zeus-bolt::forms.actions.short_link'))
                 ->distUrl(fn (ZeusForm $record) => route(
                     BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show',
@@ -325,18 +342,18 @@ class FormResource extends BoltResource
     public static function getRecordSubNavigation(Page $page): array
     {
         $formNavs = [
-            Pages\ViewForm::class,
-            Pages\EditForm::class,
+            ViewForm::class,
+            EditForm::class,
         ];
 
         if (Bolt::hasPro()) {
             // @phpstan-ignore-next-line
-            $formNavs[] = \LaraZeus\BoltPro\Livewire\ShareForm::class;
+            $formNavs[] = ShareForm::class;
         }
 
         $respNavs = [
-            Pages\ManageResponses::class,
-            Pages\BrowseResponses::class,
+            ManageResponses::class,
+            BrowseResponses::class,
         ];
 
         return $page->generateNavigationItems([

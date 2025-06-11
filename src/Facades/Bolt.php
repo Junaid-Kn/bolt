@@ -2,6 +2,8 @@
 
 namespace LaraZeus\Bolt\Facades;
 
+use LaraZeus\BoltPro\BoltProServiceProvider;
+use JsonException;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Support\Facades\FilamentView;
@@ -95,7 +97,7 @@ class Bolt extends Facade
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function isJson(string $string): bool
     {
@@ -114,7 +116,7 @@ class Bolt extends Facade
 
     public static function hasPro(): bool
     {
-        return class_exists(\LaraZeus\BoltPro\BoltProServiceProvider::class);
+        return class_exists(BoltProServiceProvider::class);
     }
 
     public static function getCustomSchema(string $hook, ?FieldsContract $field = null): Tab | Accordion | null

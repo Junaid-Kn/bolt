@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
+use LaraZeus\BoltPro\Facades\GradeOptions;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
@@ -107,7 +108,7 @@ class TextInput extends FieldsContract
                     self::hintOptions(),
                     self::visibility($sections),
                     // @phpstan-ignore-next-line
-                    ...Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::schema($field) : [],
+                    ...Bolt::hasPro() ? GradeOptions::schema($field) : [],
                     Bolt::getCustomSchema('field', resolve(static::class)) ?? [],
                 ]),
         ];
@@ -118,7 +119,7 @@ class TextInput extends FieldsContract
         return [
             self::hiddenIsActive(),
             // @phpstan-ignore-next-line
-            Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::hidden() : [],
+            Bolt::hasPro() ? GradeOptions::hidden() : [],
             ...Bolt::getHiddenCustomSchema('field', resolve(static::class)) ?? [],
             self::hiddenVisibility(),
             self::hiddenHtmlID(),
@@ -154,14 +155,14 @@ class TextInput extends FieldsContract
         if (isset($zeusField->options['prefix']) && $zeusField->options['prefix'] !== null) {
             $component = $component
                 ->prefixIcon($zeusField->options['prefix-icon'] ?? null)
-                ->prefixIconColor(Color::hex($zeusField->options['prefix-icon-color'] ?? '#000000'))
+                ->prefixIconColor(Color::generateV3Palette($zeusField->options['prefix-icon-color'] ?? '#000000'))
                 ->prefix($zeusField->options['prefix']);
         }
 
         if (isset($zeusField->options['suffix']) && $zeusField->options['suffix'] !== null) {
             $component = $component
                 ->suffixIcon($zeusField->options['suffix-icon'] ?? null)
-                ->suffixIconColor(Color::hex($zeusField->options['suffix-icon-color'] ?? '#000000'))
+                ->suffixIconColor(Color::generateV3Palette($zeusField->options['suffix-icon-color'] ?? '#000000'))
                 ->suffix($zeusField->options['suffix']);
         }
 

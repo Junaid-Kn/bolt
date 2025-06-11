@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
+use LaraZeus\BoltPro\Facades\GradeOptions;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\Hidden;
@@ -76,7 +77,7 @@ class Toggle extends FieldsContract
                     self::hintOptions(),
                     self::visibility($sections),
                     // @phpstan-ignore-next-line
-                    ...Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::schema($field) : [],
+                    ...Bolt::hasPro() ? GradeOptions::schema($field) : [],
                     Bolt::getCustomSchema('field', resolve(static::class)) ?? [],
                 ]),
         ];
@@ -87,7 +88,7 @@ class Toggle extends FieldsContract
         return [
             self::hiddenIsActive(),
             // @phpstan-ignore-next-line
-            Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::hidden() : [],
+            Bolt::hasPro() ? GradeOptions::hidden() : [],
             ...Bolt::getHiddenCustomSchema('field', resolve(static::class)) ?? [],
             self::hiddenVisibility(),
             self::hiddenHtmlID(),
@@ -117,11 +118,11 @@ class Toggle extends FieldsContract
         }
 
         if (optional($zeusField->options)['on-color']) {
-            $component = $component->onColor(Color::hex($zeusField->options['on-color']));
+            $component = $component->onColor(Color::generateV3Palette($zeusField->options['on-color']));
         }
 
         if (optional($zeusField->options)['off-color']) {
-            $component = $component->offColor(Color::hex($zeusField->options['off-color']));
+            $component = $component->offColor(Color::generateV3Palette($zeusField->options['off-color']));
         }
 
         if (isset($zeusField->options['is-inline'])) {

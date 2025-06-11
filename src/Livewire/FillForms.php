@@ -2,6 +2,8 @@
 
 namespace LaraZeus\Bolt\Livewire;
 
+use Filament\Forms\Contracts\HasForms;
+use Throwable;
 use Filament\Forms;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Illuminate\Support\Arr;
@@ -17,7 +19,7 @@ use Livewire\Component;
 /**
  * @property mixed $form
  */
-class FillForms extends Component implements Forms\Contracts\HasForms
+class FillForms extends Component implements HasForms
 {
     use InteractsWithForms;
 
@@ -56,7 +58,7 @@ class FillForms extends Component implements Forms\Contracts\HasForms
     }
 
     /**
-     * @throws \Throwable
+     * @throws Throwable
      */
     public function mount(
         mixed $slug,

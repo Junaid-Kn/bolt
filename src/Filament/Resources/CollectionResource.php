@@ -2,6 +2,9 @@
 
 namespace LaraZeus\Bolt\Filament\Resources;
 
+use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\ListCollections;
+use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\CreateCollection;
+use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages\EditCollection;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\EditAction;
@@ -57,7 +60,7 @@ class CollectionResource extends BoltResource
     public static function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 TextInput::make('name')
                     ->live(onBlur: true)
                     ->label(__('zeus-bolt::collection.name'))
@@ -115,7 +118,7 @@ class CollectionResource extends BoltResource
                     ->searchable(['values'])
                     ->toggleable(),
             ])
-            ->actions([
+            ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),
                     DeleteAction::make(),
@@ -126,9 +129,9 @@ class CollectionResource extends BoltResource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCollections::route('/'),
-            'create' => Pages\CreateCollection::route('/create'),
-            'edit' => Pages\EditCollection::route('/{record}/edit'),
+            'index' => ListCollections::route('/'),
+            'create' => CreateCollection::route('/create'),
+            'edit' => EditCollection::route('/{record}/edit'),
         ];
     }
 

@@ -42,7 +42,7 @@ class ViewResponse extends ViewRecord
                 })
                 ->label(__('zeus-bolt::response.set_status'))
                 ->icon('heroicon-o-tag')
-                ->form([
+                ->schema([
                     Select::make('status')
                         ->label(__('zeus-bolt::response.status'))
                         ->default(fn () => $this->response->status)

@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
+use LaraZeus\BoltPro\Facades\GradeOptions;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Textarea as TextareaAlias;
 use Filament\Forms\Components\TextInput;
@@ -58,7 +59,7 @@ class Textarea extends FieldsContract
                     self::hintOptions(),
                     self::visibility($sections),
                     // @phpstan-ignore-next-line
-                    ...Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::schema($field) : [],
+                    ...Bolt::hasPro() ? GradeOptions::schema($field) : [],
                     Bolt::getCustomSchema('field', resolve(static::class)) ?? [],
                 ]),
         ];
@@ -69,7 +70,7 @@ class Textarea extends FieldsContract
         return [
             self::hiddenIsActive(),
             // @phpstan-ignore-next-line
-            Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::hidden() : [],
+            Bolt::hasPro() ? GradeOptions::hidden() : [],
             ...Bolt::getHiddenCustomSchema('field', resolve(static::class)) ?? [],
             self::hiddenVisibility(),
             self::hiddenHtmlID(),

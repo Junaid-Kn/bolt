@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Mail;
 
+use Illuminate\Mail\Mailables\Attachment;
 use Filament\Facades\Filament;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -56,7 +57,7 @@ class FormSubmission extends Mailable implements ShouldQueue
     /**
      * Get the attachments for the message.
      *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
+     * @return array<int, Attachment>
      */
     public function attachments(): array
     {

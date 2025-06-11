@@ -57,7 +57,7 @@ class CategoryResource extends BoltResource
     public static function form(Schema $schema): Schema
     {
         return $schema
-            ->schema([
+            ->components([
                 Section::make()
                     ->columnSpanFull()
                     ->columns()
@@ -130,7 +130,7 @@ class CategoryResource extends BoltResource
             ])
             ->reorderable('ordering')
             ->defaultSort('id', 'description')
-            ->actions([
+            ->recordActions([
                 ActionGroup::make([
                     EditAction::make(),
                     DeleteAction::make(),
@@ -149,7 +149,7 @@ class CategoryResource extends BoltResource
                     ->toggle()
                     ->query(fn (Builder $query): Builder => $query->where('is_active', false)),
             ])
-            ->bulkActions([
+            ->toolbarActions([
                 DeleteBulkAction::make(),
                 ForceDeleteBulkAction::make(),
                 RestoreBulkAction::make(),

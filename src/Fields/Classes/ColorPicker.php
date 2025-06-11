@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\ColorPicker as ColorPickerAlias;
 use Filament\Forms\Components\Hidden;
 use LaraZeus\Accordion\Forms\Accordion;
@@ -29,7 +30,7 @@ class ColorPicker extends FieldsContract
                         ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('tabler-settings')
                         ->schema([
-                            \Filament\Forms\Components\Select::make('options.colorType')
+                            Select::make('options.colorType')
                                 ->label(__('zeus-bolt::forms.fields.options.color_type'))
                                 ->options([
                                     'hsl' => 'hsl',

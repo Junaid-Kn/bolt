@@ -2,6 +2,8 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
+use Filament\Forms\Components\Toggle;
+use Filament\Tables\Columns\Column;
 use Filament\Forms\Components\Hidden;
 use Illuminate\Support\Facades\Storage;
 use LaraZeus\Accordion\Forms\Accordion;
@@ -31,7 +33,7 @@ class FileUpload extends FieldsContract
                         ->label(__('zeus-bolt::forms.fields.options.general'))
                         ->icon('tabler-settings')
                         ->schema([
-                            \Filament\Forms\Components\Toggle::make('options.allow_multiple')
+                            Toggle::make('options.allow_multiple')
                                 ->label(__('zeus-bolt::forms.fields.options.allow_multiple')),
                             self::isActive(),
                             self::required(),
@@ -79,7 +81,7 @@ class FileUpload extends FieldsContract
             ->render();
     }
 
-    public function TableColumn(Field $field): ?\Filament\Tables\Columns\Column
+    public function TableColumn(Field $field): ?Column
     {
         return null;
     }

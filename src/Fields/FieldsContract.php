@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Fields;
 
+use JsonException;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Support\Colors\Color;
@@ -129,7 +130,7 @@ abstract class FieldsContract implements Arrayable, Fields
                 $component = $component->hintIcon($zeusField->options['hint']['icon'], tooltip: $zeusField->options['hint']['icon-tooltip']);
             }
             if (optional($zeusField->options)['hint']['color']) {
-                $component = $component->hintColor(fn () => Color::hex($zeusField->options['hint']['color']));
+                $component = $component->hintColor(fn () => Color::generateV3Palette($zeusField->options['hint']['color']));
             }
         }
 
@@ -167,7 +168,7 @@ abstract class FieldsContract implements Arrayable, Fields
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function getCollectionsValuesForResponse(Field $field, FieldResponse $resp): string
     {
@@ -215,7 +216,7 @@ abstract class FieldsContract implements Arrayable, Fields
     }
 
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     public static function getFieldCollectionItemsList(Field | FieldPreset | array $zeusField): Collection | array
     {

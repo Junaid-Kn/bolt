@@ -2,6 +2,8 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
+use LaraZeus\BoltPro\Facades\GradeOptions;
+use JsonException;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
 use LaraZeus\Bolt\Facades\Bolt;
@@ -40,7 +42,7 @@ class CheckboxList extends FieldsContract
                     self::hintOptions(),
                     self::visibility($sections),
                     // @phpstan-ignore-next-line
-                    ...Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::schema($field) : [],
+                    ...Bolt::hasPro() ? GradeOptions::schema($field) : [],
                     Bolt::getCustomSchema('field', resolve(static::class)) ?? [],
                 ]),
         ];
@@ -51,7 +53,7 @@ class CheckboxList extends FieldsContract
         return [
             self::hiddenIsActive(),
             // @phpstan-ignore-next-line
-            Bolt::hasPro() ? \LaraZeus\BoltPro\Facades\GradeOptions::hidden() : [],
+            Bolt::hasPro() ? GradeOptions::hidden() : [],
             ...Bolt::getHiddenCustomSchema('field', resolve(static::class)) ?? [],
             self::hiddenDataSource(),
             self::hiddenVisibility(),
@@ -69,9 +71,8 @@ class CheckboxList extends FieldsContract
     }
 
     // @phpstan-ignore-next-line
-
     /**
-     * @throws \JsonException
+     * @throws JsonException
      */
     public function appendFilamentComponentsOptions($component, $zeusField, bool $hasVisibility = false)
     {

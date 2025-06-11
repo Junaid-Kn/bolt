@@ -2,6 +2,9 @@
 
 namespace LaraZeus\Bolt\Concerns;
 
+use LaraZeus\BoltPro\Actions\SectionMarkAction;
+use Filament\Schemas\Components\Tabs\Tab;
+use LaraZeus\BoltPro\Actions\FieldMarkAction;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
@@ -114,7 +117,6 @@ trait Schemata
 
             Repeater::make('sections')
                 ->hiddenLabel()
-                ->groupedActions()
                 ->schema(static::getSectionsSchema())
                 ->relationship()
                 ->orderColumn('ordering')
@@ -125,7 +127,7 @@ trait Schemata
                 ->minItems(1)
                 ->extraItemActions([
                     // @phpstan-ignore-next-line
-                    Bolt::hasPro() ? \LaraZeus\BoltPro\Actions\SectionMarkAction::make('marks') : null,
+                    Bolt::hasPro() ? SectionMarkAction::make('marks') : null,
 
                     Action::make('options')
                         ->label(__('zeus-bolt::forms.section.options.title'))
@@ -160,7 +162,7 @@ trait Schemata
     public static function getTabsSchema(): array
     {
         $tabs = [
-            Tabs\Tab::make('title-slug-tab')
+            Tab::make('title-slug-tab')
                 ->label(__('zeus-bolt::forms.options.tabs.title.label'))
                 ->columns()
                 ->schema([
@@ -219,7 +221,7 @@ trait Schemata
                         ->getOptionLabelFromRecordUsing(fn (Category $record) => $record->name),
                 ]),
 
-            Tabs\Tab::make('text-details-tab')
+            Tab::make('text-details-tab')
                 ->label(__('zeus-bolt::forms.options.tabs.details.label'))
                 ->schema([
                     Textarea::make('description')
@@ -233,7 +235,7 @@ trait Schemata
                         ->helperText(__('zeus-bolt::forms.options.tabs.details.confirmation_message_help')),
                 ]),
 
-            Tabs\Tab::make('display-access-tab')
+            Tab::make('display-access-tab')
                 ->label(__('zeus-bolt::forms.options.tabs.display.label'))
                 ->columns()
                 ->schema([
@@ -282,7 +284,7 @@ trait Schemata
                         ->default(1),
                 ]),
 
-            Tabs\Tab::make('advanced-tab')
+            Tab::make('advanced-tab')
                 ->label(__('zeus-bolt::forms.options.tabs.advanced.label'))
                 ->schema([
                     Grid::make()
@@ -310,7 +312,7 @@ trait Schemata
                         ]),
                 ]),
 
-            Tabs\Tab::make('extensions-tab')
+            Tab::make('extensions-tab')
                 ->label(__('zeus-bolt::forms.options.tabs.extensions.label'))
                 ->visible(BoltPlugin::get()->getExtensions() !== null)
                 ->schema([
@@ -331,7 +333,7 @@ trait Schemata
                         }),
                 ]),
 
-            Tabs\Tab::make('design')
+            Tab::make('design')
                 ->label(__('zeus-bolt::forms.options.tabs.design.label'))
                 ->visible(Bolt::hasPro() && config('zeus-bolt.allow_design'))
                 ->schema([
@@ -409,7 +411,7 @@ trait Schemata
                 ->addActionLabel(__('zeus-bolt::forms.fields.add'))
                 ->extraItemActions([
                     // @phpstan-ignore-next-line
-                    Bolt::hasPro() ? \LaraZeus\BoltPro\Actions\FieldMarkAction::make('marks') : null,
+                    Bolt::hasPro() ? FieldMarkAction::make('marks') : null,
 
                     Action::make('fields options')
                         ->slideOver()

@@ -2,6 +2,8 @@
 
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
+use Filament\Actions\CreateAction;
+use LaraZeus\BoltPro\Actions\PresetAction;
 use Filament\Actions;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ListRecords;
@@ -21,7 +23,7 @@ class ListForms extends ListRecords
     {
         $actions = [
             LocaleSwitcher::make(),
-            Actions\CreateAction::make('create'),
+            CreateAction::make('create'),
             Action::make('open')
                 ->label(__('zeus-bolt::forms.actions.open'))
                 ->icon('heroicon-o-arrow-top-right-on-square')
@@ -33,7 +35,7 @@ class ListForms extends ListRecords
 
         if (Bolt::hasPro()) {
             // @phpstan-ignore-next-line
-            $actions[] = \LaraZeus\BoltPro\Actions\PresetAction::make('new from preset')
+            $actions[] = PresetAction::make('new from preset')
                 ->visible(config('zeus-bolt.show_presets'));
         }
 

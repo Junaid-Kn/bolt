@@ -2,14 +2,16 @@
 
 namespace LaraZeus\Bolt\Livewire;
 
+use Filament\Forms\Contracts\HasForms;
+use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms;
 use Illuminate\View\View;
 use LaraZeus\Bolt\Models\Response;
 use Livewire\Component;
 
-class ShowEntry extends Component implements Forms\Contracts\HasForms
+class ShowEntry extends Component implements HasForms
 {
-    use Forms\Concerns\InteractsWithForms;
+    use InteractsWithForms;
 
     public Response $response;
 

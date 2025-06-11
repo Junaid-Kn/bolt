@@ -2,6 +2,11 @@
 
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\FormOverview;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerMonth;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerStatus;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerFields;
+use LaraZeus\BoltPro\Widgets\ResponsesCharts;
 use Filament\Actions\Action;
 use Filament\Resources\Pages\ViewRecord;
 use Illuminate\Contracts\Support\Htmlable;
@@ -49,15 +54,15 @@ class ViewForm extends ViewRecord
     protected function getFooterWidgets(): array
     {
         $widgets = [
-            FormResource\Widgets\FormOverview::class,
-            FormResource\Widgets\ResponsesPerMonth::class,
-            FormResource\Widgets\ResponsesPerStatus::class,
-            FormResource\Widgets\ResponsesPerFields::class,
+            FormOverview::class,
+            ResponsesPerMonth::class,
+            ResponsesPerStatus::class,
+            ResponsesPerFields::class,
         ];
 
         if (Bolt::hasPro()) {
             // @phpstan-ignore-next-line
-            $widgets[] = \LaraZeus\BoltPro\Widgets\ResponsesCharts::class;
+            $widgets[] = ResponsesCharts::class;
         }
 
         return $widgets;

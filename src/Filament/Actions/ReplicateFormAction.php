@@ -21,7 +21,7 @@ class ReplicateFormAction extends ReplicateAction
         $this->icon(FilamentIcon::resolve('actions::replicate-action') ?? 'heroicon-m-square-2-stack')
             ->label(__('zeus-bolt::forms.actions.replicate'))
             ->excludeAttributes(['name', 'slug', 'responses_exists', 'responses_count'])
-            ->form([
+            ->schema([
                 TextInput::make('name.' . app()->getLocale())
                     ->required()
                     ->maxLength(255)

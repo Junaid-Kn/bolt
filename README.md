@@ -72,7 +72,7 @@ If you find any security-related issues, please email info@larazeus.com instead 
 
 ## Credits
 
--   [Lara Zeus (Ash)](https://github.com/atmonshi)
+-   [Lara Zeus](https://github.com/atmonshi)
 -   [All Contributors](../../contributors)
 
 ## License

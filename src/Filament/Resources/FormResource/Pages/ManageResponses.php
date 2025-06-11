@@ -2,6 +2,14 @@
 
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
+use Filament\Actions\DeleteAction;
+use Filament\Actions\ForceDeleteAction;
+use Filament\Actions\RestoreAction;
+use Filament\Tables\Filters\Filter;
+use Filament\Tables\Filters\TrashedFilter;
+use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\RestoreBulkAction;
+use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions;
 use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Pages\ManageRelatedRecords;
@@ -96,14 +104,14 @@ class ManageResponses extends ManageRelatedRecords
                     ])
             )
             ->columns($mainColumns)
-            ->actions([
+            ->recordActions([
                 SetResponseStatus::make(),
-                Actions\DeleteAction::make(),
-                Actions\ForceDeleteAction::make(),
-                Actions\RestoreAction::make(),
+                DeleteAction::make(),
+                ForceDeleteAction::make(),
+                RestoreAction::make(),
             ])
             ->filters([
-                Tables\Filters\Filter::make('created_at')
+                Filter::make('created_at')
                     ->schema([
                         DatePicker::make('created_from'),
                         DatePicker::make('created_until'),
@@ -119,15 +127,15 @@ class ManageResponses extends ManageRelatedRecords
                                 fn (Builder $query, $date): Builder => $query->whereDate('created_at', '<=', $date),
                             );
                     }),
-                Tables\Filters\TrashedFilter::make(),
+                TrashedFilter::make(),
                 SelectFilter::make('status')
                     ->options(BoltPlugin::getModel('FormsStatus'))
                     ->label(__('zeus-bolt::response.status')),
             ])
-            ->bulkActions([
-                Actions\DeleteBulkAction::make(),
-                Actions\RestoreBulkAction::make(),
-                Actions\ForceDeleteBulkAction::make(),
+            ->toolbarActions([
+                DeleteBulkAction::make(),
+                RestoreBulkAction::make(),
+                ForceDeleteBulkAction::make(),
                 /*ExportBulkAction::make()
                     ->exports([
                         ExcelExport::make()
