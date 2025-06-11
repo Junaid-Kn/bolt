@@ -2,11 +2,11 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
-use LaraZeus\BoltPro\Facades\GradeOptions;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
 use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Fields\FieldsContract;
+use LaraZeus\BoltPro\Facades\GradeOptions;
 
 class RichEditor extends FieldsContract
 {

@@ -2,7 +2,6 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
-use LaraZeus\BoltPro\Facades\GradeOptions;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Toggle;
 use LaraZeus\Accordion\Forms\Accordion;
@@ -11,6 +10,7 @@ use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Fields\FieldsContract;
 use LaraZeus\Bolt\Models\Field;
 use LaraZeus\Bolt\Models\FieldResponse;
+use LaraZeus\BoltPro\Facades\GradeOptions;
 
 class Radio extends FieldsContract
 {

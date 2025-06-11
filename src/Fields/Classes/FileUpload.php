@@ -2,9 +2,9 @@
 
 namespace LaraZeus\Bolt\Fields\Classes;
 
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Toggle;
 use Filament\Tables\Columns\Column;
-use Filament\Forms\Components\Hidden;
 use Illuminate\Support\Facades\Storage;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;

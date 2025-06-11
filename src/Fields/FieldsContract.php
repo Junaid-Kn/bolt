@@ -2,7 +2,6 @@
 
 namespace LaraZeus\Bolt\Fields;
 
-use JsonException;
 use Filament\Actions\Exports\ExportColumn;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Support\Colors\Color;
@@ -13,6 +12,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
+use JsonException;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Concerns\HasHiddenOptions;
 use LaraZeus\Bolt\Concerns\HasOptions;

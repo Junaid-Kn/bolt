@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Filament\Resources;
 
+use BackedEnum;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -34,7 +35,7 @@ use LaraZeus\Bolt\Models\Category;
 
 class CategoryResource extends BoltResource
 {
-    protected static string | \BackedEnum | null $navigationIcon = 'tabler-tags-filled';
+    protected static string | BackedEnum | null $navigationIcon = 'tabler-tags-filled';
 
     protected static ?int $navigationSort = 4;
 

@@ -3,7 +3,6 @@
 namespace LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages;
 
 use Filament\Actions\CreateAction;
-use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;

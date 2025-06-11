@@ -133,7 +133,7 @@ class Form extends Model
         return $this->hasManyThrough(config('zeus-bolt.models.Field'), config('zeus-bolt.models.Section'));
     }
 
-    public function responses(): hasMany
+    public function responses(): HasMany
     {
         return $this->hasMany(config('zeus-bolt.models.Response'));
     }

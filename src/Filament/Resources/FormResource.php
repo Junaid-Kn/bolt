@@ -2,24 +2,9 @@
 
 namespace LaraZeus\Bolt\Filament\Resources;
 
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ListForms;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\CreateForm;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\EditForm;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ViewForm;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ManageResponses;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\BrowseResponses;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ViewResponse;
-use LaraZeus\BoltPro\Livewire\PrefilledForm;
-use LaraZeus\BoltPro\Livewire\ShareForm;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\FormOverview;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerMonth;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerStatus;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerFields;
-use LaraZeus\BoltPro\Widgets\ResponsesPerCollection;
-use LaraZeus\Helen\HelenServiceProvider;
-use LaraZeus\Helen\Actions\ShortUrlAction;
-use Exception;
+use BackedEnum;
 use Closure;
+use Exception;
 use Filament\Actions\Action;
 use Filament\Actions\ActionGroup;
 use Filament\Actions\DeleteAction;
@@ -49,8 +34,23 @@ use LaraZeus\Bolt\Concerns\HasOptions;
 use LaraZeus\Bolt\Concerns\Schemata;
 use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Filament\Actions\ReplicateFormAction;
-use LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\BrowseResponses;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\CreateForm;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\EditForm;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ListForms;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ManageResponses;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ViewForm;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Pages\ViewResponse;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\FormOverview;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerFields;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerMonth;
+use LaraZeus\Bolt\Filament\Resources\FormResource\Widgets\ResponsesPerStatus;
 use LaraZeus\Bolt\Models\Form as ZeusForm;
+use LaraZeus\BoltPro\Livewire\PrefilledForm;
+use LaraZeus\BoltPro\Livewire\ShareForm;
+use LaraZeus\BoltPro\Widgets\ResponsesPerCollection;
+use LaraZeus\Helen\Actions\ShortUrlAction;
+use LaraZeus\Helen\HelenServiceProvider;
 use LaraZeus\ListGroup\Infolists\ListEntry;
 
 class FormResource extends BoltResource
@@ -58,7 +58,7 @@ class FormResource extends BoltResource
     use HasOptions;
     use Schemata;
 
-    protected static string | \BackedEnum | null $navigationIcon = 'tabler-file-description';
+    protected static string | BackedEnum | null $navigationIcon = 'tabler-file-description';
 
     protected static ?int $navigationSort = 1;
 
@@ -66,7 +66,7 @@ class FormResource extends BoltResource
 
     protected static Closure | array | null $boltFormSchema = null;
 
-    protected static ?\Filament\Pages\Enums\SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
+    protected static ?SubNavigationPosition $subNavigationPosition = SubNavigationPosition::Top;
 
     public static function getModel(): string
     {

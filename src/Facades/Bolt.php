@@ -2,8 +2,6 @@
 
 namespace LaraZeus\Bolt\Facades;
 
-use LaraZeus\BoltPro\BoltProServiceProvider;
-use JsonException;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Support\Facades\FilamentView;
@@ -12,11 +10,13 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Facade;
+use JsonException;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Contracts\CustomFormSchema;
 use LaraZeus\Bolt\Contracts\CustomSchema;
 use LaraZeus\Bolt\Fields\FieldsContract;
+use LaraZeus\BoltPro\BoltProServiceProvider;
 
 class Bolt extends Facade
 {
