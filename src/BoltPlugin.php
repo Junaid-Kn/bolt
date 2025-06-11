@@ -26,8 +26,8 @@ final class BoltPlugin implements Plugin
     use CanStickyActions;
     use Configuration;
     use EvaluatesClosures;
-    use HasModels;
     use HasEnums;
+    use HasModels;
     use HasNavigationGroupLabel;
     use HasRouteNamePrefix;
 
