@@ -430,7 +430,6 @@ trait Schemata
                                 Textarea::make('description')
                                     ->label(__('zeus-bolt::forms.fields.description')),
                                 Group::make()
-                                    ->label(__('zeus-bolt::forms.fields.options'))
                                     ->schema(function (Get $get) use ($allSections, $component, $arguments) {
                                         $class = $get('type');
                                         if (class_exists($class)) {

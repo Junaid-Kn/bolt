@@ -12,12 +12,12 @@ enum FormsStatus: string implements HasColor, HasIcon, HasLabel
     case OPEN = 'OPEN';
     case CLOSE = 'CLOSE';
 
-    public function getLabel(): ?string
+    public function getLabel(): string
     {
         return __('zeus-bolt::forms.status_labels.' . $this->name);
     }
 
-    public function getColor(): string | array | null
+    public function getColor(): string
     {
         return match ($this) {
             self::NEW => 'success',
@@ -26,16 +26,16 @@ enum FormsStatus: string implements HasColor, HasIcon, HasLabel
         };
     }
 
-    public function getChartColors(): string | array | null
+    public static function getChartColors(): array
     {
         return [
-            'NEW' => '#21C55D',
-            'OPEN' => '#21C55D',
-            'CLOSE' => '#EF4444',
+            '#21C55D',
+            '#EF4444',
+            '#ccc',
         ];
     }
 
-    public function getIcon(): ?string
+    public function getIcon(): string
     {
         return match ($this) {
             self::NEW => 'heroicon-o-document',

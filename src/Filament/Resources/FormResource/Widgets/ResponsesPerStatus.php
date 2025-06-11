@@ -46,14 +46,14 @@ class ResponsesPerStatus extends ChartWidget
     protected function getData(): array
     {
         $dataset = [];
-        $statuses = BoltPlugin::getEnum('FormsStatus')::cases();
+        $statuses = BoltPlugin::getEnum('FormsStatus');
 
         $form = BoltPlugin::getModel('Form')::query()
             ->with(['responses'])
             ->where('id', $this->record->id)
             ->first();
 
-        foreach ($statuses as $status) {
+        foreach ($statuses::cases() as $status) {
             $dataset[] = $form->responses
                 ->where('status', $status->name)
                 ->count();
@@ -64,12 +64,12 @@ class ResponsesPerStatus extends ChartWidget
                 [
                     'label' => __('zeus-bolt::forms.widgets.entries_per_month_desc'),
                     'data' => $dataset,
-                    'backgroundColor' => $statuses->pluck('chartColor'),
+                    'backgroundColor' => $statuses::getChartColors(),
                     'borderColor' => '#ffffff',
                 ],
             ],
 
-            'labels' => $statuses->pluck('label'),
+            'labels' => collect($statuses::cases())->map(fn ($item) => $item->getLabel())->toArray(),
         ];
     }
 

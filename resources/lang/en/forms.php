@@ -17,7 +17,7 @@ return [
     'status_labels' => [
         'NEW' => 'New',
         'OPEN' => 'Open',
-        'CLOSED' => 'Closed',
+        'CLOSE' => 'Close',
     ],
     'options' => [
         'tabs' => [

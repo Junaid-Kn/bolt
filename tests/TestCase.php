@@ -18,7 +18,7 @@ use LaraZeus\Bolt\BoltServiceProvider;
 use LaraZeus\Bolt\Tests\Models\User;
 use LaraZeus\Core\CoreServiceProvider;
 use LaraZeus\SEO\SEOServiceProvider;
-use LaraZeus\SpatieTranslatable\SpatieLaravelTranslatablePluginServiceProvider;
+use LaraZeus\SpatieTranslatable\SpatieTranslatableServiceProvider;
 use Livewire\LivewireServiceProvider;
 use Orchestra\Testbench\Attributes\WithMigration;
 use Orchestra\Testbench\TestCase as Orchestra;
@@ -56,7 +56,7 @@ class TestCase extends Orchestra
             InfolistsServiceProvider::class,
             LivewireServiceProvider::class,
             NotificationsServiceProvider::class,
-            SpatieLaravelTranslatablePluginServiceProvider::class,
+            SpatieTranslatableServiceProvider::class,
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
@@ -65,7 +65,7 @@ class TestCase extends Orchestra
             CoreServiceProvider::class,
             BoltServiceProvider::class,
             SEOServiceProvider::class,
-            FilamentIconPickerServiceProvider::class,
+            // FilamentIconPickerServiceProvider::class,
         ];
     }
 }
