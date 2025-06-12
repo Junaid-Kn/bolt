@@ -29,7 +29,7 @@ class ViewResponse extends ViewRecord
     {
         parent::mount($record);
 
-        $this->response = Response::find($this->responseID);
+        $this->response = BoltPlugin::getModel('Response')::find($this->responseID);
         static::authorizeResourceAccess();
     }
 
