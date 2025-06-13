@@ -105,7 +105,7 @@ class Bolt extends Facade
             return false;
         }
 
-        json_decode($string, false, 512, JSON_THROW_ON_ERROR);
+        json_decode($string, true);
 
         if (json_last_error()) {
             return false;
