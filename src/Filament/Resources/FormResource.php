@@ -107,20 +107,19 @@ class FormResource extends BoltResource
                         TextEntry::make('name')
                             ->label(__('zeus-bolt::forms.options.tabs.title.name')),
 
-                        ListEntry::make('items')
+                        ListEntry::make('slug_url')
                             ->visible(fn (ZeusForm $record) => $record->extensions !== null)
                             ->heading(__('zeus-bolt::forms.options.tabs.title.links'))
-                            ->list()
-                            ->state(fn ($record) => $record->slug_url),
+                            ->list(),
 
                         TextEntry::make('slug')
                             ->label(__('zeus-bolt::forms.options.tabs.title.slug'))
-                            ->url(fn (
-                                ZeusForm $record
-                            ) => route(
-                                BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show',
-                                ['slug' => $record->slug]
-                            ))
+                            ->url(
+                                fn (ZeusForm $record) => route(
+                                    BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show',
+                                    ['slug' => $record->slug]
+                                )
+                            )
                             ->visible(fn (ZeusForm $record) => $record->extensions === null)
                             ->icon('heroicon-o-arrow-top-right-on-square')
                             ->openUrlInNewTab(),

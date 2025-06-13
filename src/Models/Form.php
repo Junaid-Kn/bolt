@@ -195,7 +195,7 @@ class Form extends Model
         return collect(Extensions::init($this, 'getItems', ['form' => $this]))
             ->mapWithKeys(function ($key, $item) {
                 return [
-                    $key => [
+                    [
                         'label' => $key,
                         'url' => Extensions::init($this, 'getUrl', ['slug' => $item]),
                     ],

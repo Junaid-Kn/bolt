@@ -10,7 +10,6 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Facade;
-use JsonException;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Contracts\CustomFormSchema;
@@ -96,9 +95,6 @@ class Bolt extends Facade
         return null;
     }
 
-    /**
-     * @throws JsonException
-     */
     public static function isJson(string $string): bool
     {
         if ($string === '') {
