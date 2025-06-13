@@ -45,6 +45,7 @@ class EditForm extends EditRecord
                 ->tooltip(__('zeus-bolt::forms.actions.open_tooltip'))
                 ->color('warning')
                 ->url(fn () => route(BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show', $this->record))
+                ->visible(fn (Form $record) => $record->extensions === null)
                 ->openUrlInNewTab(),
         ];
     }
