@@ -44,6 +44,7 @@ class EditForm extends EditRecord
                 ->tooltip(__('open form'))
                 ->color('warning')
                 ->url(fn () => route(BoltPlugin::get()->getRouteNamePrefix() . 'bolt.form.show', $this->record))
+                ->visible(fn (Form $record) => $record->extensions === null)
                 ->openUrlInNewTab(),
         ];
     }
