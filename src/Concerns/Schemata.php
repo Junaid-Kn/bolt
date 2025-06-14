@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Concerns;
 
+use Exception;
 use Filament\Actions\Action;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\DateTimePicker;
@@ -17,23 +18,24 @@ use Filament\Forms\Components\Toggle;
 use Filament\Forms\Components\ViewField;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Schemas\Components\Grid;
-use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Tabs;
 use Filament\Schemas\Components\Tabs\Tab;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Str;
-use LaraZeus\Accordion\Forms\Accordion;
-use LaraZeus\Accordion\Forms\Accordions;
 use LaraZeus\Bolt\BoltPlugin;
+use LaraZeus\Bolt\Concerns\Schema\Fields;
+use LaraZeus\Bolt\Concerns\Schema\Sections;
 use LaraZeus\Bolt\Facades\Bolt;
 use LaraZeus\Bolt\Models\Category;
-use LaraZeus\BoltPro\Actions\FieldMarkAction;
 use LaraZeus\BoltPro\Actions\SectionMarkAction;
 
 trait Schemata
 {
+    use Fields;
+    use Sections;
+
     protected static function getVisibleFields(array $sections, array $arguments): array
     {
         // @phpstan-ignore-next-line
@@ -53,59 +55,9 @@ trait Schemata
             })->all();
     }
 
-    protected static function sectionOptionsFormSchema(array $formOptions, array $allSections): array
-    {
-        return [
-            TextInput::make('description')
-                ->hidden(fn (Get $get) => $get('borderless') === true)
-                ->nullable()
-                ->live()
-                ->visible($formOptions['show-as'] !== 'tabs')
-                ->label(__('zeus-bolt::forms.section.description')),
-
-            Accordions::make('section-options')
-                ->accordions(fn () => array_filter([
-                    Accordion::make('visual-options')
-                        ->label(__('zeus-bolt::forms.section.options.visual_options'))
-                        ->columns()
-                        ->icon('tabler-list-details')
-                        ->schema([
-                            Select::make('columns')
-                                ->options(fn (): array => array_combine(range(1, 12), range(1, 12)))
-                                ->required()
-                                ->default(1)
-                                ->hint(__('zeus-bolt::forms.section.options.columns_hint'))
-                                ->label(__('zeus-bolt::forms.section.options.columns_label')),
-                            // todo
-                            /*IconPicker::make('icon')
-                                ->columns([
-                                    'default' => 1,
-                                    'lg' => 3,
-                                    '2xl' => 5,
-                                ])
-                                ->visible(fn (Get $get) => $formOptions['show-as'] === 'page' && $get('borderless') === false)
-                                ->label(__('zeus-bolt::forms.section.options.icon')),*/
-                            Toggle::make('aside')
-                                ->default(false)
-                                ->visible(fn (Get $get) => $formOptions['show-as'] === 'page' && $get('borderless') === false)
-                                ->label(__('zeus-bolt::forms.section.options.aside')),
-                            Toggle::make('borderless')
-                                ->live()
-                                ->default(false)
-                                ->visible($formOptions['show-as'] === 'page')
-                                ->label(__('zeus-bolt::forms.section.options.borderless'))
-                                ->helperText(__('zeus-bolt::forms.section.options.borderless_help')),
-                            Toggle::make('compact')
-                                ->default(false)
-                                ->visible(fn (Get $get) => $formOptions['show-as'] === 'page' && $get('borderless') === false)
-                                ->label(__('zeus-bolt::forms.section.options.compact')),
-                        ]),
-                    self::visibility($allSections),
-                    Bolt::getCustomSchema('section') ?? [],
-                ])),
-        ];
-    }
-
+    /**
+     * @throws Exception
+     */
     public static function getMainFormSchema(): array
     {
         return [
@@ -199,7 +151,7 @@ trait Schemata
                                 return BoltPlugin::getModel('Category')::query()->whereBelongsTo(Filament::getTenant());
                             },
                         )
-                        ->helperText(__('zeus-bolt::forms.options.tabs.title.category.hint'))
+                        ->belowContent(__('zeus-bolt::forms.options.tabs.title.category.hint'))
                         ->createOptionForm([
                             TextInput::make('name')
                                 ->required()
@@ -217,7 +169,10 @@ trait Schemata
                                 ->maxLength(255)
                                 ->label(__('zeus-bolt::forms.options.tabs.title.category.slug')),
                         ])
-                        ->createOptionAction(fn (Action $action) => $action->hidden(auth()->user()->cannot('create', BoltPlugin::getModel('Category'))))
+                        ->createOptionAction(fn (Action $action) => $action->hidden(auth()->user()->cannot(
+                            'create',
+                            BoltPlugin::getModel('Category')
+                        )))
                         ->getOptionLabelFromRecordUsing(fn (Category $record) => $record->name),
                 ]),
 
@@ -226,13 +181,13 @@ trait Schemata
                 ->schema([
                     Textarea::make('description')
                         ->label(__('zeus-bolt::forms.options.tabs.details.description'))
-                        ->helperText(__('zeus-bolt::forms.options.tabs.details.description_help')),
+                        ->belowContent(__('zeus-bolt::forms.options.tabs.details.description_help')),
                     RichEditor::make('details')
                         ->label(__('zeus-bolt::forms.options.tabs.details.details'))
-                        ->helperText(__('zeus-bolt::forms.options.tabs.details.details_help')),
+                        ->belowContent(__('zeus-bolt::forms.options.tabs.details.details_help')),
                     RichEditor::make('options.confirmation-message')
                         ->label(__('zeus-bolt::forms.options.tabs.details.confirmation_message'))
-                        ->helperText(__('zeus-bolt::forms.options.tabs.details.confirmation_message_help')),
+                        ->belowContent(__('zeus-bolt::forms.options.tabs.details.confirmation_message_help')),
                 ]),
 
             Tab::make('display-access-tab')
@@ -246,14 +201,14 @@ trait Schemata
                             Toggle::make('is_active')
                                 ->label(__('zeus-bolt::forms.options.tabs.display.is_active'))
                                 ->default(1)
-                                ->helperText(__('zeus-bolt::forms.options.tabs.display.is_active_help')),
+                                ->belowContent(__('zeus-bolt::forms.options.tabs.display.is_active_help')),
                             Toggle::make('options.require-login')
                                 ->label(__('zeus-bolt::forms.options.tabs.display.require_login'))
-                                ->helperText(__('zeus-bolt::forms.options.tabs.display.require_login_help'))
+                                ->belowContent(__('zeus-bolt::forms.options.tabs.display.require_login_help'))
                                 ->live(),
                             Toggle::make('options.one-entry-per-user')
                                 ->label(__('zeus-bolt::forms.options.tabs.display.one_entry_per_user'))
-                                ->helperText(__('zeus-bolt::forms.options.tabs.display.one_entry_per_user_help'))
+                                ->belowContent(__('zeus-bolt::forms.options.tabs.display.one_entry_per_user_help'))
                                 ->visible(function (Get $get) {
                                     return $get('options.require-login');
                                 }),
@@ -308,7 +263,7 @@ trait Schemata
                         ->schema([
                             TextInput::make('options.emails-notification')
                                 ->label(__('zeus-bolt::forms.options.tabs.advanced.emails_notifications'))
-                                ->helperText(__('zeus-bolt::forms.options.tabs.advanced.emails_notifications_help')),
+                                ->belowContent(__('zeus-bolt::forms.options.tabs.advanced.emails_notifications_help')),
                         ]),
                 ]),
 
@@ -334,11 +289,13 @@ trait Schemata
                 ]),
 
             Tab::make('design')
+                ->columns()
                 ->label(__('zeus-bolt::forms.options.tabs.design.label'))
                 ->visible(Bolt::hasPro() && config('zeus-bolt.allow_design'))
                 ->schema([
                     ViewField::make('options.primary_color')
                         ->hiddenLabel()
+                        ->columnSpanFull()
                         ->view('zeus::filament.components.color-picker'),
                     FileUpload::make('options.logo')
                         ->disk(config('zeus-bolt.uploadDisk'))
@@ -364,157 +321,5 @@ trait Schemata
         }
 
         return $tabs;
-    }
-
-    public static function getSectionsSchema(): array
-    {
-        return array_filter([
-            TextInput::make('name')
-                ->columnSpanFull()
-                ->required()
-                ->lazy()
-                ->label(__('zeus-bolt::forms.section.name')),
-
-            TextEntry::make('section-fields-placeholder')
-                ->label(__('zeus-bolt::forms.section.name')),
-
-            Repeater::make('fields')
-                ->relationship()
-                ->orderColumn('ordering')
-                ->cloneable()
-                ->minItems(1)
-                ->cloneAction(fn (Action $action) => $action->action(function (Component $component, $arguments) {
-                    $items = $component->getState();
-                    $originalItem = $items[$arguments['item']];
-                    $clonedItem = array_merge($originalItem, [
-                        'name' => $originalItem['name'] . ' new',
-                        'options' => array_merge($originalItem['options'], [
-                            'htmlId' => $originalItem['options']['htmlId'] . Str::random(2),
-                        ]),
-                    ]);
-
-                    $items[] = $clonedItem;
-                    $component->state($items);
-
-                    return $items;
-                }))
-                ->collapsible()
-                ->collapsed(fn (string $operation) => $operation === 'edit')
-                ->grid([
-                    'default' => 1,
-                    'md' => 2,
-                    'xl' => 3,
-                    '2xl' => 3,
-                ])
-                ->hiddenLabel()
-                ->itemLabel(fn (array $state): ?string => $state['name'] ?? null)
-                ->addActionLabel(__('zeus-bolt::forms.fields.add'))
-                ->extraItemActions([
-                    // @phpstan-ignore-next-line
-                    Bolt::hasPro() ? FieldMarkAction::make('marks') : null,
-
-                    Action::make('fields options')
-                        ->slideOver()
-                        ->color('warning')
-                        ->tooltip('more field options')
-                        ->icon('heroicon-m-cog')
-                        ->modalIcon('heroicon-m-cog')
-                        ->modalDescription(__('zeus-bolt::forms.fields.settings'))
-                        ->fillForm(
-                            fn (array $arguments, Repeater $component) => $component->getItemState($arguments['item'])
-                        )
-                        ->schema(function (Get $get, array $arguments, Repeater $component) {
-                            $allSections = self::getVisibleFields($get('../../sections'), $arguments);
-
-                            return [
-                                Textarea::make('description')
-                                    ->label(__('zeus-bolt::forms.fields.description')),
-                                Group::make()
-                                    ->schema(function (Get $get) use ($allSections, $component, $arguments) {
-                                        $class = $get('type');
-                                        if (class_exists($class)) {
-                                            $newClass = (new $class);
-                                            if ($newClass->hasOptions()) {
-                                                return $newClass->getOptions($allSections, $component->getState()[$arguments['item']]);
-                                            }
-                                        }
-
-                                        return [];
-                                    }),
-                            ];
-                        })
-                        ->action(function (array $data, array $arguments, Repeater $component): void {
-                            $state = $component->getState();
-                            $state[$arguments['item']] = array_merge($state[$arguments['item']], $data);
-                            $component->state($state);
-                        }),
-                ])
-                ->schema(static::getFieldsSchema()),
-
-            Hidden::make('compact')->default(0)->nullable(),
-            Hidden::make('aside')->default(0)->nullable(),
-            Hidden::make('borderless')->default(0)->nullable(),
-            Hidden::make('icon')->nullable(),
-            Hidden::make('columns')->default(1)->nullable(),
-            Hidden::make('description')->nullable(),
-            Hidden::make('options.visibility.active')->default(0)->nullable(),
-            Hidden::make('options.visibility.fieldID')->nullable(),
-            Hidden::make('options.visibility.values')->nullable(),
-            ...Bolt::getHiddenCustomSchema('section') ?? [],
-        ]);
-    }
-
-    public static function getCleanOptionString(array $field): string
-    {
-        return
-            view('zeus::filament.fields.types')
-                ->with('field', $field)
-                ->render();
-    }
-
-    public static function getFieldsSchema(): array
-    {
-        return [
-            Hidden::make('description'),
-            TextInput::make('name')
-                ->required()
-                ->lazy()
-                ->label(__('zeus-bolt::forms.fields.name')),
-            Select::make('type')
-                ->required()
-                ->searchable()
-                ->preload()
-                ->getSearchResultsUsing(function (string $search) {
-                    return Bolt::availableFields()
-                        ->filter(fn ($q) => str($q['title'])->contains($search))
-                        ->mapWithKeys(fn ($field) => [$field['class'] => static::getCleanOptionString($field)])
-                        ->toArray();
-                })
-                ->allowHtml()
-                ->extraAttributes(['class' => 'field-type'])
-                ->options(function (): array {
-                    return Bolt::availableFields()
-                        ->mapWithKeys(function ($field) {
-                            return [$field['class'] => static::getCleanOptionString($field)];
-                        })
-                        ->toArray();
-                })
-                ->live()
-                ->default(\LaraZeus\Bolt\Fields\Classes\TextInput::class)
-                ->label(__('zeus-bolt::forms.fields.type')),
-            Group::make()
-                ->schema(function (Get $get) {
-                    $class = $get('type');
-                    if (class_exists($class)) {
-                        $newClass = (new $class);
-                        if ($newClass->hasOptions()) {
-                            // @phpstan-ignore-next-line
-                            return collect($newClass->getOptionsHidden())->flatten()->toArray();
-                        }
-                    }
-
-                    return [];
-                }),
-        ];
     }
 }

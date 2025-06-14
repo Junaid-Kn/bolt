@@ -60,7 +60,7 @@ trait HasOptions
         return Grid::make()
             ->schema([
                 Toggle::make('options.column_span_full')
-                    ->helperText(__('show this field in full width row'))
+                    ->belowContent(__('show this field in full width row'))
                     ->label(__('Full Width')),
             ])
             ->columnSpanFull()

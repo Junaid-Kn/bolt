@@ -104,7 +104,7 @@ abstract class FieldsContract implements Arrayable, Fields
 
                 return optional($zeusField->options)['grades']['points'] ?? 0 . ' ' . __('zeus-bolt::forms.fields.marks.suffix');
             })
-            ->helperText($zeusField->description);
+            ->belowContent($zeusField->description);
 
         if (optional($zeusField->options)['is_required']) {
             $component = $component->required();
