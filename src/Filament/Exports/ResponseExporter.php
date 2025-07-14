@@ -8,6 +8,7 @@ use Filament\Actions\Exports\Models\Export;
 use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Models\Field;
+use LaraZeus\Bolt\Models\Form;
 use LaraZeus\Bolt\Models\Response;
 use Livewire\Livewire;
 
@@ -17,9 +18,29 @@ class ResponseExporter extends Exporter
 
     protected ?Model $record;
 
+    public function getCachedColumns(): array
+    {
+        $id = $this->getOptions()['export_form_id'] ?? 0;
+        $record = BoltPlugin::getModel('Form')::find($id);
+
+        return $this->cachedColumns ??= array_reduce(static::getFormColumns($record), function (array $carry, ExportColumn $column): array {
+            $carry[$column->getName()] = $column->exporter($this);
+
+            return $carry;
+        }, []);
+    }
+
     public static function getColumns(): array
     {
-        $record = Livewire::current()->getRecord();
+        return static::getFormColumns(Livewire::current()->getRecord());
+    }
+
+    public static function getFormColumns(?Form $record = null): array
+    {
+        if ($record === null) {
+            return [];
+        }
+
         // todo refactor with v4
         $userModel = BoltPlugin::getModel('User') ?? config('auth.providers.users.model');
         $getUserModel = $userModel::getBoltUserFullNameAttribute();
@@ -29,6 +50,9 @@ class ResponseExporter extends Exporter
                 ->default(__('zeus-bolt::response.guest')),
 
             ExportColumn::make('status')
+                ->formatStateUsing(function ($state): string {
+                    return $state->getLabel();
+                })
                 ->label(__('zeus-bolt::response.status')),
 
             ExportColumn::make('notes')
@@ -52,18 +76,9 @@ class ResponseExporter extends Exporter
         return $mainColumns;
     }
 
-    /*public static function getOptionsFormComponents(): array
-    {
-        return [
-            TextInput::make('descriptionLimit')
-                ->label('Limit the length of the description column content')
-                ->integer(),
-        ];
-    }*/
-
     public static function getCompletedNotificationBody(Export $export): string
     {
-        $body = 'Your response export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
+        $body = 'Your form responses export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
 
         if ($failedRowsCount = $export->getFailedRowsCount()) {
             $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to export.';

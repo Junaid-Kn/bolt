@@ -5,13 +5,13 @@ namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 use BackedEnum;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
+use Filament\Actions\ExportBulkAction;
 use Filament\Actions\ForceDeleteAction;
 use Filament\Actions\ForceDeleteBulkAction;
 use Filament\Actions\RestoreAction;
 use Filament\Actions\RestoreBulkAction;
 use Filament\Forms\Components\DatePicker;
 use Filament\Resources\Pages\ManageRelatedRecords;
-use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\Filter;
@@ -22,12 +22,11 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Actions\SetResponseStatus;
+use LaraZeus\Bolt\Filament\Exports\ResponseExporter;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\Bolt\Models\Field;
 use LaraZeus\Bolt\Models\Form;
 use LaraZeus\Bolt\Models\Response;
-use pxlrbt\FilamentExcel\Actions\Tables\ExportBulkAction;
-use pxlrbt\FilamentExcel\Exports\ExcelExport;
 
 /**
  * @property Form $record.
@@ -136,17 +135,13 @@ class ManageResponses extends ManageRelatedRecords
                 DeleteBulkAction::make(),
                 RestoreBulkAction::make(),
                 ForceDeleteBulkAction::make(),
-                /*ExportBulkAction::make()
-                    ->exports([
-                        ExcelExport::make()
-                            ->fromTable()
-                            ->queue(),
+                ExportBulkAction::make()
+                    ->options([
+                        'export_form_id' => $this->getOwnerRecord()->id ?? 0,
                     ])
-                    ->label(__('Export Responses')),*/
-                // disabled for now due to issue with queues
-                /*Tables\Actions\ExportBulkAction::make()
+                    ->columnMappingColumns(2)
                     ->label(__('Export Responses'))
-                    ->exporter(ResponseExporter::class),*/
+                    ->exporter(ResponseExporter::class),
             ])
             ->recordUrl(
                 fn (Response $record): string => FormResource::getUrl('viewResponse', [
