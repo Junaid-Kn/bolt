@@ -153,7 +153,7 @@ abstract class FieldsContract implements Arrayable, Fields
                 // we need to convert booleans to strings for in_array comparison
                 $relatedFieldArray = array_map(fn ($value) => is_bool($value) ? ($value ? 'true' : 'false') : $value, $relatedFieldArray);
 
-                if (in_array($relatedFieldValues, $relatedFieldArray)) {
+                if (in_array($relatedFieldValues, $relatedFieldArray, true)) {
                     return true;
                 }
 

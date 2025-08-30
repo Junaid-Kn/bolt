@@ -28,12 +28,14 @@
     ],
     "require": {
         "php": "^8.2",
+        "guava/filament-icon-picker": "^3.1",
         "flowframe/laravel-trend": "^0.4",
         "lara-zeus/accordion": "^2.0",
         "lara-zeus/core": "^4.0",
         "lara-zeus/filament-plugin-tools": "^2.0",
         "lara-zeus/list-group": "^2.0",
-        "lara-zeus/tabler-icons-enum": "^1.0"
+        "lara-zeus/tabler-icons-enum": "^1.0",
+        "pxlrbt/filament-excel": "^3.1"
     },
     "require-dev": {
         "larastan/larastan": "^3.0",
@@ -85,6 +87,5 @@
             }
         }
     },
-    "prefer-stable": true,
-    "minimum-stability": "beta"
+    "prefer-stable": true
 }

@@ -104,7 +104,7 @@ class Designer
             $component = Wizard\Step::make($section->name)
                 ->description($section->description)
                 ->icon($section->icon ?? null);
-        } elseif ((bool) $section->borderless === true) {
+        } elseif ($section->borderless === true) {
             $component = Grid::make($section->name)
                 ->columnSpanFull();
         } else {

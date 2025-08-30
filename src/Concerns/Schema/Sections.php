@@ -14,6 +14,7 @@ use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Text;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Support\Enums\FontWeight;
+use Guava\IconPicker\Forms\Components\IconPicker;
 use Illuminate\Support\Str;
 use LaraZeus\Accordion\Forms\Accordion;
 use LaraZeus\Accordion\Forms\Accordions;
@@ -150,15 +151,14 @@ trait Sections
                                 ->default(1)
                                 ->hint(__('zeus-bolt::forms.section.options.columns_hint'))
                                 ->label(__('zeus-bolt::forms.section.options.columns_label')),
-                            // todo
-                            /*IconPicker::make('icon')
+                            IconPicker::make('icon')
                                 ->columns([
                                     'default' => 1,
                                     'lg' => 3,
                                     '2xl' => 5,
                                 ])
                                 ->visible(fn (Get $get) => $formOptions['show-as'] === 'page' && $get('borderless') === false)
-                                ->label(__('zeus-bolt::forms.section.options.icon')),*/
+                                ->label(__('zeus-bolt::forms.section.options.icon')),
                             Toggle::make('aside')
                                 ->default(false)
                                 ->visible(fn (

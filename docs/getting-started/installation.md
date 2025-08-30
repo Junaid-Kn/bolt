@@ -35,7 +35,7 @@ To set up the plugin with filament, you need to add it to your panel provider; T
 
 ```php
 ->plugins([
-    SpatieLaravelTranslatablePlugin::make()->defaultLocales([config('app.locale')]),
+    SpatieTranslatablePlugin::make()->defaultLocales([config('app.locale')]),
     BoltPlugin::make()
 ])
 ```
