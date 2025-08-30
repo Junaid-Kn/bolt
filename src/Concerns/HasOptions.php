@@ -27,7 +27,8 @@ trait HasOptions
     {
         return Grid::make()
             ->schema([
-                Toggle::make('options.is_required')->label(__('Is Required')),
+                Toggle::make('options.is_required')
+                    ->label(__('zeus-bolt::forms.options.is_required')),
             ])
             ->columnSpanFull()
             ->columns(1);
@@ -37,21 +38,22 @@ trait HasOptions
     {
         return Accordion::make('hint-options')
             ->columns()
-            ->label('Hint Options')
+            ->label(__('zeus-bolt::forms.options.hint.title'))
             ->icon('heroicon-o-light-bulb')
             ->schema([
                 TextInput::make('options.hint.text')
-                    ->label(__('Hint Text')),
+                    ->label(__('zeus-bolt::forms.options.hint.text')),
                 TextInput::make('options.hint.icon-tooltip')
-                    ->label(__('Hint Icon tooltip')),
-                ColorPicker::make('options.hint.color')->label(__('Hint Color')),
+                    ->label(__('zeus-bolt::forms.options.hint.icon_tooltip')),
+                ColorPicker::make('options.hint.color')
+                    ->label(__('zeus-bolt::forms.options.hint.color')),
                 IconPicker::make('options.hint.icon')
                     ->columns([
                         'default' => 2,
                         'lg' => 3,
                         '2xl' => 5,
                     ])
-                    ->label(__('Hint Icon')),
+                    ->label(__('zeus-bolt::forms.options.hint.label')),
             ]);
     }
 
@@ -61,7 +63,7 @@ trait HasOptions
             ->schema([
                 Toggle::make('options.column_span_full')
                     ->belowContent(__('show this field in full width row'))
-                    ->label(__('Full Width')),
+                    ->label(__('zeus-bolt::forms.options.column_span_full.label')),
             ])
             ->columnSpanFull()
             ->columns(1);
@@ -72,7 +74,7 @@ trait HasOptions
         return Grid::make()
             ->schema([
                 Toggle::make('options.hidden_label')
-                    ->label(__('Hidden Label')),
+                    ->label(__('zeus-bolt::forms.options.hidden.label')),
             ])
             ->columnSpanFull()
             ->columns(1);
@@ -111,14 +113,17 @@ trait HasOptions
                     ->createOptionForm([
                         TextInput::make('name')
                             ->live(onBlur: true)
-                            ->label(__('Collections Name'))->required()->maxLength(255)->columnSpan(2),
+                            ->label(__('zeus-bolt::forms.options.collections.label'))
+                            ->required()
+                            ->maxLength(255)
+                            ->columnSpan(2),
                         Repeater::make('values')
                             ->grid([
                                 'default' => 1,
                                 'md' => 2,
                                 'lg' => 3,
                             ])
-                            ->label(__('Collections Values'))
+                            ->label(__('zeus-bolt::forms.options.collections.values'))
                             ->columnSpan(2)
                             ->columns(1)
                             ->schema([
@@ -127,11 +132,16 @@ trait HasOptions
                                     ->afterStateUpdated(function (Set $set, Get $get, string $operation) {
                                         $set('itemKey', $get('itemValue'));
                                     })
-                                    ->required()->label(__('Value'))->hint(__('what the user will see')),
+                                    ->required()
+                                    ->label(__('zeus-bolt::forms.options.collections.values'))
+                                    ->hint(__('zeus-bolt::forms.options.collections.value_hint')),
                                 TextInput::make('itemKey')
                                     ->live(onBlur: true)
-                                    ->required()->label(__('Key'))->hint(__('what store in the form')),
-                                Toggle::make('itemIsDefault')->label(__('selected by default')),
+                                    ->required()
+                                    ->label(__('zeus-bolt::forms.options.collections.key'))
+                                    ->hint(__('what store in the form')),
+                                Toggle::make('itemIsDefault')
+                                    ->label(__('zeus-bolt::forms.options.collections.is_default')),
                             ]),
                     ])
                     ->createOptionUsing(function (array $data) {
@@ -143,7 +153,7 @@ trait HasOptions
                         return $collection->id;
                     })
                     ->options($dataSources)
-                    ->label(__('Data Source')),
+                    ->label(__('zeus-bolt::forms.options.data_source.label')),
             ])
             ->columnSpanFull()
             ->columns(1);
@@ -156,7 +166,7 @@ trait HasOptions
                 TextInput::make('options.htmlId')
                     ->required()
                     ->default(str()->random(6))
-                    ->label(__('HTML ID')),
+                    ->label(__('zeus-bolt::forms.options.html_id')),
             ])
             ->columnSpanFull()
             ->columns(1);

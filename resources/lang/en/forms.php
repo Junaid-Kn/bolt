@@ -94,6 +94,7 @@ return [
         'is_required' => 'Is Required',
         'is_active' => 'Is Active',
         'hint' => [
+            'title' => 'Hint Options',
             'text' => 'Hint Text',
             'icon_tooltip' => 'Hint Icon tooltip',
             'color' => 'Hint Color',
@@ -102,6 +103,9 @@ return [
         'column_span_full' => [
             'help_text' => 'show this field in full width row',
             'label' => 'Full Width',
+        ],
+        'hidden' => [
+            'label' => 'Hidden Label',
         ],
         'collections' => [
             'label' => 'Collections Name',
