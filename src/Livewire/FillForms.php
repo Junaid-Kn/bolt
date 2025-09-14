@@ -2,6 +2,8 @@
 
 namespace LaraZeus\Bolt\Livewire;
 
+use Filament\Actions\Concerns\InteractsWithActions;
+use Filament\Actions\Contracts\HasActions;
 use Filament\Forms\Concerns\InteractsWithForms;
 use Filament\Forms\Contracts\HasForms;
 use Illuminate\Support\Arr;
@@ -18,8 +20,10 @@ use Throwable;
 /**
  * @property mixed $form
  */
-class FillForms extends Component implements HasForms
+class FillForms extends Component implements HasActions, HasForms
 {
+    use InteractsWithActions;
+
     use InteractsWithForms;
 
     public Form $zeusForm;
