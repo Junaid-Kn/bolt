@@ -2,6 +2,18 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v4.0.1 - 2025-09-14
+
+### What's Changed
+
+* Support actions on the form page by @kyles71 in https://github.com/lara-zeus/bolt/pull/380
+
+### New Contributors
+
+* @kyles71 made their first contribution in https://github.com/lara-zeus/bolt/pull/380
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v4.0.0...v4.0.1
+
 ## v3.0.88 - 2025-06-13
 
 ### What's Changed
@@ -46,6 +58,7 @@ this the change:
     'extensionData' => $extensionData['extInfo']['itemId'] ?? 0,
     'response' => $extensionData['response'],
 ]) !!}
+
 
 
 
@@ -247,6 +260,7 @@ if you need to change this to use another model, add the following in your confi
     //...
     'User' => AnotherUserModel::class,
 ],
+
 
 
 
@@ -845,7 +859,6 @@ and you can remove the fork for `alperenersoy/filament-export`
 - add Constraints and delete relations, with support for soft delete  by @atmonshi in https://github.com/lara-zeus/bolt/pull/90
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.4...1.2.5
 ## 1.2.4 - 2023-07-01
-
 ### What's Changed
 
 - add `not-prose` for forms, so the style won't suck when the form embed… by @atmonshi in https://github.com/lara-zeus/bolt/pull/89
