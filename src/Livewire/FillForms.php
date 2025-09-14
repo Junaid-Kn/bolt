@@ -23,7 +23,6 @@ use Throwable;
 class FillForms extends Component implements HasActions, HasForms
 {
     use InteractsWithActions;
-
     use InteractsWithForms;
 
     public Form $zeusForm;
