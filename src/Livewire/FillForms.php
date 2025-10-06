@@ -100,7 +100,9 @@ class FillForms extends Component implements HasActions, HasForms
             'notes' => '',
         ]);
 
-        $fieldsData = Arr::except($this->form->getState()['zeusData'], 'extensions');
+        $state = $this->form->getState();
+
+        $fieldsData = Arr::except($state['zeusData'], 'extensions');
 
         foreach ($fieldsData as $field => $value) {
             $setValue = $value;
@@ -119,7 +121,7 @@ class FillForms extends Component implements HasActions, HasForms
         event(new FormSent($response));
 
         $this->extensionData['response'] = $response;
-        $this->extensionData['extensionsComponent'] = $this->form->getState()['zeusData']['extensions'] ?? [];
+        $this->extensionData['extensionsComponent'] = $state['zeusData']['extensions'] ?? [];
 
         $extensionItemId = Extensions::init($this->zeusForm, 'store', $this->extensionData) ?? [];
         $this->extensionData['extInfo'] = $extensionItemId;
