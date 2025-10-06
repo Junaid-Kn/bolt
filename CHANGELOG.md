@@ -2,6 +2,18 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v4.0.2 - 2025-10-06
+
+### What's Changed
+
+* fix: advanced date field bug by @Abdulmajeed-Jamaan in https://github.com/lara-zeus/bolt/pull/385
+
+### New Contributors
+
+* @Abdulmajeed-Jamaan made their first contribution in https://github.com/lara-zeus/bolt/pull/385
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v4.0.1...v4.0.2
+
 ## v4.0.1 - 2025-09-14
 
 ### What's Changed
@@ -58,6 +70,7 @@ this the change:
     'extensionData' => $extensionData['extInfo']['itemId'] ?? 0,
     'response' => $extensionData['response'],
 ]) !!}
+
 
 
 
@@ -260,6 +273,7 @@ if you need to change this to use another model, add the following in your confi
     //...
     'User' => AnotherUserModel::class,
 ],
+
 
 
 
@@ -860,7 +874,6 @@ and you can remove the fork for `alperenersoy/filament-export`
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.4...1.2.5
 ## 1.2.4 - 2023-07-01
 ### What's Changed
-
 - add `not-prose` for forms, so the style won't suck when the form embed… by @atmonshi in https://github.com/lara-zeus/bolt/pull/89
 
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.3...1.2.4
