@@ -3,6 +3,7 @@
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
+use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
@@ -24,5 +25,20 @@ class CreateForm extends CreateRecord
         return [
             LocaleSwitcher::make(),
         ];
+    }
+
+    protected function handleRecordCreation(array $data): Model
+    {
+        $formSections = $this->form->getComponent('sections')->getState();
+
+        foreach ($formSections as $sectionId => $section) {
+            foreach ($section['fields'] as $fieldId => $field) {
+                $this->mountAction('fields options', ['item' => $fieldId], ["schemaComponent"=>"form.sections.$sectionId.fields"]);
+                $this->callMountedAction();
+                $this->unmountAction();
+            }
+        }
+
+        parent::handleRecordCreation($data);
     }
 }
