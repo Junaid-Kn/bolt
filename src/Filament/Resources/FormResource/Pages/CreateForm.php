@@ -33,7 +33,7 @@ class CreateForm extends CreateRecord
 
         foreach ($formSections as $sectionId => $section) {
             foreach ($section['fields'] as $fieldId => $field) {
-                $this->mountAction('fields options', ['item' => $fieldId], ["schemaComponent"=>"form.sections.$sectionId.fields"]);
+                $this->mountAction('fields options', ['item' => $fieldId], ['schemaComponent' => "form.sections.$sectionId.fields"]);
                 $this->callMountedAction();
                 $this->unmountAction();
             }

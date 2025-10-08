@@ -3,7 +3,6 @@
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
 use Filament\Actions\Action;
-use Filament\Forms\Components\Repeater;
 use Filament\Resources\Pages\EditRecord;
 use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Model;
@@ -58,12 +57,12 @@ class EditForm extends EditRecord
 
         foreach ($formSections as $sectionId => $section) {
             foreach ($section['fields'] as $fieldId => $field) {
-                $this->mountAction('fields options', ['item' => $fieldId], ["recordKey"=> $section['id'],"schemaComponent"=>"form.sections.$sectionId.fields"]);
+                $this->mountAction('fields options', ['item' => $fieldId], ['recordKey' => $section['id'], 'schemaComponent' => "form.sections.$sectionId.fields"]);
                 $this->callMountedAction();
                 $this->unmountAction();
             }
         }
-        
+
         return parent::handleRecordUpdate($record, $data);
     }
 }
