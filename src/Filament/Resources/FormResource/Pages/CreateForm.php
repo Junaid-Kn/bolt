@@ -3,11 +3,11 @@
 namespace LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 
 use Filament\Resources\Pages\CreateRecord;
-use Illuminate\Database\Eloquent\Model;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\SpatieTranslatable\Actions\LocaleSwitcher;
 use LaraZeus\SpatieTranslatable\Resources\Pages\CreateRecord\Concerns\Translatable;
+use Throwable;
 
 class CreateForm extends CreateRecord
 {
@@ -27,7 +27,10 @@ class CreateForm extends CreateRecord
         ];
     }
 
-    protected function beforeValidate()
+    /**
+     * @throws Throwable
+     */
+    protected function beforeValidate(): void
     {
         $formSections = $this->form->getComponent('sections')->getState();
 
