@@ -52,7 +52,7 @@ class EditForm extends EditRecord
         ];
     }
 
-    protected function handleRecordUpdate(Model $record, array $data): Model
+    protected function beforeValidate()
     {
         $formSections = $this->form->getComponent('sections')->getState();
 
@@ -63,7 +63,5 @@ class EditForm extends EditRecord
                 $this->unmountAction();
             }
         }
-        
-        return parent::handleRecordUpdate($record, $data);
     }
 }

@@ -27,7 +27,7 @@ class CreateForm extends CreateRecord
         ];
     }
 
-    protected function handleRecordCreation(array $data): Model
+    protected function beforeValidate()
     {
         $formSections = $this->form->getComponent('sections')->getState();
 
@@ -38,7 +38,5 @@ class CreateForm extends CreateRecord
                 $this->unmountAction();
             }
         }
-
-        parent::handleRecordCreation($data);
     }
 }
