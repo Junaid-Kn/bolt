@@ -2,6 +2,15 @@
 
 All notable changes to `Bolt` will be documented in this file
 
+## v4.0.4 - 2025-10-12
+
+### What's Changed
+
+* fix show form as wizerd by @atmonshi in https://github.com/lara-zeus/bolt/pull/390
+* update the Extension docs by @atmonshi in https://github.com/lara-zeus/bolt/pull/391
+
+**Full Changelog**: https://github.com/lara-zeus/bolt/compare/v4.0.3...v4.0.4
+
 ## v4.0.3 - 2025-10-12
 
 ### What's Changed
@@ -81,6 +90,7 @@ this the change:
     'extensionData' => $extensionData['extInfo']['itemId'] ?? 0,
     'response' => $extensionData['response'],
 ]) !!}
+
 
 
 
@@ -285,6 +295,7 @@ if you need to change this to use another model, add the following in your confi
     //...
     'User' => AnotherUserModel::class,
 ],
+
 
 
 
@@ -889,7 +900,6 @@ and you can remove the fork for `alperenersoy/filament-export`
 ### What's Changed
 - add `not-prose` for forms, so the style won't suck when the form embed… by @atmonshi in https://github.com/lara-zeus/bolt/pull/89
 **Full Changelog**: https://github.com/lara-zeus/bolt/compare/1.2.3...1.2.4
-
 ## 1.2.3 - 2023-06-30
 
 ### What's Changed
