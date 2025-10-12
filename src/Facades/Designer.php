@@ -95,7 +95,7 @@ class Designer
         return $fields;
     }
 
-    private static function drawSections(Form $zeusForm, ZeusSection $section, array $fields): Tab | Step | Section | Grid
+    private static function drawSections(Form $zeusForm, ZeusSection $section, array $fields): Tabs\Tab | Wizard\Step | Section | Grid
     {
         if (optional($zeusForm->options)['show-as'] === 'tabs') {
             $component = Tabs\Tab::make($section->name)
