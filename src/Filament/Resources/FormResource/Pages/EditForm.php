@@ -9,6 +9,7 @@ use Illuminate\Contracts\Support\Htmlable;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Resources\FormResource;
 use LaraZeus\Bolt\Models\Form;
+use Throwable;
 
 /**
  * @property Form $record.
@@ -47,5 +48,21 @@ class EditForm extends EditRecord
                 ->visible(fn (Form $record) => $record->extensions === null)
                 ->openUrlInNewTab(),
         ];
+    }
+
+    /**
+     * @throws Throwable
+     */
+    protected function beforeValidate(): void
+    {
+        $formSections = $this->form->getComponent('data.sections')->getState();
+
+        foreach ($formSections as $sectionId => $section) {
+            foreach ($section['fields'] as $fieldId => $field) {
+                $this->mountAction('fields options', ['item' => $fieldId]);
+                $this->callMountedAction(['item' => $fieldId]);
+                $this->unmountAction();
+            }
+        }
     }
 }
