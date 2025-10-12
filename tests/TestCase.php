@@ -9,10 +9,10 @@ use Filament\FilamentServiceProvider;
 use Filament\Forms\FormsServiceProvider;
 use Filament\Infolists\InfolistsServiceProvider;
 use Filament\Notifications\NotificationsServiceProvider;
+use Filament\Schemas\SchemasServiceProvider;
 use Filament\Support\SupportServiceProvider;
 use Filament\Tables\TablesServiceProvider;
 use Filament\Widgets\WidgetsServiceProvider;
-use Guava\FilamentIconPicker\FilamentIconPickerServiceProvider;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaraZeus\Bolt\BoltServiceProvider;
 use LaraZeus\Bolt\Tests\Models\User;
@@ -47,25 +47,25 @@ class TestCase extends Orchestra
     protected function getPackageProviders($app): array
     {
         return [
-            ActionsServiceProvider::class,
-            BladeCaptureDirectiveServiceProvider::class,
+            AdminPanelProvider::class,
             BladeHeroiconsServiceProvider::class,
             BladeIconsServiceProvider::class,
+            ActionsServiceProvider::class,
             FilamentServiceProvider::class,
             FormsServiceProvider::class,
             InfolistsServiceProvider::class,
-            LivewireServiceProvider::class,
             NotificationsServiceProvider::class,
-            SpatieTranslatableServiceProvider::class,
+            SchemasServiceProvider::class,
             SupportServiceProvider::class,
             TablesServiceProvider::class,
             WidgetsServiceProvider::class,
-            BladeTablerIconsServiceProvider::class,
-            AdminPanelProvider::class,
-            CoreServiceProvider::class,
             BoltServiceProvider::class,
+            CoreServiceProvider::class,
             SEOServiceProvider::class,
-            // FilamentIconPickerServiceProvider::class,
+            SpatieTranslatableServiceProvider::class,
+            LivewireServiceProvider::class,
+            BladeCaptureDirectiveServiceProvider::class,
+            BladeTablerIconsServiceProvider::class,
         ];
     }
 }
