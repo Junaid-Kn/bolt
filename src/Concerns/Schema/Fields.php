@@ -28,7 +28,7 @@ trait Fields
                 ->searchable()
                 ->preload()
                 ->getSearchResultsUsing(fn (string $search) => Bolt::availableFields()
-                    ->filter(fn ($q) => str($q['title'])->contains($search))
+                    ->filter(fn ($q) => str($q['title'])->contains($search, ignoreCase: true))
                     ->mapWithKeys(fn ($field) => [$field['class'] => static::getFieldsTypesOptions($field)])
                     ->toArray())
                 ->allowHtml()
