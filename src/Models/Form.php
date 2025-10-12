@@ -125,7 +125,7 @@ class Form extends Model
 
     public function sections(): HasMany
     {
-        return $this->hasMany(config('zeus-bolt.models.Section'));
+        return $this->hasMany(config('zeus-bolt.models.Section'))->chaperone();
     }
 
     public function fields(): HasManyThrough
