@@ -63,7 +63,14 @@ class FormResource extends BoltResource
             return null;
         }
 
-        return (string) BoltPlugin::getModel('Form')::query()->count();
+        $query = BoltPlugin::getModel('Form')::query();
+        
+        // If accessing from mentor panel, filter forms to only show current user's forms
+        if (auth()->check() && request()->is('mentor*')) {
+            $query->where('user_id', auth()->id());
+        }
+
+        return (string) $query->count();
     }
 
     public static function getModelLabel(): string
@@ -196,13 +203,13 @@ class FormResource extends BoltResource
     /** @phpstan-return Builder<ZeusForm> */
     public static function getEloquentQuery(): Builder
     {
-         $query = parent::getEloquentQuery()
+        $query = parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
 
-        // If the current user is a mentor ( and not admin), filter forms to only show their own
-        if (auth()->check() && auth()->user()->isMentor() && !auth()->user()->isAdmin()) {
+        // If accessing from mentor panel, filter forms to only show current user's forms
+        if (auth()->check() && request()->is('mentor*')) {
             $query->where('user_id', auth()->id());
         }
 
