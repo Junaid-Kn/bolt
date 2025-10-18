@@ -64,7 +64,7 @@ class FormResource extends BoltResource
         }
 
         $query = BoltPlugin::getModel('Form')::query();
-        
+
         // If accessing from mentor panel, filter forms to only show current user's forms
         if (auth()->check() && request()->is('mentor*')) {
             $query->where('user_id', auth()->id());
