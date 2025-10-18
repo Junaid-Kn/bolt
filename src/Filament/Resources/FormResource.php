@@ -196,13 +196,13 @@ class FormResource extends BoltResource
     /** @phpstan-return Builder<ZeusForm> */
     public static function getEloquentQuery(): Builder
     {
-         $query = parent::getEloquentQuery()
+        $query = parent::getEloquentQuery()
             ->withoutGlobalScopes([
                 SoftDeletingScope::class,
             ]);
 
         // If the current user is a mentor ( and not admin), filter forms to only show their own
-        if (auth()->check() && auth()->user()->isMentor() && !auth()->user()->isAdmin()) {
+        if (auth()->check() && auth()->user()->isMentor() && ! auth()->user()->isAdmin()) {
             $query->where('user_id', auth()->id());
         }
 
