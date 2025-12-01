@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Filament\Resources;
 
+use Filament\Facades\Filament;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Textarea;
@@ -32,8 +33,6 @@ use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\CreateCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\EditCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\ListCategories;
 use LaraZeus\Bolt\Models\Category;
-use Filament\Facades\Filament;
-
 
 class CategoryResource extends BoltResource
 {
@@ -48,7 +47,7 @@ class CategoryResource extends BoltResource
         return BoltPlugin::getModel('Category');
     }
 
-     public static function canViewAny(): bool
+    public static function canViewAny(): bool
     {
         $panel = Filament::getCurrentPanel();
 
