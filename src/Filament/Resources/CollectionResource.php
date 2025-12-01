@@ -2,6 +2,7 @@
 
 namespace LaraZeus\Bolt\Filament\Resources;
 
+use Filament\Facades\Filament;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Auth;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Widgets\EditCollectionWarning;
-use Filament\Facades\Filament;
 
 class CollectionResource extends BoltResource
 {
@@ -42,7 +42,6 @@ class CollectionResource extends BoltResource
 
         return true;
     }
-
 
     public static function getNavigationBadge(): ?string
     {
