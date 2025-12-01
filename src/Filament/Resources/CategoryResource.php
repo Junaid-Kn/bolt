@@ -32,6 +32,8 @@ use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\CreateCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\EditCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\ListCategories;
 use LaraZeus\Bolt\Models\Category;
+use Filament\Facades\Filament;
+
 
 class CategoryResource extends BoltResource
 {
@@ -46,9 +48,15 @@ class CategoryResource extends BoltResource
         return BoltPlugin::getModel('Category');
     }
 
-    public static function canViewAny(): bool
+     public static function canViewAny(): bool
     {
-        return Auth::user()?->mentor?->booking_type === 'internal';
+        $panel = Filament::getCurrentPanel();
+
+        if ($panel && $panel->getId() === 'mentor') {
+            return Auth::user()?->mentor?->booking_type === 'internal';
+        }
+
+        return true;
     }
 
     public static function getNavigationBadge(): ?string
