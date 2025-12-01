@@ -16,6 +16,7 @@ use Filament\Tables\Table;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Widgets\EditCollectionWarning;
+use Illuminate\Support\Facades\Auth;
 
 class CollectionResource extends BoltResource
 {
@@ -29,7 +30,9 @@ class CollectionResource extends BoltResource
     {
         return BoltPlugin::getModel('Collection');
     }
-
+    public static function canViewAny():bool{
+        return Auth::user()?->mentor?->booking_type === "internal";
+    }
     public static function getNavigationBadge(): ?string
     {
         if (! BoltPlugin::getNavigationBadgesVisibility(self::class)) {
