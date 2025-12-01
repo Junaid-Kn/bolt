@@ -36,6 +36,7 @@ use LaraZeus\Bolt\Filament\Actions\ReplicateFormAction;
 use LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 use LaraZeus\Bolt\Models\Form as ZeusForm;
 use LaraZeus\ListGroup\Infolists\ListEntry;
+use Illuminate\Support\Facades\Auth;
 
 class FormResource extends BoltResource
 {
@@ -55,6 +56,9 @@ class FormResource extends BoltResource
     public static function getModel(): string
     {
         return BoltPlugin::getModel('Form');
+    }
+    public static function canViewAny():bool{
+        return Auth::user()?->mentor?->booking_type === "internal";
     }
 
     public static function getNavigationBadge(): ?string
