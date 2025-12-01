@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Auth;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Pages;
 use LaraZeus\Bolt\Filament\Resources\CollectionResource\Widgets\EditCollectionWarning;
+use Filament\Facades\Filament;
 
 class CollectionResource extends BoltResource
 {
@@ -33,8 +34,15 @@ class CollectionResource extends BoltResource
 
     public static function canViewAny(): bool
     {
-        return Auth::user()?->mentor?->booking_type === 'internal';
+        $panel = Filament::getCurrentPanel();
+
+        if ($panel && $panel->getId() === 'mentor') {
+            return Auth::user()?->mentor?->booking_type === 'internal';
+        }
+
+        return true;
     }
+
 
     public static function getNavigationBadge(): ?string
     {
