@@ -31,6 +31,7 @@ use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\CreateCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\EditCategory;
 use LaraZeus\Bolt\Filament\Resources\CategoryResource\Pages\ListCategories;
 use LaraZeus\Bolt\Models\Category;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryResource extends BoltResource
 {
@@ -43,6 +44,9 @@ class CategoryResource extends BoltResource
     public static function getModel(): string
     {
         return BoltPlugin::getModel('Category');
+    }
+     public static function canViewAny():bool{
+        return Auth::user()?->mentor?->booking_type === "internal";
     }
 
     public static function getNavigationBadge(): ?string
