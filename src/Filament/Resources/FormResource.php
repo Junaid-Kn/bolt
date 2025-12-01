@@ -37,6 +37,8 @@ use LaraZeus\Bolt\Filament\Actions\ReplicateFormAction;
 use LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 use LaraZeus\Bolt\Models\Form as ZeusForm;
 use LaraZeus\ListGroup\Infolists\ListEntry;
+use Filament\Facades\Filament;
+
 
 class FormResource extends BoltResource
 {
@@ -60,7 +62,13 @@ class FormResource extends BoltResource
 
     public static function canViewAny(): bool
     {
-        return Auth::user()?->mentor?->booking_type === 'internal';
+        $panel = Filament::getCurrentPanel();
+
+        if ($panel && $panel->getId() === 'mentor') {
+            return Auth::user()?->mentor?->booking_type === 'internal';
+        }
+
+        return true;
     }
 
     public static function getNavigationBadge(): ?string
