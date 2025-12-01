@@ -3,6 +3,7 @@
 namespace LaraZeus\Bolt\Filament\Resources;
 
 use Closure;
+use Filament\Facades\Filament;
 use Filament\Forms\Form;
 use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\Section;
@@ -37,8 +38,6 @@ use LaraZeus\Bolt\Filament\Actions\ReplicateFormAction;
 use LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 use LaraZeus\Bolt\Models\Form as ZeusForm;
 use LaraZeus\ListGroup\Infolists\ListEntry;
-use Filament\Facades\Filament;
-
 
 class FormResource extends BoltResource
 {
