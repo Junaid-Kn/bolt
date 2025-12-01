@@ -28,6 +28,7 @@ use Filament\Tables\Filters\TrashedFilter;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Illuminate\Support\Facades\Auth;
 use LaraZeus\Bolt\BoltPlugin;
 use LaraZeus\Bolt\Concerns\HasOptions;
 use LaraZeus\Bolt\Concerns\Schemata;
@@ -36,7 +37,6 @@ use LaraZeus\Bolt\Filament\Actions\ReplicateFormAction;
 use LaraZeus\Bolt\Filament\Resources\FormResource\Pages;
 use LaraZeus\Bolt\Models\Form as ZeusForm;
 use LaraZeus\ListGroup\Infolists\ListEntry;
-use Illuminate\Support\Facades\Auth;
 
 class FormResource extends BoltResource
 {
@@ -57,8 +57,10 @@ class FormResource extends BoltResource
     {
         return BoltPlugin::getModel('Form');
     }
-    public static function canViewAny():bool{
-        return Auth::user()?->mentor?->booking_type === "internal";
+
+    public static function canViewAny(): bool
+    {
+        return Auth::user()?->mentor?->booking_type === 'internal';
     }
 
     public static function getNavigationBadge(): ?string
