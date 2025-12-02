@@ -54,8 +54,11 @@ class CategoryResource extends BoltResource
         if ($panel && $panel->getId() === 'mentor') {
             return Auth::user()?->mentor?->booking_type === 'internal';
         }
+        elseif($panel && $panel->getId() === 'admin'){
+            return true;
+        }
 
-        return true;
+        return false;
     }
 
     public static function getNavigationBadge(): ?string
